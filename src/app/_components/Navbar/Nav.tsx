@@ -20,13 +20,13 @@ export default function Nav() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="fixed top-0 left-0 right-0 p-2 bg-white shadow-md">
-      <div className=" grid md:grid-cols-[auto_1fr_auto] grid-cols-2 items-center max-w-[1200px] mx-auto relative">
+    <div className="fixed top-0 left-0 right-0 p-2 bg-white shadow-md z-50">
+      <div className=" grid md:grid-cols-[auto_1fr_auto] grid-cols-2 items-center  max-w-[1200px] mx-auto relative ">
         <Link href="/" className="flex items-center gap-3">
           <CodeXml className="w-10 h-10 mt-3" />
           <h1 className="text-[40px] font-medium ">دليل</h1>
         </Link>
-        <div className="links flex justify-center items-center gap-5 text-[18px] text-gray-500">
+        <div className="links  justify-center items-center gap-5 text-[18px] text-gray-500 hidden md:flex">
           {pages.map((page) => (
             <Link
               onClick={() => setIsClicked(page?.name)}
@@ -39,7 +39,7 @@ export default function Nav() {
             </Link>
           ))}
         </div>
-        <div className="user flex item-center gap-2 text-white">
+        <div className="user flex item-center justify-end gap-2 text-white">
           {isLoggedIn ? (
             <button
               className="py-2 px-5 bg-therd rounded-md "
@@ -52,9 +52,9 @@ export default function Nav() {
           ) : (
             <div
               onClick={() => setIsOpen(!isOpen)}
-              className="flex gap-1 items-center cursor-pointer"
+              className="flex gap-1 items-center cursor-pointer "
             >
-              <p className={`text-primary mt-0`}>
+              <p className={`text-primary mt-0 hidden sm:block`}>
                 {name.split(' ').slice(0, 3).join(' ')}
               </p>
               <ChevronDown className="w-5 h-5 text-gray-500" />

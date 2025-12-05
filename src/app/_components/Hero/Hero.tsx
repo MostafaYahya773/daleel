@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 export default function Hero() {
   return (
-    <div className="bg-therd lg:min-h-[500px] min-h-screen flex justify-center items-center mt-16 relative  left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
+    <div className="bg-therd min-h-screen flex justify-center items-center mt-16 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-8 lg:gap-0 max-w-[1200px] mx-auto h-full px-2">
         <div className="text flex flex-col gap-8 lg:text-start text-center">
           <h1 className="lg:text-[40px] md:text-[30px] text-[23px] font-bold text-white">
