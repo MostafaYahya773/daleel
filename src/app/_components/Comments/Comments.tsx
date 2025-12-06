@@ -59,9 +59,9 @@ const HomeComments = React.memo(() => {
   ];
 
   return (
-    <div className="flex flex-col px-2 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
+    <div className="flex flex-col  relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
       <div>
-        <div className="max-w-[1200px] mx-auto lg:py-10 py-5 flex flex-col gap-7">
+        <div className="max-w-[1200px] mx-auto lg:py-10 py-5  px-5 lg:px-0 flex flex-col gap-7">
           <h2 className=" lg:text-[40px] md:text-[30px] text-[25px] text-therd border-b-2 border-therd font-bold w-fit pb-5 md:pb-3">
             تقييمات طلاب دليل
           </h2>

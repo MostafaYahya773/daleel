@@ -12,17 +12,13 @@ import {
   Globe,
 } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
+import { Features } from '../../interfaces/index';
 export default function WhyUs() {
   const { ref, inView } = useInView({
-    threshold: 0.5,
+    threshold: 0,
     triggerOnce: true,
   });
-  interface Feature {
-    text: string;
-    icon: any;
-    description: string;
-  }
-  const features: Feature[] = [
+  const features: Features[] = [
     {
       text: 'شرح بأسلوب بسيط ومباشر',
       icon: BookOpen,
@@ -72,66 +68,86 @@ export default function WhyUs() {
   return (
     <div
       ref={ref}
-      className="bg-secondary min-h-fit py-5 mt-[70px] px-5 lg:mt-16 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen"
+      className="bg-secondary min-h-fit py-5 mt-[70px] lg:mt-16 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen overflow-hidden"
     >
-      {inView && (
-        <div className="max-w-[1200px] mx-auto flex flex-col gap-5 ">
-          <h3 className="lg:text-[50px] md:text-[35px] text-[25px] text-therd font-bold text-start ">
-            لماذا دليل !
-          </h3>
-          <div className="grid md:grid-cols-2 grid-cols-1 md:grid-rows-2 gap-5">
-            <div className="img1 mx-auto md:order-1 order-2">
-              <Image
-                src="/WhyUs.png"
-                width={500}
-                height={500}
-                alt="user Image"
-                className="object-cover w-full"
-              />
-            </div>
-            <div className="text1 grid md:grid-rows-[auto_auto_auto_auto] grid-cols-1 sm:grid-cols-2 md:grid-cols-none gap-5 md:order-2 order-1">
-              {features.slice(0, 4)?.map((feature: Feature, index: number) => (
-                <div key={index} className="flex md:gap-5 gap-2 items-start">
-                  <feature.icon className="text-therd lg:w-[60px] lg:h-[60px] md:w-[40px] md:h-[40px] w-[30px] h-[30px]" />
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-fourth lg:text-[25px] md:text-[20px] text-[18px]">
-                      {feature.text}
-                    </h3>
-                    <p className="md:text-[16px] text-[14px] text-gray-500">
-                      {feature?.description}
-                    </p>
-                  </div>
+      {/* {inView && ( */}
+      <div className="max-w-[1200px] mx-auto flex flex-col px-5 lg:px-0 gap-5 ">
+        <h3 className="lg:text-[50px] md:text-[35px] text-[25px] text-therd font-bold text-start duration-1000 ">
+          لماذا دليل !
+        </h3>
+        <div className="grid md:grid-cols-2 grid-cols-1 md:grid-rows-2 gap-5">
+          <div
+            className={`img1 mx-auto md:order-1 order-2 duration-1000 ${
+              inView
+                ? 'translate-y-0 opacity-100 '
+                : 'translate-y-full opacity-0'
+            }`}
+          >
+            <Image
+              src="/WhyUs.png"
+              width={500}
+              height={500}
+              alt="user Image"
+              className="object-cover w-full"
+            />
+          </div>
+          <div
+            className={`text1 grid md:grid-rows-[auto_auto_auto_auto] grid-cols-1 sm:grid-cols-2 md:grid-cols-none gap-5 md:order-2 order-1 duration-1000 ${
+              inView
+                ? 'md:translate-x-0 opacity-100 translate-y-0'
+                : 'md:-translate-x-full opacity-0 translate-y-full'
+            } `}
+          >
+            {features.slice(0, 4)?.map((feature: Features, index: number) => (
+              <div key={index} className="flex md:gap-5 gap-2 items-start">
+                <feature.icon className="text-therd lg:w-[60px] lg:h-[60px] md:w-[40px] md:h-[40px] w-[30px] h-[30px]" />
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-fourth lg:text-[25px] md:text-[20px] text-[18px]">
+                    {feature.text}
+                  </h3>
+                  <p className="lg:text-[20px] md:text-[16px] text-[14px] text-gray-500">
+                    {feature?.description}
+                  </p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
 
-            <div className="text2 grid md:grid-rows-[auto_auto_auto_auto] grid-cols-1 sm:grid-cols-2 md:grid-cols-none gap-5">
-              {features.slice(4, 8)?.map((feature: Feature, index: number) => (
-                <div key={index} className="flex gap-5 items-start">
-                  <feature.icon className="text-therd lg:w-[60px] lg:h-[60px] md:w-[40px] md:h-[40px] w-[30px] h-[30px]" />
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-fourth lg:text-[25px] md:text-[20px] text-[18px]">
-                      {feature.text}
-                    </h3>
-                    <p className=" md:text-[20px] text-[14px] text-gray-500">
-                      {feature?.description}
-                    </p>
-                  </div>
+          <div
+            className={`text2 grid md:grid-rows-[auto_auto_auto_auto] grid-cols-1 sm:grid-cols-2 md:grid-cols-none gap-5 duration-1000 ${
+              inView ? 'translate-x-0' : 'translate-x-full'
+            } `}
+          >
+            {features.slice(4, 8)?.map((feature: Features, index: number) => (
+              <div key={index} className="flex gap-5 items-start">
+                <feature.icon className="text-therd lg:w-[60px] lg:h-[60px] md:w-[40px] md:h-[40px] w-[30px] h-[30px]" />
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-fourth lg:text-[25px] md:text-[20px] text-[18px]">
+                    {feature.text}
+                  </h3>
+                  <p className="lg:text-[20px] md:text-[16px] text-[14px] text-gray-500">
+                    {feature?.description}
+                  </p>
                 </div>
-              ))}
-            </div>
-            <div className="img2 w-full mx-auto hidden md:block">
-              <Image
-                src="/WhyUs2.png"
-                width={200}
-                height={200}
-                alt="user Image"
-                className="object-cover w-full "
-              />
-            </div>
+              </div>
+            ))}
+          </div>
+          <div
+            className={`img2 w-full mx-auto hidden md:block duration-1000 ${
+              inView ? 'translate-y-0' : 'translate-y-full'
+            }`}
+          >
+            <Image
+              src="/WhyUs2.png"
+              width={200}
+              height={200}
+              alt="user Image"
+              className="object-cover w-full "
+            />
           </div>
         </div>
-      )}
+      </div>
+      {/* )} */}
     </div>
   );
 }

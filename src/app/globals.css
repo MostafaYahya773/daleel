@@ -14,13 +14,12 @@
   content: '';
   position: absolute;
   top: -50%;
-  left: 40%;
-  transform: translateX(-50%);
+  left: 33%;
   width: 40px;
   height: 200%;
   background-color: #ff6d1f;
   z-index: -3;
-  animation: loop 3s infinite linear;
+  animation: loop 3s linear 4;
 }
 
 .counterSide::after {

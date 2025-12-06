@@ -59,7 +59,7 @@ const CommentsSwiper = ({
         >
           {allComments.map((comment, index) => (
             <SwiperSlide key={index}>
-              <div className="p-3 h-[160px] min-w-0 bg-primary border border-primary rounded-lg flex flex-col gap-3">
+              <div className="p-3 shadow-lg h-[160px] min-w-0 bg-primary border border-primary rounded-lg flex flex-col gap-3">
                 <div className="flex items-center gap-2">
                   <span className="w-8 h-8 mt-1 rounded-full flex justify-center items-center bg-therd text-white">
                     {comment.name.slice(0, 1)}
