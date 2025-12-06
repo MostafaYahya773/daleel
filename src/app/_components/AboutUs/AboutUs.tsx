@@ -17,7 +17,7 @@ const AboutUs = () => {
         <>
           <div className="whyusimg w-full lg:order-1 order-2">
             <Image
-              src="/whyUsImage.png"
+              src="/AboutUs.png"
               width={400}
               height={400}
               alt="whyUsImage"
