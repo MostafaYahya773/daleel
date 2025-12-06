@@ -20,11 +20,16 @@ export default function Nav() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="fixed top-0 left-0 right-0 p-2 bg-white shadow-md z-50">
+    <div className="fixed top-0 left-0 right-0 p-2 bg-white shadow-md z-50 overflow-y-hidden">
       <div className=" grid md:grid-cols-[auto_1fr_auto] grid-cols-2 items-center  max-w-[1200px] mx-auto relative ">
-        <Link href="/" className="flex items-center gap-3">
-          <CodeXml className="w-10 h-10 mt-3" />
-          <h1 className="text-[40px] font-medium ">دليل</h1>
+        <Link href="/" className="flex items-center gap-3 ">
+          <Image
+            src="/logo.png"
+            width={70}
+            height={70}
+            alt="user Image"
+            className="object-cover scale-[2] px-2 lg:px-0"
+          />
         </Link>
         <div className="links  justify-center items-center gap-5 text-[18px] text-gray-500 hidden md:flex">
           {pages.map((page) => (
@@ -33,7 +38,7 @@ export default function Nav() {
               key={page.name}
               href={page.href}
             >
-              <span className={isClicked === page.name ? 'text-primary' : ''}>
+              <span className={isClicked === page.name ? 'text-therd' : ''}>
                 {page.name}
               </span>
             </Link>
@@ -54,7 +59,7 @@ export default function Nav() {
               onClick={() => setIsOpen(!isOpen)}
               className="flex gap-1 items-center cursor-pointer "
             >
-              <p className={`text-primary mt-0 hidden sm:block`}>
+              <p className={`text-therd mt-0 hidden sm:block`}>
                 {name.split(' ').slice(0, 3).join(' ')}
               </p>
               <ChevronDown className="w-5 h-5 text-gray-500" />

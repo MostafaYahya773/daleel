@@ -42,7 +42,7 @@ const NavDropList = React.memo(
         {DropList.map((item) => (
           <div
             className={`flex items-center gap-3 p-2 cursor-pointer ${
-              isHovered === item.name ? ' text-primary' : ''
+              isHovered === item.name ? ' text-therd' : ''
             }`}
             key={item.name}
             onMouseEnter={() => setIsHovered(item.name)}
