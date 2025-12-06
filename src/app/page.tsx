@@ -18,6 +18,10 @@ const WhyUs = dynamic(() => import('./_components/WhyUs/WhyUs'), {
   ssr: false,
   loading: () => <p>Loading...</p>,
 });
+const Target = dynamic(() => import('./_components/Target/Target'), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
 export default function Home() {
   return (
     <div className="flex flex-col gap-8">
@@ -26,6 +30,7 @@ export default function Home() {
       <HomeComments />
       <Instructor />
       <WhyUs />
+      <Target />
     </div>
   );
 }

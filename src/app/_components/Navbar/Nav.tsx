@@ -17,7 +17,7 @@ export default function Nav() {
     { name: 'تواصل معنا', href: '/Contact' },
   ];
   const [isClicked, setIsClicked] = useState('الرئيسية');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="fixed top-0 left-0 right-0 p-2 bg-white shadow-md z-50 overflow-y-hidden">
