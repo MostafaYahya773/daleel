@@ -13,6 +13,11 @@ import {
 } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { Features } from '../../interfaces/index';
+import dynamic from 'next/dynamic';
+const Title = dynamic(() => import('../../_components/Title/Title'), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
 export default function WhyUs() {
   const { ref, inView } = useInView({
     threshold: 0,
@@ -70,11 +75,8 @@ export default function WhyUs() {
       ref={ref}
       className="bg-secondary min-h-fit py-5 mt-[70px] lg:mt-16 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen overflow-hidden"
     >
-      {/* {inView && ( */}
       <div className="max-w-[1200px] mx-auto flex flex-col px-5 lg:px-0 gap-5 ">
-        <h3 className="lg:text-[50px] md:text-[35px] text-[25px] text-therd font-bold text-start duration-1000 ">
-          لماذا دليل !
-        </h3>
+        <Title title="لماذا تختار دليل؟" />
         <div className="grid md:grid-cols-2 grid-cols-1 md:grid-rows-2 gap-5">
           <div
             className={`img1 mx-auto md:order-1 order-2 duration-1000 ${
@@ -92,20 +94,23 @@ export default function WhyUs() {
             />
           </div>
           <div
-            className={`text1 grid md:grid-rows-[auto_auto_auto_auto] grid-cols-1 sm:grid-cols-2 md:grid-cols-none gap-5 md:order-2 order-1 duration-1000 ${
+            className={`text1 grid md:grid-rows-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-none  gap-5 md:order-2 order-1 duration-1000 ${
               inView
                 ? 'md:translate-x-0 opacity-100 translate-y-0'
                 : 'md:-translate-x-full opacity-0 translate-y-full'
             } `}
           >
             {features.slice(0, 4)?.map((feature: Features, index: number) => (
-              <div key={index} className="flex md:gap-5 gap-2 items-start">
-                <feature.icon className="text-therd lg:w-[60px] lg:h-[60px] md:w-[40px] md:h-[40px] w-[30px] h-[30px]" />
+              <div
+                key={index}
+                className="flex md:gap-5 gap-2 items-start lg:items-center"
+              >
+                <feature.icon className="text-therd md:w-[50px] md:h-[50px] w-[40px] h-[40px]" />
                 <div className="flex flex-col gap-2">
-                  <h3 className="text-fourth lg:text-[25px] md:text-[20px] text-[18px]">
+                  <h4 className="text-fourth md:text-[22px] text-[18px] font-medium">
                     {feature.text}
-                  </h3>
-                  <p className="lg:text-[20px] md:text-[16px] text-[14px] text-gray-500">
+                  </h4>
+                  <p className="md:text-[18px] text-[16px] text-gray-500">
                     {feature?.description}
                   </p>
                 </div>
@@ -119,13 +124,16 @@ export default function WhyUs() {
             } `}
           >
             {features.slice(4, 8)?.map((feature: Features, index: number) => (
-              <div key={index} className="flex gap-5 items-start">
-                <feature.icon className="text-therd lg:w-[60px] lg:h-[60px] md:w-[40px] md:h-[40px] w-[30px] h-[30px]" />
+              <div
+                key={index}
+                className="flex gap-5 items-start lg:items-center"
+              >
+                <feature.icon className="text-therd md:w-[50px] md:h-[50px] w-[40px] h-[40px]" />
                 <div className="flex flex-col gap-2">
-                  <h3 className="text-fourth lg:text-[25px] md:text-[20px] text-[18px]">
+                  <h4 className="text-fourth md:text-[22px] text-[18px]">
                     {feature.text}
-                  </h3>
-                  <p className="lg:text-[20px] md:text-[16px] text-[14px] text-gray-500">
+                  </h4>
+                  <p className="md:text-[18px] text-[16px] text-gray-500">
                     {feature?.description}
                   </p>
                 </div>
@@ -147,7 +155,6 @@ export default function WhyUs() {
           </div>
         </div>
       </div>
-      {/* )} */}
     </div>
   );
 }

@@ -1,6 +1,11 @@
 import React from 'react';
 import AutoSwiper from '../Swiper/swiper';
 import { CommentProps } from '../../interfaces/index';
+import dynamic from 'next/dynamic';
+const Title = dynamic(() => import('../../_components/Title/Title'), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
 const HomeComments = React.memo(() => {
   const Comments: CommentProps[] = [
     {
@@ -62,9 +67,7 @@ const HomeComments = React.memo(() => {
     <div className="flex flex-col  relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
       <div>
         <div className="max-w-[1200px] mx-auto lg:py-10 py-5  px-5 lg:px-0 flex flex-col gap-7">
-          <h2 className=" lg:text-[40px] md:text-[30px] text-[25px] text-therd border-b-2 border-therd font-bold w-fit pb-5 md:pb-3">
-            تقييمات طلاب دليل
-          </h2>
+          <Title title="تقييمات طلاب دليل" />
           <div className="name__rate flex gap-3 items-center w-full ">
             <AutoSwiper allComments={Comments} />
           </div>
