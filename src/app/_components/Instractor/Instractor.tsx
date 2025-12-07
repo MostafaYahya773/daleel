@@ -2,30 +2,28 @@
 import React from 'react';
 import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
-import { CodeXml } from 'lucide-react';
+import dynamic from 'next/dynamic';
+const Title = dynamic(() => import('../../_components/Title/Title'), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
 export default function Instractor() {
   const { ref, inView } = useInView({
     threshold: 0,
     triggerOnce: true,
-    // initialInView: true,
-    delay: 100,
   });
   return (
     <div
       ref={ref}
       className="grid md:grid-cols-2 lg:gap-5 gap-16 overflow-hidden"
     >
-      {/* {inView && ( */}
-      {/* <> */}
       <div
         className={`aboutInstractor flex flex-col lg:gap-7 gap-3 duration-1000 ${
           inView ? 'translate-y-0' : 'translate-y-full'
         }`}
       >
-        <h3 className="lg:text-[50px] md:text-[35px] text-[25px] font-bold text-therd mt-5">
-          نبذة عن المدرب
-        </h3>
-        <p className="lg:text-[20px] md:text-[18px] text-[16px] text-gray-500 leading-8">
+        <Title title="مهندسة شهد مازن طراف" />
+        <p className="lg:text-[20px] md:text-[18px] text-[16px] text-gray-500 lg:leading-10 leading-7">
           المهندسة شهد مازن طراف هي خبيرة في الذكاء الاصطناعي وعلوم البيانات
           والبرمجة، وُلدت عام 2003 في اللاذقية وتخرجت من جامعة اللاذقية كمهندسة
           متميزة. تمتلك خبرة قوية في التدريب، وتركّز على تبسيط المفاهيم المعقدة
@@ -43,18 +41,14 @@ export default function Instractor() {
           inView ? 'translate-x-0' : '-translate-x-full'
         } `}
       >
-        <div className="bg-primary rounded-full  border-2 shadow-2xl shadow-therd border-therd">
-          <Image
-            src="/instractor.png"
-            width={400}
-            height={400}
-            alt="instractor"
-            className="object-cover w-full"
-          />
-        </div>
+        <Image
+          src="/instractors.png"
+          width={400}
+          height={400}
+          alt="instractor"
+          className="object-cover w-full"
+        />
       </div>
-      {/* </> */}
-      {/* // )} */}
     </div>
   );
 }
