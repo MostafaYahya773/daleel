@@ -1,10 +1,12 @@
 'use client';
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { ChevronDown, CodeXml } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import NavDropList from '../NavDropList/NavDropList';
+import { usePathname } from 'next/navigation';
 export default function Nav() {
+  const path = usePathname();
   interface NavProps {
     name: string;
     href: string;
@@ -16,7 +18,7 @@ export default function Nav() {
     { name: 'المدونة', href: '/Blogs' },
     { name: 'تواصل معنا', href: '/Contact' },
   ];
-  const [isClicked, setIsClicked] = useState('الرئيسية');
+  const [isClicked, setIsClicked] = useState(path);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -34,11 +36,11 @@ export default function Nav() {
         <div className="links  justify-center items-center gap-5 text-[18px] text-gray-500 hidden md:flex">
           {pages.map((page) => (
             <Link
-              onClick={() => setIsClicked(page?.name)}
+              onClick={() => setIsClicked(page.href)}
               key={page.name}
               href={page.href}
             >
-              <span className={isClicked === page.name ? 'text-therd' : ''}>
+              <span className={isClicked === page.href ? 'text-therd' : ''}>
                 {page.name}
               </span>
             </Link>
