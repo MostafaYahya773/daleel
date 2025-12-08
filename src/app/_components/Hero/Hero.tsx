@@ -7,13 +7,12 @@ export default function Hero() {
   return (
     <div className="bg-secondary min-h-screen  py-5 overflow-x-hidden lg:py-0 flex justify-center  items-center mt-[70px]  lg:mt-16 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
       <span className="absolute md:w-[600] md:h-[600] w-[500px] h-[500px] rounded-full bg-primary -top-[160px] -right-40 z-10"></span>
-
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-16 md:gap-8 lg:gap-0 max-w-[1200px] mx-auto h-full px-2 z-20">
         <div className="text flex flex-col gap-10 ">
           <h1 className="lg:text-[40px] md:text-[30px] text-[40px] font-bold text-therd">
             تعلم الذكاء الاصطناعي من الصفر إلى الاحتراف
           </h1>
-          <p className="text-fourth lg:text-[20px]  ">
+          <p className="text-fourth lg:text-[20px]">
             منصة تعليمية متخصصة في{' '}
             <span className="text-therd">الذكاء الاصطناعي</span>، تقدم محتوى
             عالي الجودة بأسلوب مبسط وعملي، مع مشاريع حقيقية وشهادات معتمدة

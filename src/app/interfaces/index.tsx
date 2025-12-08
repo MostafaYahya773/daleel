@@ -9,3 +9,8 @@ export interface Features {
   icon: any;
   description: string;
 }
+
+export interface SelectOptionProps {
+  value: string;
+  label: string;
+}
