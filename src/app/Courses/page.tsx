@@ -15,9 +15,10 @@ const AllCourses = dynamic(
     loading: () => <p>Loading...</p>,
   }
 );
+
 export default function Courses() {
   return (
-    <div className="flex flex-col gap-7 ">
+    <div className="flex flex-col gap-7">
       <CoursesHero />
       <AllCourses />
     </div>

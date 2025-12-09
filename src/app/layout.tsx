@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body
-        className={`${cairoFont.variable} max-w-[1200px] px-5  mx-auto overflow-x-hidden `}
+        className={`${cairoFont.variable} max-w-[1200px] px-2 mx-auto overflow-x-hidden `}
       >
         <main>
           <nav>

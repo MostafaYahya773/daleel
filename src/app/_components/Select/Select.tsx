@@ -4,13 +4,19 @@ import { SelectOptionProps } from '../../interfaces/index';
 import { ArrowDown } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 const Select = React.memo(
-  ({ selectOptions }: { selectOptions: SelectOptionProps[] }) => {
+  ({
+    selectOptions,
+    onselect,
+  }: {
+    selectOptions: SelectOptionProps[];
+    onselect: (value: string) => void;
+  }) => {
     const { ref, inView } = useInView({
       threshold: 0.5,
       triggerOnce: true,
     });
-    const [isOpen, setIsOpen] = useState(false);
-    const [inputValue, setInputValue] = useState('');
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [inputValue, setInputValue] = useState<string>('');
 
     return (
       <div ref={ref} className="options relative">
@@ -26,25 +32,26 @@ const Select = React.memo(
                 readOnly
               />
               <ArrowDown className="absolute top-3 left-2 w-4 h-4 text-therd" />
+              <ul
+                className={`flex flex-col gap-0 bg-secondary contact-shadow rounded-b-md absolute z-20 w-full ${
+                  isOpen ? 'block' : 'hidden'
+                }`}
+              >
+                {selectOptions?.map((item, index) => (
+                  <li
+                    onClick={() => {
+                      setInputValue(item.value);
+                      onselect(item.value);
+                      setIsOpen(false);
+                    }}
+                    key={index}
+                    className="flex items-center md:text-[16px] text-[14px] cursor-pointer p-2 hover:bg-therd text-gray-500 hover:text-white rounded-md"
+                  >
+                    <span>{item.label}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul
-              className={`flex flex-col gap-0 bg-secondary shadow-md rounded-b-md ${
-                isOpen ? 'block' : 'hidden'
-              }`}
-            >
-              {selectOptions?.map((item, index) => (
-                <li
-                  onClick={() => {
-                    setInputValue(item.value);
-                    setIsOpen(false);
-                  }}
-                  key={index}
-                  className="flex items-center md:text-[16px] text-[14px] cursor-pointer p-2 hover:bg-therd text-gray-500 hover:text-white rounded-md"
-                >
-                  <span>{item.label}</span>
-                </li>
-              ))}
-            </ul>
           </>
         )}
       </div>
