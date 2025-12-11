@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { Award, RefreshCw, MessageCircle } from 'lucide-react';
-export default function CoursesHero() {
+export default function HeroCourse() {
   interface HeroText {
     description: string;
     icon: any;

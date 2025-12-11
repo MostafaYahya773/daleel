@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import dynamic from 'next/dynamic';
-import CoursesHero from '../_components/CoursesHero/CoursesHero';
+import CoursesHero from '../_components/HeroCourse/HeroCourse';
 const AllCourses = dynamic(
   () => import('../_components/AllCourses/AllCourses'),
   {
