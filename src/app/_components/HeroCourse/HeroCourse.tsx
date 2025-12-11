@@ -23,7 +23,7 @@ export default function HeroCourse() {
     },
   ];
   return (
-    <div className="bg-secondary  min-h-screen  py-5 overflow-x-hidden lg:py-0 flex justify-center items-center mt-[70px] lg:mt-10 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
+    <div className="bg-secondary  lg:min-h-screen  py-5 overflow-x-hidden lg:py-0 flex justify-center items-center mt-[70px] lg:mt-10 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
       <span className="absolute md:w-[600] md:h-[600] w-[500px] h-[500px] rounded-full bg-primary -top-[160px] -right-40 z-10 "></span>
 
       <div className="max-w-[1200px] mx-auto px-5 lg:px-2 grid lg:grid-cols-2 grid-cols-1 gap-16 md:gap-8 lg:gap-10 z-40">
@@ -51,7 +51,7 @@ export default function HeroCourse() {
             </ul>
           </div>
         </div>
-        <div className="img">
+        <div className="img hidden lg:block">
           <Image
             src="/herocorses.png"
             width={500}

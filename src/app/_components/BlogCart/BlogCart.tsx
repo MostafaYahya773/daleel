@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
+import { useInView } from 'react-intersection-observer';
 
 interface Article {
   id: number;
@@ -80,63 +81,68 @@ const articles: Article[] = [
 
 export default function BlogCart() {
   const isPriority = (index: number) => index < 3;
-
+  const { ref, inView } = useInView({
+    threshold: 0.5,
+    triggerOnce: true,
+  });
   return (
-    <div className="min-h-screen">
-      <div className="max-w-[1200px] mx-auto py-5">
-        <h2 className="lg:text-[30px] md:text-[25px] text-[20px] text-center mb-5 pb-3 border-b-2 border-therd w-fit mx-auto">
-          احدث مقالات <span className="text-therd">دليل</span>
-        </h2>
-        <Link
-          href="/blog/id"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"
-        >
-          {articles.map((article, index) => (
-            <div
-              key={article.id}
-              className="group bg-white rounded-2xl border-2 shadow-md border-gray-200  overflow-hidden duration-300 hover:scale-[103%]"
-            >
-              <div className="relative h-64 w-full overflow-hidden">
-                <Image
-                  src={article.image}
-                  alt={article.title}
-                  fill
-                  priority={isPriority(index)}
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-
-              <div className="p-5">
-                <h3 className="md:text-[15px] font-bold text-fourth mb-4 group-hover:text-therd  transition-colors">
-                  {article.title}
-                </h3>
-
-                {/* مدة القراءة + التاريخ */}
-                <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400 mb-5">
-                  <div className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
-                    <span className="font-medium">
-                      {article.readTime === 1
-                        ? 'دقيقة واحدة'
-                        : `${article.readTime} دقائق`}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    <span>{article.date}</span>
-                  </div>
+    <div ref={ref} className="min-h-screen">
+      {inView && (
+        <div className="max-w-[1200px] mx-auto py-5">
+          <h2 className="lg:text-[30px] md:text-[25px]  text-[20px] text-center mb-5 pb-3 border-b-2 border-therd w-fit mx-auto">
+            احدث مقالات <span className="text-therd">دليل</span>
+          </h2>
+          <Link
+            href="/blog/id"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"
+          >
+            {articles.map((article, index) => (
+              <div
+                key={article.id}
+                className="group bg-white rounded-2xl border-2 shadow-md border-gray-200  overflow-hidden duration-300 hover:scale-[103%]"
+              >
+                <div className="relative h-64 w-full overflow-hidden">
+                  <Image
+                    src={article.image}
+                    alt={article.title}
+                    fill
+                    priority={isPriority(index)}
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                 </div>
 
-                {/* الوصف */}
-                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed line-clamp-2 mb-6">
-                  {article.description}
-                </p>
+                <div className="p-5">
+                  <h3 className="md:text-[15px] font-bold text-fourth mb-4 group-hover:text-therd  transition-colors">
+                    {article.title}
+                  </h3>
+
+                  {/* مدة القراءة + التاريخ */}
+                  <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400 mb-5">
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      <span className="font-medium">
+                        {article.readTime === 1
+                          ? 'دقيقة واحدة'
+                          : `${article.readTime} دقائق`}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      <span>{article.date}</span>
+                    </div>
+                  </div>
+
+                  {/* الوصف */}
+                  <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed line-clamp-2 mb-6">
+                    {article.description}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
-        </Link>
-      </div>
+            ))}
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

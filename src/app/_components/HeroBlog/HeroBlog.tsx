@@ -8,6 +8,7 @@ const HeroBlog = () => {
         src="/blogsHero.jpg"
         width={1200}
         height={1200}
+        priority
         alt="hero"
         className="absolute top-0 left-0 object-cover object-[40%_60%] md:object-[85%_15%] w-full h-full "
       />

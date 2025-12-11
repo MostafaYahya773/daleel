@@ -4,9 +4,8 @@ import './globals.css';
 import Nav from './_components/Navbar/Nav';
 
 const cairoFont = Cairo({
-  variable: '--font-cairo',
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['arabic'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
 });
 
 export const metadata: Metadata = {
@@ -25,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body
-        className={`${cairoFont.variable} max-w-[1200px] px-2 mx-auto overflow-x-hidden `}
+        className={`${cairoFont.className} max-w-[1200px] px-2 mx-auto overflow-x-hidden `}
       >
         <main>
           <nav>

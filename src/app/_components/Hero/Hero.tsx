@@ -5,14 +5,14 @@ import HeroCounter from '../HeroCounter/HeroCounter';
 import { GraduationCap, Sparkle } from 'lucide-react';
 export default function Hero() {
   return (
-    <div className="bg-secondary min-h-screen  py-5 overflow-x-hidden lg:py-0 flex justify-center  items-center mt-[70px]  lg:mt-16 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
+    <div className="bg-secondary lg:min-h-screen  py-5 overflow-x-hidden lg:py-0 flex justify-center items-center mt-[70px]  lg:mt-16 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
       <span className="absolute md:w-[600] md:h-[600] w-[500px] h-[500px] rounded-full bg-primary -top-[160px] -right-40 z-10"></span>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-16 md:gap-8 lg:gap-0 max-w-[1200px] mx-auto h-full px-2 z-20">
-        <div className="text flex flex-col gap-10 ">
-          <h1 className="lg:text-[40px] md:text-[30px] text-[40px] font-bold text-therd">
+        <div className="text flex flex-col justify-center items-center gap-10 ">
+          <h1 className="lg:text-[40px] md:text-[30px] text-[30px] text-start md::text-center lg:text-start font-bold text-therd">
             تعلم الذكاء الاصطناعي من الصفر إلى الاحتراف
           </h1>
-          <p className="text-fourth lg:text-[20px]">
+          <p className="text-fourth lg:text-[20px] text-start md:text-center lg:text-start">
             منصة تعليمية متخصصة في{' '}
             <span className="text-therd">الذكاء الاصطناعي</span>، تقدم محتوى
             عالي الجودة بأسلوب مبسط وعملي، مع مشاريع حقيقية وشهادات معتمدة
@@ -21,13 +21,13 @@ export default function Hero() {
           <div className="link w-full flex justify-center lg:justify-start">
             <Link
               href="/Courses"
-              className="shadow-[0px_0px_1px] hover:bg-primary hover:text-therd transition-all duration-300 shadow-therd lg:text-[25px] md:text-[25px] text-[20px] text-fourth  px-16 py-3 rounded-lg cursor-pointer"
+              className=" hover:bg-primary hover:text-therd transition-all duration-300  shadow-md lg:text-[25px] md:text-[25px] text-[20px] text-fourth  px-16 py-3 rounded-lg cursor-pointer"
             >
               ابدأ رحلتك الأن
             </Link>
           </div>
         </div>
-        <div className="img flex  justify-center items-center relative z-0">
+        <div className="img justify-center items-center relative z-0 hidden lg:flex">
           <GraduationCap className="absolute w-20 h-20 right-10 top-0 rounded-full text-therd hidden lg:block" />
           <Sparkle className="absolute w-20 h-20 left-10 top-0 rounded-full text-therd hidden lg:block" />
           <Image
