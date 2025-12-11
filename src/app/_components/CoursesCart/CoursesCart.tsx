@@ -2,8 +2,7 @@
 import Image from 'next/image';
 import React, { use, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
-import dynamic from 'next/dynamic';
-import Instractor from '../Instractor/Instractor';
+import { SearchX } from 'lucide-react';
 import Link from 'next/link';
 
 const CoursesCart = React.memo(
@@ -19,8 +18,6 @@ const CoursesCart = React.memo(
       triggerOnce: true,
     });
 
-    console.log(filterOptions, filterLevel);
-
     interface Course {
       id: number;
       imageUrl: string;
@@ -29,9 +26,9 @@ const CoursesCart = React.memo(
       skills: string[];
       rating: number;
       reviewsCount: number;
-      level: 'مبتدئ' | 'متوسط' | 'متقدم';
       category: 'مواد جامعية' | 'ذكاء اصطناعي';
-      lessonsCount: number;
+      level?: string;
+      lessonsCount?: number;
     }
 
     const coursesData: Course[] = useMemo(
@@ -40,30 +37,28 @@ const CoursesCart = React.memo(
           id: 1,
           imageUrl: '/logo.png',
           instructorName: 'أحمد محمد',
-          courseName: 'مقدمة في الذكاء الاصطناعي وتطبيقاته الحديثة 2025',
+          courseName: 'الذكاء الاصطناعي للصف الثالث - مفاهيم أساسية ممتعة',
           skills: [
-            'AI Basics',
-            'Machine Learning',
-            'Neural Networks',
-            'Python',
+            'Scratch',
+            'AI للأطفال',
+            'التفكير المنطقي',
+            'مشاريع تفاعلية',
           ],
-          rating: 4.8,
-          reviewsCount: 5421,
-          level: 'مبتدئ',
+          rating: 4.9,
+          reviewsCount: 8921,
           category: 'مواد جامعية',
-          lessonsCount: 42,
+          level: 'الصف الثالث',
         },
         {
           id: 2,
           imageUrl: '/logo.png',
           instructorName: 'سارة علي',
-          courseName:
-            'تعلم عميق (Deep Learning) من الصفر باستخدام TensorFlow وPyTorch',
+          courseName: 'تعلم عميق Deep Learning من الصفر إلى الاحتراف',
           skills: ['TensorFlow', 'PyTorch', 'CNN', 'RNN'],
           rating: 4.9,
           reviewsCount: 7890,
-          level: 'متوسط',
           category: 'ذكاء اصطناعي',
+          level: 'متوسط',
           lessonsCount: 68,
         },
         {
@@ -74,50 +69,53 @@ const CoursesCart = React.memo(
           skills: ['Transformers', 'BERT', 'Arabic NLP', 'Hugging Face'],
           rating: 4.9,
           reviewsCount: 6234,
-          level: 'متقدم',
           category: 'ذكاء اصطناعي',
+          level: 'متقدم',
           lessonsCount: 55,
         },
         {
           id: 4,
           imageUrl: '/logo.png',
           instructorName: 'يوسف عبدالله',
-          courseName: 'رؤية الحاسوب ومعالجة الصور باستخدام OpenCV وYOLO',
+          courseName: 'رؤية الحاسوب ومعالجة الصور باستخدام YOLO وOpenCV',
           skills: ['OpenCV', 'YOLOv8', 'Object Detection', 'Segmentation'],
           rating: 4.7,
           reviewsCount: 4987,
-          level: 'متوسط',
           category: 'ذكاء اصطناعي',
+          level: 'متوسط',
           lessonsCount: 61,
         },
         {
           id: 5,
           imageUrl: '/logo.png',
           instructorName: 'أمل حسن',
-          courseName: 'بناء نماذج Generative AI - Stable Diffusion وLLMs',
-          skills: ['Diffusion', 'LLAMA', 'LangChain', 'Prompt Engineering'],
+          courseName: 'الذكاء الاصطناعي للصف الخامس - مشاريع عملية متقدمة',
+          skills: [
+            'Python',
+            'Teachable Machine',
+            'AI Projects',
+            'Image Recognition',
+          ],
           rating: 5.0,
-          reviewsCount: 9321,
-          level: 'متقدم',
-          category: 'ذكاء اصطناعي',
-          lessonsCount: 79,
+          reviewsCount: 11342,
+          category: 'مواد جامعية',
+          level: 'الصف الخامس',
         },
         {
           id: 6,
           imageUrl: '/logo.png',
           instructorName: 'خالد العتيبي',
-          courseName: 'تعلم الآلة (Machine Learning) - مادة جامعية شاملة',
+          courseName: 'تعلم الآلة للصف الرابع - من الصفر إلى بناء نماذج حقيقية',
           skills: [
-            'Scikit-learn',
-            'Regression',
+            'Machine Learning',
+            'Python',
+            'Data Analysis',
             'Classification',
-            'Clustering',
           ],
           rating: 4.8,
-          reviewsCount: 11234,
-          level: 'متوسط',
+          reviewsCount: 9876,
           category: 'مواد جامعية',
-          lessonsCount: 50,
+          level: 'الصف الرابع',
         },
         {
           id: 7,
@@ -127,29 +125,35 @@ const CoursesCart = React.memo(
           skills: ['Docker', 'Kubernetes', 'MLflow', 'FastAPI'],
           rating: 4.8,
           reviewsCount: 3876,
-          level: 'متقدم',
           category: 'ذكاء اصطناعي',
+          level: 'متقدم',
           lessonsCount: 44,
         },
         {
           id: 8,
           imageUrl: '/logo.png',
           instructorName: 'علي الزهراني',
-          courseName: 'الذكاء الاصطناعي التوليدي باستخدام ChatGPT وAPIs',
+          courseName: 'الذكاء الاصطناعي التوليدي - GPT وChatGPT وRAG',
           skills: ['OpenAI API', 'GPT-4', 'Fine-tuning', 'RAG'],
           rating: 4.9,
           reviewsCount: 15678,
-          level: 'متوسط',
           category: 'ذكاء اصطناعي',
+          level: 'متوسط',
           lessonsCount: 58,
         },
       ],
       []
     );
+
     const coursesFilter = useMemo(() => {
       const categorySelected =
         !!filterOptions && filterOptions !== 'كل التخصصات';
-      const levelSelected = !!filterLevel && filterLevel !== 'كل المستويات';
+
+      const isUniversity = filterOptions === 'مواد جامعية';
+
+      const levelSelected =
+        !!filterLevel &&
+        filterLevel !== (isUniversity ? 'كل الصفوف' : 'كل المستويات');
 
       return coursesData.filter((course) => {
         if (categorySelected && levelSelected) {
@@ -173,55 +177,71 @@ const CoursesCart = React.memo(
       >
         {inView && (
           <>
-            {coursesFilter?.map((course) => (
-              <Link
-                href="/CourseDetails"
-                key={course?.id}
-                className="grid grid-rows-[auto_auto_1fr_auto_auto] gap-5 bg-white hover:shadow-md hover:scale-[103%] transition-all duration-300 border border-gray-300 rounded-lg p-3"
-              >
-                <div className="img h-[200px] bg-secondary rounded-md">
-                  <Image
-                    src={course?.imageUrl}
-                    alt="Course"
-                    width={100}
-                    height={100}
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                </div>
-                {/* <div className="grid grid-rows-[auto_auto_auto_auto] gap-5"> */}
-                <h3 className="courseName text-fourth font-bold md:text-[15px]">
-                  {course?.courseName}
-                </h3>
-                <div className="skills text-[14px] flex flex-col  gap-2">
-                  <p className="text-therd font-bold">المهارات المكتسبة: </p>
-                  <div className="flex flex-wrap gap-2 text-therd">
-                    {course?.skills.map((skill, index) => (
-                      <span
-                        key={index}
-                        className=" border  border-gray-400 text-fourth/90 font-bold rounded-md text-[12px] px-3 py-1"
-                      >{`${skill}`}</span>
-                    ))}
+            {coursesFilter.length > 0 ? (
+              coursesFilter.map((course) => (
+                <Link
+                  href="/CourseDetails"
+                  key={course.id}
+                  className="grid grid-rows-[auto_auto_1fr_auto_auto] gap-5 bg-white border border-gray-300 rounded-lg p-3 hover:shadow-lg hover:scale-[103%] transition-all duration-300"
+                >
+                  <div className="h-[200px] bg-secondary rounded-md overflow-hidden">
+                    <Image
+                      src={course.imageUrl}
+                      alt="Course"
+                      width={100}
+                      height={100}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                </div>
-                <div className="flex gap-1 items-center">
-                  <svg
-                    className="w-5 h-5 text-yellow-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.962a1 1 0 00.95.69h4.17c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.962c.3.921-.755 1.688-1.538 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.783.57-1.838-.197-1.538-1.118l1.287-3.962a1 1 0 00-.364-1.118L2.047 9.39c-.783-.57-.38-1.81.588-1.81h4.17a1 1 0 00.95-.69l1.286-3.962z" />
-                  </svg>
-                  <p className="text-[14px] text-gray-500">{`${course?.rating} | `}</p>
-                  <p className="text-[14px] text-gray-500">{`${course?.reviewsCount} تقييم `}</p>
-                </div>
-                <div className="flex gap-3 justify-between items-center text-gray-500 md:text-[16px] text-[14px]">
-                  <p className="level ">{course?.level}</p>
-                  <p>{`${course?.lessonsCount} درس`}</p>
-                </div>
-                {/* </div> */}
-              </Link>
-            ))}
+
+                  <h3 className="text-fourth font-bold md:text-[15px]">
+                    {course.courseName}
+                  </h3>
+
+                  <div className="text-[14px] flex flex-col gap-2">
+                    <p className="text-therd font-bold">المهارات المكتسبة:</p>
+                    <div className="flex flex-wrap gap-2 text-therd">
+                      {course.skills.map((skill, index) => (
+                        <span
+                          key={index}
+                          className="text-fourth/90 font-bold border border-gray-400 rounded-md text-[12px] px-3 py-1"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex gap-1 items-center">
+                    <svg
+                      className="w-5 h-5 text-yellow-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.962a1 1 0 00.95.69h4.17c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.962c.3.921-.755 1.688-1.538 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.783.57-1.838-.197-1.538-1.118l1.287-3.962a1 1 0 00-.364-1.118L2.047 9.39c-.783-.57-.38-1.81.588-1.81h4.17a1 1 0 00.95-.69l1.286-3.962z" />
+                    </svg>
+                    <p className="text-[14px] text-gray-500">
+                      {course.rating} |
+                    </p>
+                    <p className="text-[14px] text-gray-500">
+                      {course.reviewsCount} تقييم
+                    </p>
+                  </div>
+
+                  <div className="flex justify-between items-center text-gray-500 md:text-[16px] text-[14px]">
+                    <p>{course.level}</p>
+                    {course.lessonsCount && <p>{course.lessonsCount} درس</p>}
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div className="col-span-full flex justify-center opacity-50 flex-col gap-7 items-center py-10">
+                <SearchX className="w-16 h-16 text-therd" />
+                <p className="text-fourth text-[16px] md:text-[18px] lg:text-[20px] font-bold">
+                  لا يوجد دورات مطابقة للفلترة
+                </p>
+              </div>
+            )}
           </>
         )}
       </div>

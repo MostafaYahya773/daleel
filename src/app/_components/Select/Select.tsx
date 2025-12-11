@@ -1,8 +1,9 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SelectOptionProps } from '../../interfaces/index';
 import { ArrowDown } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
+
 const Select = React.memo(
   ({
     selectOptions,
@@ -19,21 +20,21 @@ const Select = React.memo(
     const [inputValue, setInputValue] = useState<string>('');
 
     return (
-      <div ref={ref} className="options relative">
+      <div ref={ref} className="options relative ">
         {inView && (
           <>
             <div className="input">
               <input
                 onClick={() => setIsOpen(!isOpen)}
                 type="text"
-                className="w-full md:text-[16px] text-[14px] outline-none p-2 border rounded-md border-gray-400 text-gray-500 font-bold focus:border-gray-600 cursor-pointer"
+                className="w-full  md:text-[16px] text-[14px] outline-none p-2 border rounded-md border-gray-400 text-gray-500 font-bold focus:border-gray-600 cursor-pointer"
                 placeholder={selectOptions[0].value}
                 value={inputValue || ''}
                 readOnly
               />
               <ArrowDown className="absolute top-3 left-2 w-4 h-4 text-therd" />
               <ul
-                className={`flex flex-col gap-0 bg-secondary contact-shadow rounded-b-md absolute z-20 w-full ${
+                className={`flex flex-col gap-0 bg-secondary contact-shadow rounded-b-md absolute z-10 w-full ${
                   isOpen ? 'block' : 'hidden'
                 }`}
               >

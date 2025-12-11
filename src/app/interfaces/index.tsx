@@ -13,4 +13,5 @@ export interface Features {
 export interface SelectOptionProps {
   value: string;
   label: string;
+  id?: number;
 }
