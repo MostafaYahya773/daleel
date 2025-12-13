@@ -39,10 +39,10 @@ const AllCourses = () => {
   const dynamicLevels: SelectOptionProps[] = useMemo(() => {
     if (filterOptions === 'مواد جامعية') {
       return [
-        { label: 'كل الصفوف', value: 'كل الصفوف' },
-        { label: 'الصف الثالث', value: 'الصف الثالث' },
-        { label: 'الصف الرابع', value: 'الصف الرابع' },
-        { label: 'الصف الخامس', value: 'الصف الخامس' },
+        { label: 'كل السنين', value: 'كل السنين' },
+        { label: 'سنة ثالثة', value: 'سنة ثالثة' },
+        { label: 'سنة رابعة', value: 'سنة رابعة' },
+        { label: 'سنة خامسة', value: 'سنة خامسة' },
       ];
     }
 

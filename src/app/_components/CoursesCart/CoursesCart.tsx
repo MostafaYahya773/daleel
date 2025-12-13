@@ -47,7 +47,7 @@ const CoursesCart = React.memo(
           rating: 4.9,
           reviewsCount: 8921,
           category: 'مواد جامعية',
-          level: 'الصف الثالث',
+          level: 'سنة ثالثة',
         },
         {
           id: 2,
@@ -99,7 +99,7 @@ const CoursesCart = React.memo(
           rating: 5.0,
           reviewsCount: 11342,
           category: 'مواد جامعية',
-          level: 'الصف الخامس',
+          level: 'سنة رابعة',
         },
         {
           id: 6,
@@ -115,7 +115,7 @@ const CoursesCart = React.memo(
           rating: 4.8,
           reviewsCount: 9876,
           category: 'مواد جامعية',
-          level: 'الصف الرابع',
+          level: 'سنة خامسة',
         },
         {
           id: 7,
@@ -153,7 +153,7 @@ const CoursesCart = React.memo(
 
       const levelSelected =
         !!filterLevel &&
-        filterLevel !== (isUniversity ? 'كل الصفوف' : 'كل المستويات');
+        filterLevel !== (isUniversity ? 'كل السنين' : 'كل المستويات');
 
       return coursesData.filter((course) => {
         if (categorySelected && levelSelected) {
