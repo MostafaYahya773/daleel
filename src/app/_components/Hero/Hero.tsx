@@ -18,7 +18,7 @@ export default function Hero() {
             عالي الجودة بأسلوب مبسط وعملي، مع مشاريع حقيقية وشهادات معتمدة
           </p>
           <HeroCounter />
-          <div className="link w-full flex justify-center lg:justify-start">
+          <div className="link w-full flex justify-center ">
             <Link
               href="/Courses"
               className=" hover:bg-primary hover:text-therd transition-all duration-300  shadow-md lg:text-[25px] md:text-[25px] text-[20px] text-fourth  px-16 py-3 rounded-lg cursor-pointer"
