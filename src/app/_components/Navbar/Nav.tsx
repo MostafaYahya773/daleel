@@ -1,6 +1,6 @@
 'use client';
-import React, { use, useState } from 'react';
-import { ChevronDown, CodeXml } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronDown, Menu } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import NavDropList from '../NavDropList/NavDropList';
@@ -19,21 +19,31 @@ export default function Nav() {
     { name: 'تواصل معنا', href: '/Contact' },
   ];
   const [isClicked, setIsClicked] = useState(path);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="fixed top-0 left-0 right-0 p-2 bg-white shadow-md z-50 overflow-y-hidden">
-      <div className=" grid md:grid-cols-[auto_1fr_auto] grid-cols-2 items-center  max-w-[1200px] mx-auto relative ">
-        <Link href="/" className="flex items-center gap-3 ">
-          <Image
-            src="/logo.png"
-            width={70}
-            height={70}
-            alt="user Image"
-            className="object-cover scale-[2] px-2 lg:px-0"
-          />
-        </Link>
-        <div className="links  justify-center items-center gap-5 text-[18px] text-gray-500 hidden md:flex">
+      <div className="grid md:grid-cols-[auto_1fr_auto] grid-cols-2 items-center max-w-[1200px] mx-auto relative z-50">
+        <div className="flex items-center gap-3">
+          <div>
+            <span
+              onClick={() => setIsOpen(!isOpen)}
+              className="mt-1 block md:hidden"
+            >
+              <Menu className="w-6 h-6 text-therd" />
+            </span>
+          </div>
+          <Link href="/" className="flex items-center gap-3 ">
+            <Image
+              src="/logo.png"
+              width={70}
+              height={70}
+              alt="user Image"
+              className="object-cover scale-[2] px-2 lg:px-0"
+            />
+          </Link>
+        </div>
+        <div className="links justify-center items-center gap-5 text-[18px] text-gray-500 hidden md:flex">
           {pages.map((page) => (
             <Link
               onClick={() => setIsClicked(page.href)}
@@ -75,11 +85,7 @@ export default function Nav() {
             </div>
           )}
         </div>
-        <div
-          className={`navDropDown ${
-            isOpen ? 'block' : 'hidden'
-          } absolute left-0 top-16 z-50`}
-        >
+        <div className={`navDropDown ${isOpen ? 'block ' : 'hidden'} `}>
           <NavDropList setIsOpen={setIsOpen} />
         </div>
       </div>

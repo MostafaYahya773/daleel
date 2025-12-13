@@ -38,7 +38,7 @@ const NavDropList = React.memo(
     ];
     const [isHovered, setIsHovered] = useState('');
     return (
-      <div className=" bg-white rounded-md min-w-[200px] shadow-md text-gray-500 font-normal p-2 ">
+      <div className="bg-white rounded-md min-w-[200px] shadow-md text-gray-500 font-normal p-2 absolute left-0 top-16 z-50">
         {DropList.map((item) => (
           <div
             className={`flex items-center gap-3 p-2 cursor-pointer ${

@@ -5,7 +5,7 @@ import HeroCounter from '../HeroCounter/HeroCounter';
 import { GraduationCap, Sparkle } from 'lucide-react';
 export default function Hero() {
   return (
-    <div className="bg-secondary lg:min-h-screen  py-5 overflow-x-hidden lg:py-0 flex justify-center items-center mt-[70px]  lg:mt-16 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
+    <div className="bg-secondary lg:min-h-screen  py-5 overflow-x-hidden lg:py-0 flex justify-center items-center mt-[70px]  lg:mt-16 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen z-30">
       <span className="absolute md:w-[600] md:h-[600] w-[500px] h-[500px] rounded-full bg-primary -top-[160px] -right-40 z-10"></span>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-16 md:gap-8 lg:gap-0 max-w-[1200px] mx-auto h-full px-2 z-20">
         <div className="text flex flex-col justify-center items-center gap-10 ">
