@@ -57,11 +57,9 @@ const ContactType: Contact[] = [
 
 const ContactUsContent = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 py-5">
-      <form className="w-full flex flex-col gap-4">
-        <h3 className="lg:text-[30px] md:text-[25px] sm:text-[20px] text-[18px] text-therd">
-          من فضلك قم بتعبئة الحقول التالية
-        </h3>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 py-5 px-5">
+      <form className="w-full flex flex-col gap-4 order-2 lg:order-1 bg-secondary p-2 rounded-lg shadow-lg">
+        {' '}
         {formFields.map((field) => (
           <div key={field.name} className="flex flex-col gap-2">
             <label className="text-sm font-medium text-gray-700 px-2">
@@ -83,7 +81,6 @@ const ContactUsContent = () => {
             )}
           </div>
         ))}
-
         <button
           type="submit"
           className="flex items-center justify-center gap-2 rounded-xl bg-therd px-6 py-3 hover:opacity-80 duration-300 text-sm font-medium text-white"
@@ -92,17 +89,21 @@ const ContactUsContent = () => {
           <Send size={16} />
         </button>
       </form>
-      <div className="grid  md:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3 order-1 lg:order-2">
         {ContactType?.map((contact, index) => (
           <div
             key={index}
-            className="flex flex-col  items-center justify-center gap-3 w-full h-full rounded-xl  bg-primary p-4"
+            className="flex items-center justify-start gap-3 w-full h-full rounded-xl bg-secondary p-4 shadow-md"
           >
-            <contact.icon size={50} className="text-therd" />
-            <p className="lg:text-xl text-lg  font-medium">{contact.label}</p>
-            <p className="lg:text-xl text-lg font-medium text-gray-400">
-              {contact.value}
-            </p>
+            <span className="flex items-center justify-center bg-therd rounded-full w-12 h-12">
+              <contact.icon size={25} className="text-white" />
+            </span>
+            <div className="flex flex-col gap-2">
+              <p className="lg:text-xl text-lg  font-medium">{contact.label}</p>
+              <p className="lg:text-xl text-lg font-medium text-gray-400">
+                {contact.value}
+              </p>
+            </div>
           </div>
         ))}
       </div>
