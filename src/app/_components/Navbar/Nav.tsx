@@ -17,6 +17,7 @@ export default function Nav() {
     { name: 'الكورسات', href: '/Courses' },
     { name: 'المدونة', href: '/Blogs' },
     { name: 'تواصل معنا', href: '/Contact' },
+    { name: 'الإدارة', href: '/Admin' },
   ];
   const [isClicked, setIsClicked] = useState(path);
   const [isLoggedIn, setIsLoggedIn] = useState(false);

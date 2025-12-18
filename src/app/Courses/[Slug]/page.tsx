@@ -64,7 +64,7 @@ export default function CourseDetailsPage() {
                   {`${courseInfo?.level}`}
                 </p>
               </div>
-              <span className="text-gray-500">|</span>
+              <span className="text-gray-500 ">|</span>
               <div className="flex items-center gap-2 flex-wrap justify-center">
                 <Star className="w-5 h-5 text-therd" />
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">

@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Cairo } from 'next/font/google';
 import './globals.css';
 import Nav from './_components/Navbar/Nav';
+import ReactQueryProvider from './_components/ReactQueryProvider/ReactQueryProvider';
+import { Toaster } from 'react-hot-toast';
 
 const cairoFont = Cairo({
   subsets: ['arabic'],
@@ -26,12 +28,15 @@ export default function RootLayout({
       <body
         className={`${cairoFont.className} max-w-[1200px] px-2 mx-auto overflow-x-hidden `}
       >
-        <main>
-          <nav>
-            <Nav />
-          </nav>
-          {children}
-        </main>
+        <ReactQueryProvider>
+          <main>
+            <nav>
+              <Nav />
+            </nav>
+            {children}
+          </main>
+          <Toaster />
+        </ReactQueryProvider>
       </body>
     </html>
   );
