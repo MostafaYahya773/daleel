@@ -2,14 +2,12 @@
 import React, { useMemo } from 'react';
 import { useFormik } from 'formik';
 import { courseSchema } from '../Schema';
-import { CourseProps } from '@/app/interfaces';
+import { Courseprops } from '@/app/interfaces';
 import useAddCourse from '@/app/hook/useAddCourse';
 import toast from 'react-hot-toast';
 import Select from '@/app/_components/Select/Select';
 import { SelectOptionProps } from '@/app/interfaces';
-import { uploadImage } from '../../../../lib/uploadImage';
-import { log } from 'console';
-export default function CourseForm() {
+export default function NewCourse() {
   const { mutate: addCourse } = useAddCourse();
   const categories: SelectOptionProps[] = useMemo(
     () => [
@@ -31,7 +29,7 @@ export default function CourseForm() {
   );
   interface FormField {
     label: string;
-    name: string;
+    name: keyof Courseprops;
     type?: string;
     placeholder?: string;
   }
@@ -70,7 +68,7 @@ export default function CourseForm() {
     },
   ];
 
-  const formik = useFormik<CourseProps>({
+  const formik = useFormik<Courseprops>({
     initialValues: {
       course_name: '',
       image_url: '',
@@ -79,12 +77,11 @@ export default function CourseForm() {
       description: '',
       skills: '',
       what_you_will_learn: '',
-      price: '',
+      price: 0,
     },
     validationSchema: courseSchema,
     onSubmit: (values, { resetForm, setSubmitting }) => {
       console.log(values);
-
       addCourse(values, {
         onSuccess: () => {
           toast.success('تم اضافة الكورس بنجاح', {
@@ -94,7 +91,7 @@ export default function CourseForm() {
           setSubmitting(false);
         },
         onError: () => {
-          toast.error('حدث خطأ في اضافة الكورس');
+          toast.error('اسم الكورس مستخدم من قبل');
           setSubmitting(false);
         },
       });
@@ -105,27 +102,24 @@ export default function CourseForm() {
     <form onSubmit={formik.handleSubmit}>
       <div className="grid grid-cols-3 gap-5 mb-5">
         {/* inputs */}
-        {fields.slice(0, 3)?.map((feld, index) => (
-          <>
-            <div key={index} className="flex flex-col gap-2">
-              <label className="font-semibold px-2">{feld.label}</label>
-              <input
-                type={feld.type}
-                name={feld.name}
-                value={formik.values[feld.name as keyof CourseProps]}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder={feld.placeholder}
-                className="border border-gray-400 p-2 rounded outline-none focus:border-therd duration-100"
-              />
-              {formik.touched[feld.name as keyof CourseProps] &&
-                formik.errors[feld.name as keyof CourseProps] && (
-                  <span className="text-red-500 text-sm">
-                    {formik.errors[feld.name as keyof CourseProps]}
-                  </span>
-                )}
-            </div>
-          </>
+        {fields?.slice(0, 3)?.map((feld, index) => (
+          <div key={index} className="flex flex-col gap-2">
+            <label className="font-semibold px-2">{feld.label}</label>
+            <input
+              type={feld.type}
+              name={feld.name}
+              value={formik.values[feld.name]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              placeholder={feld.placeholder}
+              className="border border-gray-400 p-2 rounded outline-none focus:border-therd duration-100"
+            />
+            {formik.touched[feld.name] && formik.errors[feld.name] && (
+              <span className="text-red-500 text-sm">
+                {formik.errors[feld.name]}
+              </span>
+            )}
+          </div>
         ))}
       </div>
       <div className="select grid grid-cols-2 gap-5 mb-5 *:flex *:flex-col *:px-2 *:gap-2">
@@ -152,17 +146,16 @@ export default function CourseForm() {
             <textarea
               placeholder={feld.placeholder}
               name={feld.name}
-              value={formik.values[feld.name as keyof CourseProps]}
+              value={formik.values[feld.name]}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className="border border-gray-400 p-5 rounded outline-none focus:border-therd duration-100 h-[250px] resize-none"
             />
-            {formik.touched[feld.name as keyof CourseProps] &&
-              formik.errors[feld.name as keyof CourseProps] && (
-                <span className="text-red-500 text-sm">
-                  {formik.errors[feld.name as keyof CourseProps]}
-                </span>
-              )}
+            {formik.touched[feld.name] && formik.errors[feld.name] && (
+              <span className="text-red-500 text-sm">
+                {formik.errors[feld.name]}
+              </span>
+            )}
           </div>
         ))}
       </div>

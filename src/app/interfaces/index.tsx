@@ -16,19 +16,16 @@ export interface SelectOptionProps {
   id?: number;
 }
 
-export interface CourseProps {
+export interface Courseprops {
   id?: number;
   course_name: string;
-  image_url?: string;
-  category?: string;
+  image_url: string;
+  category: string;
   level?: string;
-  description?: string;
-  skills?: string;
-  what_you_will_learn?: string;
-  instructor_name?: string;
-  instructor_photo_url?: string;
-  instructor_bio?: string;
-  price?: string;
-  students_count?: number;
+  description: string;
+  skills: string;
+  what_you_will_learn: string;
+  price: number;
   reviews_count?: number;
+  students_count?: number;
 }

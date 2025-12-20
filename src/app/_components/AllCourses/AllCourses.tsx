@@ -2,15 +2,17 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { SelectOptionProps } from '../../interfaces/index';
+import Skeleton from 'react-loading-skeleton';
 
 const Select = dynamic(() => import('../Select/Select'), {
   ssr: false,
-  loading: () => <p>Loading...</p>,
+  loading: () => (
+    <Skeleton height={40} count={1} baseColor="#e5e7eb" highlightColor="#fff" />
+  ),
 });
 
 const CoursesCart = dynamic(() => import('../CoursesCart/CoursesCart'), {
   ssr: false,
-  loading: () => <p>Loading...</p>,
 });
 
 const AllCourses = () => {
@@ -66,7 +68,6 @@ const AllCourses = () => {
         />
 
         <Select selectOptions={dynamicLevels} onselect={setFilterLevel} />
-
         <Select selectOptions={filterBy} onselect={setFilterDate} />
       </div>
 

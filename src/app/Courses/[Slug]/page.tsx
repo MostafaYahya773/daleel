@@ -1,45 +1,19 @@
+'use client';
 import Image from 'next/image';
 import { User, ChartNoAxesColumnDecreasing, Star } from 'lucide-react';
 import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseDetailsContent';
+import useGetCourseByName from '@/app/hook/useGetCourseByName';
+import { useParams } from 'next/navigation';
+import Skeleton from 'react-loading-skeleton';
+
 export default function CourseDetailsPage() {
-  interface Course {
-    id: number;
-    slug: string; // للـ routing
-    imageUrl: string;
-    instructorName: string;
-    courseName: string;
-    skills: string;
-    rating: number;
-    reviewsCount: number;
-    category: 'مواد جامعية' | 'ذكاء اصطناعي';
-    level?: string;
-    lessonsCount?: number;
-    price: number;
-    studentsCount: number;
-    description?: string;
-    whatYouWillLearn?: string;
-    instructorPhotoUrl?: string;
-    instructorBio?: string;
-  }
-  const courseInfo: Course = {
-    id: 1,
-    slug: 'ai-grade-3-basics',
-    imageUrl: '/logo.png',
-    instructorName: 'أحمد محمد',
-    courseName: 'الذكاء الاصطناعي للصف الثالث - مفاهيم أساسية ممتعة',
-    skills: 'Scratch , AI للأطفال ,  التفكير المنطقي , مشاريع تفاعلية',
-    rating: 4.9,
-    reviewsCount: 8921,
-    category: 'مواد جامعية',
-    level: 'سنة ثالثة',
-    lessonsCount: 30,
-    price: 500,
-    studentsCount: 1200,
-    description: 'مقدمة ممتعة للذكاء الاصطناعي للأطفال مع مشاريع عملية',
-    whatYouWillLearn: 'Scratch, AI للأطفال, التفكير المنطقي, مشاريع تفاعلية',
-    instructorPhotoUrl: '/instructor1.png',
-    instructorBio: 'مدرب ذو خبرة في تعليم الذكاء الاصطناعي للأطفال',
-  };
+  const { Slug } = useParams();
+  const paramWithdecodeURIComponent = decodeURIComponent(Slug as string);
+  console.log(paramWithdecodeURIComponent);
+
+  const { data: courseInfo, isLoading } = useGetCourseByName(
+    paramWithdecodeURIComponent
+  );
 
   return (
     <div className="flex flex-col gap-7 py-7">
@@ -48,27 +22,62 @@ export default function CourseDetailsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 text-center md:text-start px-5 gap-5 z-20 max-w-[1200px] mx-auto">
           <div className="flex flex-col gap-7 justify-center">
             <h2 className=" md:text-[40px] sm:text-[30px] text-[30px] text-therd">
-              {courseInfo.courseName}
+              {courseInfo?.course_name || (
+                <Skeleton
+                  height={35}
+                  count={1}
+                  width={300}
+                  baseColor="#e5e7eb"
+                />
+              )}
             </h2>
             <div className="flex items-center gap-5 bg-white w-fit px-5 py-2 rounded-full shadow-md mx-auto md:mx-0 ">
               <div className="flex items-center flex-wrap justify-center gap-2">
                 <User className="w-5 h-5 text-therd" />
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">
-                  {`+ ${courseInfo?.studentsCount}`}
+                  {isLoading ? (
+                    <Skeleton
+                      height={20}
+                      count={1}
+                      width={50}
+                      baseColor="#e5e7eb"
+                    />
+                  ) : courseInfo?.students_count === 0 ? (
+                    500
+                  ) : (
+                    courseInfo?.students_count
+                  )}
                 </p>
               </div>
               <span className="text-gray-500">|</span>
               <div className="flex items-center gap-2 flex-wrap justify-center">
                 <ChartNoAxesColumnDecreasing className="w-5 h-5 text-therd" />
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">
-                  {`${courseInfo?.level}`}
+                  {courseInfo?.level || (
+                    <Skeleton
+                      height={20}
+                      count={1}
+                      width={50}
+                      baseColor="#e5e7eb"
+                    />
+                  )}
                 </p>
               </div>
               <span className="text-gray-500 ">|</span>
               <div className="flex items-center gap-2 flex-wrap justify-center">
                 <Star className="w-5 h-5 text-therd" />
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">
-                  {`${courseInfo?.rating}`}
+                  {courseInfo?.reviews_count === 0
+                    ? 0
+                    : courseInfo?.reviews_count || (
+                        <Skeleton
+                          height={20}
+                          count={1}
+                          width={50}
+                          baseColor="#e5e7eb"
+                          highlightColor="#000"
+                        />
+                      )}
                 </p>
               </div>
             </div>
@@ -88,8 +97,8 @@ export default function CourseDetailsPage() {
       <div className="description">
         <CourseDetailsContent
           description={courseInfo?.description!}
-          whatYouWillLearn={courseInfo?.whatYouWillLearn!}
-          price={courseInfo.price!}
+          whatYouWillLearn={courseInfo?.what_you_will_learn!}
+          price={courseInfo?.price!}
         />
       </div>
     </div>

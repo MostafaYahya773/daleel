@@ -1,12 +1,12 @@
 'use client';
-import React from 'react';
 import dynamic from 'next/dynamic';
 import CoursesHero from '../_components/HeroCourse/HeroCourse';
+import Skeleton from 'react-loading-skeleton';
 const AllCourses = dynamic(
   () => import('../_components/AllCourses/AllCourses'),
   {
     ssr: false,
-    loading: () => <p>Loading...</p>,
+    loading: () => <Skeleton height={40} count={1} />,
   }
 );
 

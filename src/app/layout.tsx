@@ -4,7 +4,7 @@ import './globals.css';
 import Nav from './_components/Navbar/Nav';
 import ReactQueryProvider from './_components/ReactQueryProvider/ReactQueryProvider';
 import { Toaster } from 'react-hot-toast';
-
+import 'react-loading-skeleton/dist/skeleton.css';
 const cairoFont = Cairo({
   subsets: ['arabic'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],

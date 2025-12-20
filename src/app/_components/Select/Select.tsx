@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SelectOptionProps } from '../../interfaces/index';
 import { ArrowDown } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
