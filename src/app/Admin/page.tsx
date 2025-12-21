@@ -1,9 +1,10 @@
 'use client';
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
+import AddAndEditindCourseAndLesson from '../_components/Loader/AddAndEditindCourseAndLesson';
 const NewCourse = dynamic(() => import('./NewCourse/NewCourse'), {
   ssr: false,
-  loading: () => <p>loading</p>,
+  loading: () => <AddAndEditindCourseAndLesson />,
 });
 const EditCourse = dynamic(() => import('./EditCourse/EditCourse'), {
   ssr: false,

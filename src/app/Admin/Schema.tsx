@@ -7,13 +7,7 @@ export const courseSchema = Yup.object().shape({
     .required('اسم الكورس مطلوب'),
   image_url: Yup.string().nullable(),
   category: Yup.string().required('الفئة مطلوبة').nullable(),
-  level: Yup.string()
-    .oneOf(
-      ['متوسط', 'متقدم', 'مبتدئ', 'سنة ثالثة', 'سنة رابعة', 'سنة خامسة'],
-      'Level غير صالح'
-    )
-    .required('المستوى مطلوب')
-    .nullable(),
+  level: Yup.string().required('المستوى مطلوب').nullable(),
   description: Yup.string()
     .max(1500, 'الوصف طويل جدًا')
     .required('الوصف مطلوب')

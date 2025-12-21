@@ -9,7 +9,6 @@ import Skeleton from 'react-loading-skeleton';
 export default function CourseDetailsPage() {
   const { Slug } = useParams();
   const paramWithdecodeURIComponent = decodeURIComponent(Slug as string);
-  console.log(paramWithdecodeURIComponent);
 
   const { data: courseInfo, isLoading } = useGetCourseByName(
     paramWithdecodeURIComponent
