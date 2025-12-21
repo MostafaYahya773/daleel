@@ -4,24 +4,22 @@ import React, { useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { SearchX } from 'lucide-react';
 import Link from 'next/link';
-import useGetCourses from '@/app/hook/useGetCourses';
 import { Courseprops } from '../../interfaces';
 import CartLoader from '../Loader/CartLoader';
-
 const CoursesCart = React.memo(
   ({
     filterOptions,
     filterLevel,
+    courses,
   }: {
     filterOptions: string;
     filterLevel: string;
+    courses: Courseprops[];
   }) => {
     const { ref, inView } = useInView({
       threshold: 0.5,
       triggerOnce: true,
     });
-
-    const { data, isLoading } = useGetCourses();
 
     const coursesFilter = useMemo(() => {
       const categorySelected =
@@ -31,7 +29,7 @@ const CoursesCart = React.memo(
         !!filterLevel &&
         filterLevel !== (isUniversity ? 'كل السنين' : 'كل المستويات');
 
-      return data?.filter((course: Courseprops) => {
+      return courses?.filter((course: Courseprops) => {
         if (categorySelected && levelSelected) {
           return (
             course.category === filterOptions && course.level === filterLevel
@@ -44,7 +42,7 @@ const CoursesCart = React.memo(
           return true;
         }
       });
-    }, [filterOptions, filterLevel, data]);
+    }, [filterOptions, filterLevel, courses]);
 
     return (
       <div
@@ -53,7 +51,7 @@ const CoursesCart = React.memo(
       >
         {inView && (
           <>
-            {isLoading ? (
+            {!courses ? (
               <CartLoader />
             ) : coursesFilter && coursesFilter.length > 0 ? (
               coursesFilter.map((course) => (

@@ -3,7 +3,8 @@ import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { SelectOptionProps } from '../../interfaces/index';
 import Skeleton from 'react-loading-skeleton';
-
+import { Courseprops } from '../../interfaces/index';
+import CartLoader from '../Loader/CartLoader';
 const Select = dynamic(() => import('../Select/Select'), {
   ssr: false,
   loading: () => (
@@ -13,9 +14,10 @@ const Select = dynamic(() => import('../Select/Select'), {
 
 const CoursesCart = dynamic(() => import('../CoursesCart/CoursesCart'), {
   ssr: false,
+  loading: () => <CartLoader />,
 });
 
-const AllCourses = () => {
+const AllCourses = React.memo(({ courses }: { courses: Courseprops[] }) => {
   const selectTypes: SelectOptionProps[] = useMemo(
     () => [
       { label: 'كل التخصصات', value: 'كل التخصصات' },
@@ -72,10 +74,14 @@ const AllCourses = () => {
       </div>
 
       <div className="course cart">
-        <CoursesCart filterOptions={filterOptions} filterLevel={filterLevel} />
+        <CoursesCart
+          filterOptions={filterOptions}
+          filterLevel={filterLevel}
+          courses={courses}
+        />
       </div>
     </div>
   );
-};
+});
 
 export default AllCourses;

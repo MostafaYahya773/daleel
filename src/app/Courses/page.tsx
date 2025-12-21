@@ -1,20 +1,15 @@
-'use client';
-import dynamic from 'next/dynamic';
 import CoursesHero from '../_components/HeroCourse/HeroCourse';
-import Skeleton from 'react-loading-skeleton';
-const AllCourses = dynamic(
-  () => import('../_components/AllCourses/AllCourses'),
-  {
-    ssr: false,
-    loading: () => <Skeleton height={40} count={1} />,
-  }
-);
+import AllCourses from '../_components/AllCourses/AllCourses';
+import GetCources from '../../../lib/GetCources';
 
-export default function Courses() {
+export default async function Courses() {
+  // get data from server
+  const data = await GetCources();
+
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-7 ">
       <CoursesHero />
-      <AllCourses />
+      <AllCourses courses={data} />
     </div>
   );
 }

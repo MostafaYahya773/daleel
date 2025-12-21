@@ -129,6 +129,11 @@ export default function NewCourse() {
             selectOptions={categories}
             onselect={(value) => formik.setFieldValue('category', value)}
           />
+          {formik.touched.category && formik.errors.category && (
+            <span className="text-red-500 text-sm">
+              {formik.errors.category}
+            </span>
+          )}
         </div>
         <div>
           <span>{fields[4].label}</span>
@@ -136,6 +141,9 @@ export default function NewCourse() {
             selectOptions={levels}
             onselect={(value) => formik.setFieldValue('level', value)}
           />
+          {formik.touched.level && formik.errors.level && (
+            <span className="text-red-500 text-sm">{formik.errors.level}</span>
+          )}
         </div>
       </div>
       <div className="textArea grid grid-cols-3 gap-5 mb-5">
