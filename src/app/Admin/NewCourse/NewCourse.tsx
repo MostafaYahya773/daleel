@@ -172,7 +172,11 @@ export default function NewCourse() {
         className="bg-therd text-white p-2 rounded hover:opacity-80 mb-5 w-full mx-auto"
         disabled={formik.isSubmitting}
       >
-        {formik.isSubmitting ? 'جارٍ الإرسال...' : 'إرسال'}
+        {formik.isSubmitting ? (
+          <span className="loaderAnimation"></span>
+        ) : (
+          'اضافة كورس جديد'
+        )}
       </button>
     </form>
   );

@@ -28,6 +28,7 @@ const ConfirmAlert = React.memo(
               تراجع
             </button>
             <button
+              disabled={isPending}
               onClick={() => {
                 deleteCourse(courseID);
                 setConfirmation(false);
