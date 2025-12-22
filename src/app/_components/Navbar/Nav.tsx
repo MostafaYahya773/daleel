@@ -51,7 +51,9 @@ export default function Nav() {
               key={page.name}
               href={page.href}
             >
-              <span className={isClicked === page.href ? 'text-therd' : ''}>
+              <span
+                className={isClicked && path === page.href ? 'text-therd' : ''}
+              >
                 {page.name}
               </span>
             </Link>
