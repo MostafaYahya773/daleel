@@ -8,9 +8,7 @@ import Select from '@/app/_components/Select/Select';
 import { SelectOptionProps } from '@/app/interfaces';
 import useGetCourseByName from '@/app/hook/useGetCourseByName';
 import useEditCourse from '@/app/hook/useEditCourse';
-import CartLoader from '@/app/_components/Loader/CartLoader';
 import AddAndEditindCourseAndLesson from '@/app/_components/Loader/AddAndEditindCourseAndLesson';
-import { number } from 'yup';
 const CourseForm = React.memo(
   ({ courseID, courseName }: { courseID: number; courseName: string }) => {
     const { mutate } = useEditCourse(courseID);
@@ -106,88 +104,90 @@ const CourseForm = React.memo(
       return <AddAndEditindCourseAndLesson />;
     }
     return (
-      <form onSubmit={formik.handleSubmit}>
-        <div className="grid grid-cols-3 gap-5 mb-5">
-          {/* inputs */}
-          {fields?.slice(0, 3)?.map((feld, index) => (
-            <div key={index} className="flex flex-col gap-2">
-              <label className="font-semibold px-2">{feld.label}</label>
-              <input
-                type={feld.type}
-                name={feld.name}
-                value={formik.values[feld.name]}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                placeholder={feld.placeholder}
-                className="border border-gray-400 p-2 rounded outline-none focus:border-therd duration-100"
+      <div className={`${!courseID && !courseName ? 'hidden' : ''}`}>
+        <form onSubmit={formik.handleSubmit}>
+          <div className="grid grid-cols-3 gap-5 mb-5">
+            {/* inputs */}
+            {fields?.slice(0, 3)?.map((feld, index) => (
+              <div key={index} className="flex flex-col gap-2">
+                <label className="font-semibold px-2">{feld.label}</label>
+                <input
+                  type={feld.type}
+                  name={feld.name}
+                  value={formik.values[feld.name]}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  placeholder={feld.placeholder}
+                  className="border border-gray-400 p-2 rounded outline-none focus:border-therd duration-100"
+                />
+                {formik.touched[feld.name] && formik.errors[feld.name] && (
+                  <span className="text-red-500 text-sm">
+                    {formik.errors[feld.name]}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="select grid grid-cols-2 gap-5 mb-5 *:flex *:flex-col *:px-2 *:gap-2">
+            <div>
+              <span>{fields[3].label}</span>
+              <Select
+                selectOptions={categories}
+                onselect={(value) => formik.setFieldValue('category', value)}
               />
-              {formik.touched[feld.name] && formik.errors[feld.name] && (
+              {formik.touched.category && formik.errors.category && (
                 <span className="text-red-500 text-sm">
-                  {formik.errors[feld.name]}
+                  {formik.errors.category}
                 </span>
               )}
             </div>
-          ))}
-        </div>
-        <div className="select grid grid-cols-2 gap-5 mb-5 *:flex *:flex-col *:px-2 *:gap-2">
-          <div>
-            <span>{fields[3].label}</span>
-            <Select
-              selectOptions={categories}
-              onselect={(value) => formik.setFieldValue('category', value)}
-            />
-            {formik.touched.category && formik.errors.category && (
-              <span className="text-red-500 text-sm">
-                {formik.errors.category}
-              </span>
-            )}
-          </div>
-          <div>
-            <span>{fields[4].label}</span>
-            <Select
-              selectOptions={levels}
-              onselect={(value) => formik.setFieldValue('level', value)}
-            />
-            {formik.touched.level && formik.errors.level && (
-              <span className="text-red-500 text-sm">
-                {formik.errors.level}
-              </span>
-            )}
-          </div>
-        </div>
-        <div className="textArea grid grid-cols-3 gap-5 mb-5">
-          {/* text area */}
-          {fields.slice(5, 8)?.map((feld, index) => (
-            <div key={index} className="flex flex-col gap-2">
-              <label className="font-semibold px-2">{feld.label}</label>
-              <textarea
-                placeholder={feld.placeholder}
-                name={feld.name}
-                value={formik.values[feld.name]}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className="border border-gray-400 p-5 rounded outline-none focus:border-therd duration-100 h-[250px] resize-none"
+            <div>
+              <span>{fields[4].label}</span>
+              <Select
+                selectOptions={levels}
+                onselect={(value) => formik.setFieldValue('level', value)}
               />
-              {formik.touched[feld.name] && formik.errors[feld.name] && (
+              {formik.touched.level && formik.errors.level && (
                 <span className="text-red-500 text-sm">
-                  {formik.errors[feld.name]}
+                  {formik.errors.level}
                 </span>
               )}
             </div>
-          ))}
-        </div>
-        <button
-          type="submit"
-          className="bg-therd text-white p-2 rounded hover:opacity-80 mb-5 w-full mx-auto"
-          disabled={formik.isSubmitting}
-        >
-          {formik.isSubmitting ? (
-            <span className="loaderAnimation"></span>
-          ) : (
-            'تحديث'
-          )}
-        </button>
-      </form>
+          </div>
+          <div className="textArea grid grid-cols-3 gap-5 mb-5">
+            {/* text area */}
+            {fields.slice(5, 8)?.map((feld, index) => (
+              <div key={index} className="flex flex-col gap-2">
+                <label className="font-semibold px-2">{feld.label}</label>
+                <textarea
+                  placeholder={feld.placeholder}
+                  name={feld.name}
+                  value={formik.values[feld.name]}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  className="border border-gray-400 p-5 rounded outline-none focus:border-therd duration-100 h-[250px] resize-none"
+                />
+                {formik.touched[feld.name] && formik.errors[feld.name] && (
+                  <span className="text-red-500 text-sm">
+                    {formik.errors[feld.name]}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+          <button
+            type="submit"
+            className="bg-therd text-white p-2 rounded hover:opacity-80 mb-5 w-full mx-auto"
+            disabled={formik.isSubmitting}
+          >
+            {formik.isSubmitting ? (
+              <span className="loaderAnimation"></span>
+            ) : (
+              'تحديث'
+            )}
+          </button>
+        </form>
+      </div>
     );
   }
 );

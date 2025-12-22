@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import GetCources from '../../../../lib/GetCources';
 import { Courseprops } from '@/app/interfaces';
-import DropList from './DropList';
+import DropList from '../_Components/DropList/DropList';
 import CourseForm from './CourseForm';
 export default function EditCourse() {
   const [courses, setCourses] = useState<Courseprops[]>([]);

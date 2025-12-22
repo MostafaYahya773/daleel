@@ -1,12 +1,12 @@
 'use client';
 import React, { useMemo, useState } from 'react';
-import { Courseprops } from '../../interfaces/index';
+import { Courseprops } from '../../../interfaces/index';
 import { ArrowDown } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 
 interface Props {
   selectOptions: Courseprops[];
-  onselect: (value: number, CourseName: string) => void; // id كورس رقم
+  onselect: (value: number, CourseName: string) => void;
 }
 
 const DropList = React.memo(({ selectOptions, onselect }: Props) => {
@@ -50,7 +50,7 @@ const DropList = React.memo(({ selectOptions, onselect }: Props) => {
             >
               {filterData?.map((item) => (
                 <li
-                  key={item.id} // أفضل من index
+                  key={item.id}
                   onClick={() => handleSelect(item.id!, item.course_name)}
                   className="flex items-center md:text-[16px] text-[14px] cursor-pointer p-2 hover:bg-therd text-gray-500 hover:text-white rounded-md"
                 >

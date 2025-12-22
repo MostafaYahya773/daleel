@@ -8,30 +8,25 @@ const NewCourse = dynamic(() => import('./NewCourse/NewCourse'), {
 });
 const EditCourse = dynamic(() => import('./EditCourse/EditCourse'), {
   ssr: false,
-  loading: () => <p>loading</p>,
 });
 const DeleteCoure = dynamic(() => import('./DeleteCourse/DeleteCourse'), {
   ssr: false,
-  loading: () => <p>loading</p>,
 });
 const NewLesson = dynamic(() => import('./NewLesson/NewLesson'), {
   ssr: false,
-  loading: () => <p>loading</p>,
 });
 const EditLesson = dynamic(() => import('./EditLesson/EditLesson'), {
   ssr: false,
-  loading: () => <p>loading</p>,
 });
 const DeleteLesson = dynamic(() => import('./DeleteLesson/DeleteLesson'), {
   ssr: false,
-  loading: () => <p>loading</p>,
 });
 
 export default function Admin() {
   const Options = [
     { name: 'اضافة كورس' },
     { name: 'تعديل كورس' },
-    { name: 'حزف كورس' },
+    { name: 'حذف كورس' },
     { name: 'اضافة درس' },
     { name: 'تعديل درس' },
     { name: 'حزف درس' },
@@ -69,13 +64,19 @@ export default function Admin() {
             isActive === 'تعديل كورس' ? 'block' : 'hidden'
           } addCourse`}
         >
+          <h3 className="text-therd font-bold md:text-[20px] text-[14px] mb-3">
+            من فضلك اختر الكورس المراد تعديلة
+          </h3>
           <EditCourse />
         </div>
         <div
           className={`${
-            isActive === 'حزف كورس' ? 'block' : 'hidden'
+            isActive === 'حذف كورس' ? 'block' : 'hidden'
           } addCourse`}
         >
+          <h3 className="text-therd font-bold md:text-[20px] text-[14px] mb-3">
+            من فضلك اختر الكورس المراد حذفة
+          </h3>
           <DeleteCoure />
         </div>
         <div
@@ -90,11 +91,17 @@ export default function Admin() {
             isActive === 'تعديل درس' ? 'block' : 'hidden'
           } addCourse`}
         >
+          <h3 className="text-therd font-bold md:text-[20px] text-[14px] mb-3">
+            من فضلك اختر الدرس المراد تعديلة
+          </h3>
           <EditLesson />
         </div>
         <div
           className={`${isActive === 'حزف درس' ? 'block' : 'hidden'} addCourse`}
         >
+          <h3 className="text-therd font-bold md:text-[20px] text-[14px] mb-3">
+            من فضلك اختر الدرس المراد حذفة
+          </h3>
           <DeleteLesson />
         </div>
       </div>

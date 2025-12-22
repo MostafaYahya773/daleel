@@ -1,5 +1,41 @@
-import React from 'react';
+'use client';
+import { useEffect, useState } from 'react';
+import GetCources from '../../../../lib/GetCources';
+import { Courseprops } from '@/app/interfaces';
+import DropList from '../_Components/DropList/DropList';
+import ConfirmAlert from '../_Components/ConfirmAlert/ConfirmAlert';
 
-export default function DeleteCoure() {
-  return <div className="mt-24">انت في صفحة مسح الكورسات</div>;
+export default function DeleteCourse() {
+  const [courses, setCourses] = useState<Courseprops[]>([]);
+  const [courseID, setcourseID] = useState<number>(0);
+  const [courseName, setcourseName] = useState<string>('');
+  const [confirmation, setConfirmation] = useState<boolean>(false);
+  useEffect(() => {
+    const handleData = async () => {
+      const data = await GetCources();
+      setCourses(data);
+    };
+    handleData();
+  }, []);
+
+  return (
+    <div className="mt-0 flex flex-col gap-7">
+      <DropList
+        selectOptions={courses}
+        onselect={(courseid: number, CourseName: string) => {
+          setcourseID(courseid);
+          setcourseName(CourseName);
+          setConfirmation(true);
+        }}
+      />
+
+      <div className={`${confirmation ? 'block' : 'hidden'}`}>
+        <ConfirmAlert
+          courseName={courseName}
+          setConfirmation={setConfirmation}
+          courseID={courseID}
+        />
+      </div>
+    </div>
+  );
 }
