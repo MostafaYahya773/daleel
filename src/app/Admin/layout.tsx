@@ -11,11 +11,11 @@ export default function AdminLayout({
   const pathname = usePathname();
   const Options = [
     { name: 'اضافة كورس', href: '/Admin/NewCourse' },
-    { name: 'تعديل كورس', href: '/Admin/EditCourse' },
+    { name: 'تحديث كورس', href: '/Admin/EditCourse' },
     { name: 'حذف كورس', href: '/Admin/DeleteCourse' },
     { name: 'اضافة درس', href: '/Admin/NewLesson' },
-    { name: 'تعديل درس', href: '/Admin/EditLesson' },
-    { name: 'حزف درس', href: '/Admin/DeleteLesson' },
+    { name: 'تحديث درس', href: '/Admin/EditLesson' },
+    { name: 'حذف درس', href: '/Admin/DeleteLesson' },
   ];
 
   return (

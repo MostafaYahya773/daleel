@@ -183,7 +183,7 @@ const CourseForm = React.memo(
             {formik.isSubmitting ? (
               <span className="loaderAnimation"></span>
             ) : (
-              'تحديث'
+              'تحديث الكورس'
             )}
           </button>
         </form>

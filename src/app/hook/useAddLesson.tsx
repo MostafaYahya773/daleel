@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Lessonprops } from '../interfaces';
 import { supabase } from '../../../lib/supabaseClient';
 
-const useAddLesson = (LessonId: number) => {
+const useAddLesson = () => {
   const addLesson = async (lesson: Lessonprops) => {
     const { data, error } = await supabase.from('lessons').insert(lesson);
     if (error) throw new Error(error.message);
@@ -11,7 +11,7 @@ const useAddLesson = (LessonId: number) => {
   };
 
   return useMutation({
-    mutationKey: ['addLesson', LessonId],
+    mutationKey: ['addLesson'],
     mutationFn: addLesson,
   });
 };

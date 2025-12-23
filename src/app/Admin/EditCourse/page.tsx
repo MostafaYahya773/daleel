@@ -18,14 +18,19 @@ export default function EditCourse() {
   }, []);
 
   return (
-    <div className="mt-0 flex flex-col gap-7">
-      <DropList
-        selectOptions={courses}
-        onselect={(courseid: number, CourseName: string) => {
-          setcourseID(courseid);
-          setcourseName(CourseName);
-        }}
-      />
+    <div className="flex flex-col gap-7">
+      <div className="flex flex-col gap-3">
+        <h2 className="text-therd md:text-[18px] font-bold px-2">
+          اختر اسم الكورس المراد تحديثة
+        </h2>
+        <DropList
+          selectOptions={courses}
+          onselect={(courseid: number, CourseName: string) => {
+            setcourseID(courseid);
+            setcourseName(CourseName);
+          }}
+        />
+      </div>
       <CourseForm courseID={courseID} courseName={courseName} />{' '}
     </div>
   );
