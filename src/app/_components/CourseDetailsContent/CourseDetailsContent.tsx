@@ -3,15 +3,20 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { BookCheck } from 'lucide-react';
 import Skeleton from 'react-loading-skeleton';
+import Link from 'next/link';
 
 const CourseDetailsContent = ({
   description,
   whatYouWillLearn,
   price,
+  paramWithdecodeURIComponent,
+  courseId,
 }: {
   description: string;
   whatYouWillLearn: string;
   price: number;
+  paramWithdecodeURIComponent: string;
+  courseId: number;
 }) => {
   interface FutureProps {
     name: string;
@@ -113,9 +118,18 @@ const CourseDetailsContent = ({
               )}
               <span>جنية</span>
             </p>
-            <button className="bg-therd py-2 md:text-[20px] text-[16px] rounded-lg text-white hover:opacity-70 duration-300">
-              {price === 0 ? 'مشاهدة الدورة' : 'اشتري الان'}
-            </button>
+            <Link
+              className="w-full"
+              href={
+                price === 0
+                  ? `/Courses/${paramWithdecodeURIComponent}/Lessons/${courseId}`
+                  : '/Courses'
+              }
+            >
+              <button className="bg-therd w-full py-2 md:text-[20px] text-[16px] rounded-lg text-white hover:opacity-70 duration-300">
+                {price === 0 ? 'مشاهدة الدورة' : 'اشتري الان'}
+              </button>
+            </Link>
           </div>
         </div>
       </div>

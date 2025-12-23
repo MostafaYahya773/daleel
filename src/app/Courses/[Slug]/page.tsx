@@ -98,6 +98,8 @@ export default function CourseDetailsPage() {
           description={courseInfo?.description!}
           whatYouWillLearn={courseInfo?.what_you_will_learn!}
           price={courseInfo?.price!}
+          paramWithdecodeURIComponent={paramWithdecodeURIComponent}
+          courseId={courseInfo?.id!}
         />
       </div>
     </div>
