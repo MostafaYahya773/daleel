@@ -25,3 +25,35 @@ export const courseSchema = Yup.object().shape({
     .required('السعر مطلوب')
     .nullable(),
 });
+
+export const lessonSchema = Yup.object({
+  title: Yup.string()
+    .required('اسم الدرس مطلوب')
+    .min(3, 'اسم الدرس قصير جدًا')
+    .max(100, 'اسم الدرس طويل جدًا')
+    .matches(/^[^<>]*$/, 'ممنوع إدخال أكواد أو علامات غير مسموح بها'),
+
+  description: Yup.string()
+    .required('وصف الدرس مطلوب')
+    .min(10, 'الوصف قصير جدًا')
+    .max(1500, 'الوصف طويل جدًا')
+    .matches(/^[^<>]*$/, 'ممنوع إدخال أكواد HTML أو Scripts'),
+
+  youtube_url: Yup.string()
+    .required('رابط الفيديو مطلوب')
+    .url('رابط غير صالح')
+    .matches(
+      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/,
+      'الرابط يجب أن يكون من YouTube فقط'
+    ),
+
+  lesson_img: Yup.string()
+    .required('رابط الصورة مطلوب')
+    .url('رابط الصورة غير صالح')
+    .matches(
+      /\.(jpg|jpeg|png|webp)$/i,
+      'يجب أن يكون رابط صورة صحيح (jpg, png, webp)'
+    ),
+
+  is_free: Yup.boolean().required(),
+});

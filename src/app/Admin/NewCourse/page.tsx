@@ -100,7 +100,7 @@ export default function NewCourse() {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="grid grid-cols-3 gap-5 mb-5">
+      <div className="grid grid-cols-3 gap-5 mb-5 ">
         {/* inputs */}
         {fields?.slice(0, 3)?.map((feld, index) => (
           <div key={index} className="flex flex-col gap-2">

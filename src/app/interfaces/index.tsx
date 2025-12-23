@@ -29,3 +29,13 @@ export interface Courseprops {
   reviews_count?: number;
   students_count?: number;
 }
+
+export interface Lessonprops {
+  id?: number;
+  course_id: number;
+  title: string;
+  description: string;
+  youtube_url: string;
+  is_free: boolean;
+  lesson_img: string;
+}
