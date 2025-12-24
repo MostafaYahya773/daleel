@@ -17,7 +17,7 @@ export interface SelectOptionProps {
 }
 
 export interface Courseprops {
-  id?: number;
+  id?: string;
   course_name: string;
   image_url: string;
   category: string;

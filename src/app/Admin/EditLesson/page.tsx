@@ -10,7 +10,7 @@ import LessonsDropList from '../_Components/LessonsDropList/LessonsDropList';
 export default function EditCourse() {
   const [courses, setCourses] = useState<Courseprops[]>([]);
   const [lessonsId, setLessonsId] = useState<number>(0);
-  const [courseID, setcourseID] = useState<number>(0);
+  const [courseID, setcourseID] = useState<string>('');
   const [courseName, setcourseName] = useState<string>('');
   useEffect(() => {
     const handleData = async () => {
@@ -32,7 +32,7 @@ export default function EditCourse() {
           </h2>
           <DropList
             selectOptions={courses}
-            onselect={(courseid: number, CourseName: string) => {
+            onselect={(courseid: string, CourseName: string) => {
               setcourseID(courseid);
               setcourseName(CourseName);
             }}
