@@ -7,7 +7,7 @@ import ConfirmAlert from '../_Components/ConfirmAlert/ConfirmAlert';
 
 export default function DeleteCourse() {
   const [courses, setCourses] = useState<Courseprops[]>([]);
-  const [courseID, setcourseID] = useState<number>(0);
+  const [courseID, setcourseID] = useState<string>('');
   const [courseName, setcourseName] = useState<string>('');
   const [confirmation, setConfirmation] = useState<boolean>(false);
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function DeleteCourse() {
     <div className="mt-0 flex flex-col gap-7">
       <DropList
         selectOptions={courses}
-        onselect={(courseid: number, CourseName: string) => {
+        onselect={(courseid: string, CourseName: string) => {
           setcourseID(courseid);
           setcourseName(CourseName);
           setConfirmation(true);

@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { supabaseServer } from '../../../lib/supabaseServer';
 import toast from 'react-hot-toast';
 const useDeleteCourse = () => {
-  const deleteCourse = async (id: number) => {
+  const deleteCourse = async (id: string) => {
     const { error } = await supabaseServer
       .from('courses')
       .delete()

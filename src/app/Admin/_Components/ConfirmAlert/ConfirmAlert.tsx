@@ -10,7 +10,7 @@ const ConfirmAlert = React.memo(
   }: {
     courseName: string;
     setConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
-    courseID: number;
+    courseID: string;
   }) => {
     const { mutate: deleteCourse, isPending } = useDeleteCourse();
     return (
