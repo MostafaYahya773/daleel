@@ -5,8 +5,12 @@ import { supabase } from '../../../lib/supabaseClient';
 
 const useAddLesson = () => {
   const addLesson = async (lesson: Lessonprops) => {
-    const { data, error } = await supabase.from('lessons').insert(lesson);
+    const { data, error, statusText } = await supabase
+      .from('lessons')
+      .insert(lesson);
     if (error) throw new Error(error.message);
+    console.log(statusText);
+
     return data;
   };
 

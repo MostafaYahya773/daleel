@@ -7,6 +7,7 @@ import { lessonSchema } from '../Schema';
 import AddAndEditindCourseAndLesson from '@/app/_components/Loader/AddAndEditindCourseAndLesson';
 import useGetCourseByName from '@/app/hook/useGetCourseByName';
 import useAddLesson from '@/app/hook/useAddLesson';
+import { error } from 'console';
 const NewLessonForm = React.memo(
   ({ CourseId, courseName }: { CourseId: number; courseName: string }) => {
     const { data: courseDetails, isLoading } = useGetCourseByName(courseName);

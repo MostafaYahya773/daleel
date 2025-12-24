@@ -67,3 +67,21 @@
     transform: rotate(360deg);
   }
 }
+
+.lesson {
+  &::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #ff6d1f;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+}
