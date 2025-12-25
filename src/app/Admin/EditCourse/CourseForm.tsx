@@ -10,7 +10,7 @@ import useGetCourseByName from '@/app/hook/useGetCourseByName';
 import useEditCourse from '@/app/hook/useEditCourse';
 import AddAndEditindCourseAndLesson from '@/app/_components/Loader/AddAndEditindCourseAndLesson';
 const CourseForm = React.memo(
-  ({ courseID, courseName }: { courseID: number; courseName: string }) => {
+  ({ courseID, courseName }: { courseID: string; courseName: string }) => {
     const { mutate } = useEditCourse(courseID);
     const { data: courseDetails, isLoading } = useGetCourseByName(courseName);
     const categories: SelectOptionProps[] = useMemo(

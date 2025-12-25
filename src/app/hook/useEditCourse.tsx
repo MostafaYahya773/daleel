@@ -2,7 +2,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { supabaseServer } from '../../../lib/supabaseServer';
 import { Courseprops } from '../interfaces';
-const useEditCourse = (id: number) => {
+const useEditCourse = (id: string) => {
   const editCourse = async (values: Courseprops) => {
     const { error } = await supabaseServer
       .from('courses')
