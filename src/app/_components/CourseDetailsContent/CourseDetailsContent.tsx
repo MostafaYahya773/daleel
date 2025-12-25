@@ -28,7 +28,6 @@ const CourseDetailsContent = ({
     { name: 'التقييم', id: 3 },
   ];
   const [selected, setSelected] = useState<number>(1);
-  console.log(courseId);
 
   return (
     <div className="grid md:grid-cols-[2fr_1.2fr] grid-cols-1 gap-5">
