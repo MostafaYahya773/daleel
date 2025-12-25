@@ -46,7 +46,7 @@ const LessonForm = React.memo(
     ];
     const formik = useFormik<Lessonprops>({
       initialValues: {
-        course_id: courseDetails?.[0].course_id || 0,
+        course_id: courseDetails?.[0].course_id || '',
         title: courseDetails?.[0].title || '',
         description: courseDetails?.[0].description || '',
         youtube_url: courseDetails?.[0].youtube_url || '',

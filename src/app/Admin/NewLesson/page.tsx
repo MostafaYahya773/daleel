@@ -7,7 +7,7 @@ import LessonForm from '../EditLesson/LessonForm';
 import NewLessonForm from './NewLessonForm';
 export default function NewLesson() {
   const [courses, setCourses] = useState<Courseprops[]>([]);
-  const [courseID, setcourseID] = useState<number>(0);
+  const [courseID, setcourseID] = useState<string>('');
   const [courseName, setcourseName] = useState<string>('');
   useEffect(() => {
     const handleData = async () => {
@@ -25,7 +25,7 @@ export default function NewLesson() {
         </h2>
         <DropList
           selectOptions={courses}
-          onselect={(courseId: number, courseName: string) => {
+          onselect={(courseId: string, courseName: string) => {
             setcourseID(courseId);
             setcourseName(courseName);
           }}

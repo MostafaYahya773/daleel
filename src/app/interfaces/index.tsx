@@ -32,7 +32,7 @@ export interface Courseprops {
 
 export interface Lessonprops {
   id?: number;
-  course_id: number;
+  course_id: string;
   title: string;
   description: string;
   youtube_url: string;

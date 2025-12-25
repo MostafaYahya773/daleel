@@ -9,7 +9,7 @@ import useGetCourseByName from '@/app/hook/useGetCourseByName';
 import useAddLesson from '@/app/hook/useAddLesson';
 import { error } from 'console';
 const NewLessonForm = React.memo(
-  ({ CourseId, courseName }: { CourseId: number; courseName: string }) => {
+  ({ CourseId, courseName }: { CourseId: string; courseName: string }) => {
     const { data: courseDetails, isLoading } = useGetCourseByName(courseName);
     const { mutate: addLesson } = useAddLesson();
     interface FormField {
@@ -46,7 +46,7 @@ const NewLessonForm = React.memo(
     ];
     const formik = useFormik<Lessonprops>({
       initialValues: {
-        course_id: courseDetails?.id || 0,
+        course_id: courseDetails?.id || '',
         title: '',
         description: '',
         youtube_url: '',
