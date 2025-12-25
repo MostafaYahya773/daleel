@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer';
 
 interface Props {
   selectOptions: Courseprops[];
-  onselect: (value: string, CourseName: string) => void;
+  onselect: (value: string) => void;
 }
 
 const DropList = React.memo(({ selectOptions, onselect }: Props) => {
@@ -26,7 +26,7 @@ const DropList = React.memo(({ selectOptions, onselect }: Props) => {
 
   const handleSelect = (id: string, name: string) => {
     setInputValue(name);
-    onselect(id, name);
+    onselect(id);
     setIsOpen(false);
   };
 
@@ -51,7 +51,7 @@ const DropList = React.memo(({ selectOptions, onselect }: Props) => {
               {filterData?.map((item) => (
                 <li
                   key={item.id}
-                  onClick={() => handleSelect(item.id!, item.course_name)}
+                  onClick={() => handleSelect(item.id!, item.course_name!)}
                   className="flex items-center md:text-[16px] text-[14px] cursor-pointer p-2 hover:bg-therd text-gray-500 hover:text-white rounded-md"
                 >
                   {item.course_name}

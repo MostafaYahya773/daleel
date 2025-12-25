@@ -81,7 +81,6 @@ export default function NewCourse() {
     },
     validationSchema: courseSchema,
     onSubmit: (values, { resetForm, setSubmitting }) => {
-      console.log(values);
       addCourse(values, {
         onSuccess: () => {
           toast.success('تم اضافة الكورس بنجاح', {

@@ -5,6 +5,7 @@ export const revalidate = 60;
 export default async function Courses() {
   // get data from server
   const data = await GetCources();
+
   return (
     <div className="flex flex-col gap-7">
       <CoursesHero />

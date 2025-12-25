@@ -1,18 +1,13 @@
-'use client';
 import Image from 'next/image';
 import { User, ChartNoAxesColumnDecreasing, Star } from 'lucide-react';
 import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseDetailsContent';
-import useGetCourseByName from '@/app/hook/useGetCourseByName';
-import { useParams } from 'next/navigation';
 import Skeleton from 'react-loading-skeleton';
-
-export default function CourseDetailsPage() {
-  const { Slug } = useParams();
-  const paramWithdecodeURIComponent = decodeURIComponent(Slug as string);
-
-  const { data: courseInfo, isLoading } = useGetCourseByName(
-    paramWithdecodeURIComponent
-  );
+import getCourseBySlug from '../../../../lib/getCourseBySlug';
+import { paramsServerProps } from '../../interfaces/index';
+export default async function CourseDetailsPage({ params }: paramsServerProps) {
+  const { slug } = await params;
+  const slugDecoded = decodeURIComponent(slug);
+  const courseInfo = await getCourseBySlug(slugDecoded);
 
   return (
     <div className="flex flex-col gap-7 py-7">
@@ -34,18 +29,9 @@ export default function CourseDetailsPage() {
               <div className="flex items-center flex-wrap justify-center gap-2">
                 <User className="w-5 h-5 text-therd" />
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">
-                  {isLoading ? (
-                    <Skeleton
-                      height={20}
-                      count={1}
-                      width={50}
-                      baseColor="#e5e7eb"
-                    />
-                  ) : courseInfo?.students_count === 0 ? (
-                    500
-                  ) : (
-                    courseInfo?.students_count
-                  )}
+                  {courseInfo?.students_count === 0
+                    ? 500
+                    : courseInfo?.students_count}
                 </p>
               </div>
               <span className="text-gray-500">|</span>
@@ -98,8 +84,8 @@ export default function CourseDetailsPage() {
           description={courseInfo?.description!}
           whatYouWillLearn={courseInfo?.what_you_will_learn!}
           price={courseInfo?.price!}
-          paramWithdecodeURIComponent={paramWithdecodeURIComponent}
           courseId={courseInfo?.id!}
+          slug={courseInfo?.slug!}
         />
       </div>
     </div>

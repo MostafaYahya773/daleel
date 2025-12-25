@@ -9,14 +9,14 @@ const CourseDetailsContent = ({
   description,
   whatYouWillLearn,
   price,
-  paramWithdecodeURIComponent,
   courseId,
+  slug,
 }: {
   description: string;
   whatYouWillLearn: string;
   price: number;
-  paramWithdecodeURIComponent: string;
   courseId: string;
+  slug: string;
 }) => {
   interface FutureProps {
     name: string;
@@ -123,7 +123,7 @@ const CourseDetailsContent = ({
               className="w-full"
               href={
                 price === 0
-                  ? `/Courses/${paramWithdecodeURIComponent}/Lessons/${courseId}`
+                  ? `/Courses/${slug}/Lessons/${courseId}`
                   : '/Courses'
               }
             >

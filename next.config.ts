@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
+  productionBrowserSourceMaps: false,
 };
 
 export default nextConfig;

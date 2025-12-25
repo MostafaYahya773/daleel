@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import GetCources from '../../../../lib/GetCources';
-import { Courseprops, Lessonprops } from '@/app/interfaces';
+import { Courseprops } from '@/app/interfaces';
 import DropList from '../_Components/DropList/DropList';
 import LessonForm from './LessonForm';
 import useGetLessonsById from '@/app/hook/useGetLessonsById';
@@ -11,7 +11,6 @@ export default function EditCourse() {
   const [courses, setCourses] = useState<Courseprops[]>([]);
   const [lessonsId, setLessonsId] = useState<number>(0);
   const [courseID, setcourseID] = useState<string>('');
-  const [courseName, setcourseName] = useState<string>('');
   useEffect(() => {
     const handleData = async () => {
       const data = await GetCources();
@@ -32,9 +31,8 @@ export default function EditCourse() {
           </h2>
           <DropList
             selectOptions={courses}
-            onselect={(courseid: string, CourseName: string) => {
+            onselect={(courseid: string) => {
               setcourseID(courseid);
-              setcourseName(CourseName);
             }}
           />
         </div>

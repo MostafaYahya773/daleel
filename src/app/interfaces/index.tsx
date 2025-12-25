@@ -26,6 +26,7 @@ export interface Courseprops {
   skills: string;
   what_you_will_learn: string;
   price: number;
+  slug?: string;
   reviews_count?: number;
   students_count?: number;
 }
@@ -38,4 +39,11 @@ export interface Lessonprops {
   youtube_url: string;
   is_free: boolean;
   lesson_img: string;
+}
+
+export interface paramsServerProps {
+  params: {
+    slug: string;
+    courseId?: string;
+  };
 }

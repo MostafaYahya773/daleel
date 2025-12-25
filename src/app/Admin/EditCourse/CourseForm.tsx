@@ -6,7 +6,7 @@ import { Courseprops } from '@/app/interfaces';
 import toast from 'react-hot-toast';
 import Select from '@/app/_components/Select/Select';
 import { SelectOptionProps } from '@/app/interfaces';
-import useGetCourseByName from '@/app/hook/useGetCourseByName';
+import useGetCourseByName from '@/app/hook/useGetCourseById';
 import useEditCourse from '@/app/hook/useEditCourse';
 import AddAndEditindCourseAndLesson from '@/app/_components/Loader/AddAndEditindCourseAndLesson';
 const CourseForm = React.memo(
