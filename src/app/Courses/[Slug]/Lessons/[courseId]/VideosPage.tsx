@@ -16,7 +16,7 @@ export default function VideosPage({
     LessonInfo?.[0]?.youtube_url
   );
   return (
-    <div className="lg:mt-14 mt-10 py-10 grid grid-cols-[70%_30%] gap-7 lg:mx-4">
+    <div className="lg:mt-14 mt-10 py-10 grid md:grid-cols-[70%_30%] grid-cols-1 gap-7 lg:mx-4">
       <div className="flex flex-col gap-5">
         <Plyr
           source={{
