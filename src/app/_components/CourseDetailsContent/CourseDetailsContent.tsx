@@ -16,7 +16,7 @@ const CourseDetailsContent = ({
   whatYouWillLearn: string;
   price: number;
   paramWithdecodeURIComponent: string;
-  courseId: number;
+  courseId: string;
 }) => {
   interface FutureProps {
     name: string;
