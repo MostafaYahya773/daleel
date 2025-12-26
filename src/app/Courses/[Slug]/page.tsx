@@ -7,7 +7,14 @@ import { notFound } from 'next/navigation';
 export default async function CourseDetailsPage({ params }: paramsServerProps) {
   const { slug } = await params;
   if (!slug) return notFound();
-  const slugDecoded = decodeURIComponent(slug);
+  const safeDecode = (value: string) => {
+    try {
+      return decodeURIComponent(value);
+    } catch {
+      return value;
+    }
+  };
+  const slugDecoded = safeDecode(slug);
   const courseInfo = await getCourseBySlug(slugDecoded);
 
   return (
@@ -60,11 +67,11 @@ export default async function CourseDetailsPage({ params }: paramsServerProps) {
       </div>
       <div className="description">
         <CourseDetailsContent
-          description={courseInfo?.description!}
-          whatYouWillLearn={courseInfo?.what_you_will_learn!}
-          price={courseInfo?.price!}
-          courseId={courseInfo?.id!}
-          slug={courseInfo?.slug!}
+          description={courseInfo?.description}
+          whatYouWillLearn={courseInfo?.what_you_will_learn}
+          price={courseInfo?.price}
+          courseId={courseInfo?.id}
+          slug={courseInfo?.slug}
         />
       </div>
     </div>
