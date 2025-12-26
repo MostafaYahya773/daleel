@@ -79,7 +79,7 @@ export default function Nav() {
               </p>
               <ChevronDown className="w-5 h-5 text-gray-500" />
               <Image
-                src="/doctor.jpg"
+                src="/logo.png"
                 width={0}
                 height={0}
                 alt="user Image"

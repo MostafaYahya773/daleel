@@ -86,9 +86,9 @@ const CourseDetailsContent = ({
         </div>
         <div className="p-4">
           <div className="whatYouLearn flex flex-col gap-5">
-            <h4 className="md:text-[20px] text-[16px] font-bold text-therd">
+            <h3 className="md:text-[20px] text-[16px] font-bold text-therd">
               ما الذي ستتعلمة في هذه الدورة ؟
-            </h4>
+            </h3>
             <div className="text-gray-500 flex flex-col  gap-5 leading-7">
               {whatYouWillLearn ? (
                 whatYouWillLearn?.split(',').map((item, index) => (
@@ -124,7 +124,7 @@ const CourseDetailsContent = ({
               href={
                 price === 0
                   ? `/Courses/${slug}/Lessons/${courseId}`
-                  : '/Courses'
+                  : `/Courses/${slug}`
               }
             >
               <button className="bg-therd w-full py-2 md:text-[20px] text-[16px] rounded-lg text-white hover:opacity-70 duration-300">

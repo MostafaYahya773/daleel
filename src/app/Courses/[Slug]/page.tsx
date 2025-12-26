@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import { User, ChartNoAxesColumnDecreasing, Star } from 'lucide-react';
 import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseDetailsContent';
-import Skeleton from 'react-loading-skeleton';
 import getCourseBySlug from '../../../../lib/getCourseBySlug';
 import { paramsServerProps } from '../../interfaces/index';
+import { notFound } from 'next/navigation';
 export default async function CourseDetailsPage({ params }: paramsServerProps) {
   const { slug } = await params;
+  if (!slug) return notFound();
   const slugDecoded = decodeURIComponent(slug);
   const courseInfo = await getCourseBySlug(slugDecoded);
 
@@ -16,14 +17,7 @@ export default async function CourseDetailsPage({ params }: paramsServerProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 text-center md:text-start px-5 gap-5 z-20 max-w-[1200px] mx-auto">
           <div className="flex flex-col gap-7 justify-center">
             <h2 className=" md:text-[40px] sm:text-[30px] text-[30px] text-therd">
-              {courseInfo?.course_name || (
-                <Skeleton
-                  height={35}
-                  count={1}
-                  width={300}
-                  baseColor="#e5e7eb"
-                />
-              )}
+              {courseInfo?.course_name}
             </h2>
             <div className="flex items-center gap-5 bg-white w-fit px-5 py-2 rounded-full shadow-md mx-auto md:mx-0 ">
               <div className="flex items-center flex-wrap justify-center gap-2">
@@ -38,14 +32,7 @@ export default async function CourseDetailsPage({ params }: paramsServerProps) {
               <div className="flex items-center gap-2 flex-wrap justify-center">
                 <ChartNoAxesColumnDecreasing className="w-5 h-5 text-therd" />
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">
-                  {courseInfo?.level || (
-                    <Skeleton
-                      height={20}
-                      count={1}
-                      width={50}
-                      baseColor="#e5e7eb"
-                    />
-                  )}
+                  {courseInfo?.level}
                 </p>
               </div>
               <span className="text-gray-500 ">|</span>
@@ -54,15 +41,7 @@ export default async function CourseDetailsPage({ params }: paramsServerProps) {
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">
                   {courseInfo?.reviews_count === 0
                     ? 0
-                    : courseInfo?.reviews_count || (
-                        <Skeleton
-                          height={20}
-                          count={1}
-                          width={50}
-                          baseColor="#e5e7eb"
-                          highlightColor="#000"
-                        />
-                      )}
+                    : courseInfo?.reviews_count}
                 </p>
               </div>
             </div>

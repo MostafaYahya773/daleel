@@ -57,6 +57,7 @@ export default function HeroCourse() {
             width={500}
             height={500}
             priority
+            fetchPriority="high"
             alt="user Image"
             className="object-cover md:w-full mx-auto"
           />
