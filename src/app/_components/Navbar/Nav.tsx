@@ -14,7 +14,7 @@ export default function Nav() {
   const name = 'Mostafa yahya mahmoud hassan';
   const pages: NavProps[] = [
     { name: 'الرئيسية', href: '/' },
-    { name: 'الكورسات', href: '/Courses' },
+    { name: 'الكورسات', href: '/courses' },
     { name: 'المدونة', href: '/Blogs' },
     { name: 'تواصل معنا', href: '/Contact' },
     { name: 'الإدارة', href: '/Admin' },
