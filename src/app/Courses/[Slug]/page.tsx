@@ -11,7 +11,7 @@ export default async function CourseDetailsPage({
 }) {
   const { slug } = await params;
   if (!slug) return notFound();
-  const slugDecoded = decodeURIComponent(slug);
+  const slugDecoded = decodeURIComponent(slug).normalize('NFC');
   const courseInfo = await getCourseBySlug(slugDecoded);
 
   return (
