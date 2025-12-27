@@ -1,7 +1,6 @@
-import { supabaseServer } from './supabaseServer';
+import { supabase } from './supabaseClient';
 
 const getLessons = async () => {
-  const supabase = await supabaseServer();
   const { data, error } = await supabase
     .from('lessons')
     .select('*')
