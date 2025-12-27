@@ -7,7 +7,6 @@ const getCourseBySlug = async (slug: string) => {
     .single();
 
   if (error) {
-    console.error('Supabase Admin error:', error);
     throw new Error(error.message);
   }
   return data;

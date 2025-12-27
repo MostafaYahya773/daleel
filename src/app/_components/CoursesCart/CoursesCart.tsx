@@ -57,6 +57,7 @@ const CoursesCart = React.memo(
               coursesFilter.map((course) => (
                 <Link
                   href={`/Courses/${course?.slug}`}
+                  prefetch={true}
                   key={course?.id}
                   className="grid grid-rows-[auto_auto_1fr_auto] gap-5 bg-white border border-gray-300 rounded-lg p-3 hover:shadow-lg hover:scale-[103%] transition-all duration-300"
                 >
