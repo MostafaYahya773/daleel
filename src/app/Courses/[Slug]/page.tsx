@@ -9,11 +9,12 @@ interface paramsServerProps {
 
 export default async function CourseDetailsPage({ params }: paramsServerProps) {
   const { slug } = await params;
-  // console.log(slug);
-
+  console.log('[PRODUCTION LOG] Raw slug from params:', slug);
+  console.log('[PRODUCTION LOG] Decoded slug:', decodeURIComponent(slug));
   const slugDecoded = decodeURIComponent(slug);
-  const courseInfo = await getCourseBySlug(slugDecoded);
 
+  const courseInfo = await getCourseBySlug(slugDecoded);
+  console.log('[PRODUCTION LOG] Final courseInfo:', courseInfo);
   return (
     <div className="flex flex-col gap-7 py-7">
       <div className="bg-secondary py-5 overflow-hidden lg:py-0 flex justify-center items-center mt-[40px] lg:mt-16  z-[-1] relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">

@@ -1,5 +1,6 @@
 import { supabase } from './supabaseClient';
 const getCourseBySlug = async (slug: string) => {
+  console.log('[PRODUCTION LOG] Query started for slug:', slug);
   const { data, error } = await supabase
     .from('courses')
     .select('*')
