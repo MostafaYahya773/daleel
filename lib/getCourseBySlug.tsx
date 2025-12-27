@@ -1,9 +1,10 @@
 import { supabase } from './supabaseClient';
 const getCourseBySlug = async (slug: string) => {
+  const initSlug = slug.trim();
   const { data, error } = await supabase
     .from('courses')
     .select('*')
-    .ilike('slug', slug)
+    .eq('slug', initSlug)
     .single();
 
   if (error) throw new Error(error.message);
