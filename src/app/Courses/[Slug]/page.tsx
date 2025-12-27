@@ -9,25 +9,13 @@ export default async function CourseDetailsPage({
 }: {
   params: Promise<{ Slug: string }>;
 }) {
-  const resolvedParams = await params;
-  console.log('Raw params:', resolvedParams);
-
-  const slug = resolvedParams.Slug; // <--- ده السطر السحري
-
-  if (!slug || slug === 'undefined') {
-    console.log('No valid slug found');
-    return notFound();
-  }
-
-  const slugDecoded = decodeURI(slug).normalize('NFC').trim();
-  console.log('Using decoded slug:', slugDecoded);
-
+  const { Slug } = await params;
+  const slugDecoded = decodeURI(Slug).normalize('NFC').trim();
   const courseInfo = await getCourseBySlug(slugDecoded);
-
-  if (!courseInfo) {
-    console.log('Course not found');
+  if (!Slug || Slug === 'undefined' || !slugDecoded) {
     return notFound();
   }
+
   return (
     <div className="flex flex-col gap-7 py-7">
       <div className="bg-secondary py-5 overflow-hidden lg:py-0 flex justify-center items-center mt-[40px] lg:mt-16  z-[-1] relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
