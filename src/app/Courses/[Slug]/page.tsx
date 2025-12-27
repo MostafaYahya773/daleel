@@ -10,11 +10,14 @@ export default async function CourseDetailsPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const courseInfo = await getCourseBySlug(slug);
-
-  if (!courseInfo || !slug) {
+  const slugDecoded = decodeURI(slug).normalize('NFC').trim();
+  const courseInfo = await getCourseBySlug(slugDecoded);
+  if (!courseInfo || !slugDecoded || !slug) {
     return notFound();
   }
+  console.log('slug', slug);
+  console.log('slug slug', slugDecoded);
+
   return (
     <div className="flex flex-col gap-7 py-7">
       <div className="bg-secondary py-5 overflow-hidden lg:py-0 flex justify-center items-center mt-[40px] lg:mt-16  z-[-1] relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
