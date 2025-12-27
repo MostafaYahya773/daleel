@@ -5,16 +5,9 @@ import getCourseBySlug from '../../../../lib/getCourseBySlug';
 import { paramsServerProps } from '../../interfaces/index';
 import { notFound } from 'next/navigation';
 export default async function CourseDetailsPage({ params }: paramsServerProps) {
-  const { slug } = await params;
-  if (!slug) return notFound();
-  const safeDecode = (value: string) => {
-    try {
-      return decodeURIComponent(value);
-    } catch {
-      return value;
-    }
-  };
-  const slugDecoded = safeDecode(slug);
+  const paramsResolved = await params;
+  if (!paramsResolved.slug) return notFound();
+  const slugDecoded = decodeURIComponent(paramsResolved.slug);
   const courseInfo = await getCourseBySlug(slugDecoded);
 
   return (
