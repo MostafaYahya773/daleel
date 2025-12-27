@@ -42,8 +42,5 @@ export interface Lessonprops {
 }
 
 export interface paramsServerProps {
-  params: {
-    slug: string;
-    courseId?: string;
-  };
+  params: Promise<{ slug: string; courseId: string }>;
 }

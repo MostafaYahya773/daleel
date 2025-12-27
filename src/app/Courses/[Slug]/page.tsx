@@ -4,11 +4,12 @@ import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseD
 import getCourseBySlug from '../../../../lib/getCourseBySlug';
 import { paramsServerProps } from '../../interfaces/index';
 import { notFound } from 'next/navigation';
+
 export default async function CourseDetailsPage({ params }: paramsServerProps) {
-  const paramsResolved = await params;
-  if (!paramsResolved.slug) return notFound();
-  const slugDecoded = decodeURIComponent(paramsResolved.slug);
+  const { slug } = await params;
+  const slugDecoded = decodeURIComponent(slug);
   const courseInfo = await getCourseBySlug(slugDecoded);
+  if (!slug) return notFound();
 
   return (
     <div className="flex flex-col gap-7 py-7">
