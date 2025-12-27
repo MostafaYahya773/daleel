@@ -51,7 +51,7 @@ const DropList = React.memo(({ selectOptions, onselect }: Props) => {
               {filterData?.map((item) => (
                 <li
                   key={item.id}
-                  onClick={() => handleSelect(item.id!, item.course_name!)}
+                  onClick={() => handleSelect(item?.id!, item?.course_name!)}
                   className="flex items-center md:text-[16px] text-[14px] cursor-pointer p-2 hover:bg-therd text-gray-500 hover:text-white rounded-md"
                 >
                   {item.course_name}

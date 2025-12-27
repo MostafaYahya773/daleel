@@ -25,8 +25,8 @@ export default function EditCourse() {
         </h2>
         <DropList
           selectOptions={courses}
-          onselect={(courseid: string, CourseName: string) => {
-            setcourseID(courseid);
+          onselect={(value: string, CourseName: string) => {
+            setcourseID(value);
             setcourseName(CourseName);
           }}
         />
