@@ -10,14 +10,15 @@ export default async function CourseDetailsPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  if (!slug || slug === undefined) {
+
+  if (!slug || slug === 'undefined') {
     return notFound();
   }
-  const slugDecoded = decodeURIComponent(slug).normalize('NFC').trim();
+  const slugDecoded = decodeURI(slug).normalize('NFC').trim();
   const courseInfo = await getCourseBySlug(slugDecoded);
-  console.log('slug', slug);
-  console.log('slug slug', slugDecoded);
-
+  if (!courseInfo) {
+    return notFound();
+  }
   return (
     <div className="flex flex-col gap-7 py-7">
       <div className="bg-secondary py-5 overflow-hidden lg:py-0 flex justify-center items-center mt-[40px] lg:mt-16  z-[-1] relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
@@ -31,7 +32,7 @@ export default async function CourseDetailsPage({
               <div className="flex items-center flex-wrap justify-center gap-2">
                 <User className="w-5 h-5 text-therd" />
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">
-                  {courseInfo?.students_count === 0
+                  {courseInfo.students_count === 0
                     ? 500
                     : courseInfo?.students_count}
                 </p>
@@ -40,16 +41,16 @@ export default async function CourseDetailsPage({
               <div className="flex items-center gap-2 flex-wrap justify-center">
                 <ChartNoAxesColumnDecreasing className="w-5 h-5 text-therd" />
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">
-                  {courseInfo?.level}
+                  {courseInfo.level}
                 </p>
               </div>
               <span className="text-gray-500 ">|</span>
               <div className="flex items-center gap-2 flex-wrap justify-center">
                 <Star className="w-5 h-5 text-therd" />
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">
-                  {courseInfo?.reviews_count === 0
+                  {courseInfo.reviews_count === 0
                     ? 0
-                    : courseInfo?.reviews_count}
+                    : courseInfo.reviews_count}
                 </p>
               </div>
             </div>
@@ -68,11 +69,11 @@ export default async function CourseDetailsPage({
       </div>
       <div className="description">
         <CourseDetailsContent
-          description={courseInfo?.description}
-          whatYouWillLearn={courseInfo?.what_you_will_learn}
-          price={courseInfo?.price}
-          courseId={courseInfo?.id}
-          slug={courseInfo?.slug}
+          description={courseInfo.description}
+          whatYouWillLearn={courseInfo.what_you_will_learn}
+          price={courseInfo.price}
+          courseId={courseInfo.id}
+          slug={courseInfo.slug}
         />
       </div>
     </div>
