@@ -2,18 +2,27 @@ import Image from 'next/image';
 import { User, ChartNoAxesColumnDecreasing, Star } from 'lucide-react';
 import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseDetailsContent';
 import getCourseBySlug from '../../../../lib/getCourseBySlug';
+import { notFound } from 'next/navigation';
 
 interface paramsServerProps {
   params: Promise<{ slug: string }>;
 }
 
 export default async function CourseDetailsPage({ params }: paramsServerProps) {
-  const { slug } = await params;
+  const param = await params;
+  const slug = param.slug;
+  if (!slug || slug === 'undefined') {
+    return notFound();
+  }
   console.log('[PRODUCTION LOG] Raw slug from params:', slug);
   console.log('[PRODUCTION LOG] Decoded slug:', decodeURIComponent(slug));
   const slugDecoded = decodeURIComponent(slug);
-
   const courseInfo = await getCourseBySlug(slugDecoded);
+
+  if (!courseInfo) {
+    return notFound();
+  }
+
   console.log('[PRODUCTION LOG] Final courseInfo:', courseInfo);
   return (
     <div className="flex flex-col gap-7 py-7">
