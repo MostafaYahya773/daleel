@@ -7,12 +7,12 @@ import { notFound } from 'next/navigation';
 export default async function CourseDetailsPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ Slug: string }>;
 }) {
   const resolvedParams = await params;
   console.log('Raw params:', resolvedParams);
 
-  const slug = resolvedParams.Slug || resolvedParams.slug; // <--- ده السطر السحري
+  const slug = resolvedParams.Slug; // <--- ده السطر السحري
 
   if (!slug || slug === 'undefined') {
     console.log('No valid slug found');
