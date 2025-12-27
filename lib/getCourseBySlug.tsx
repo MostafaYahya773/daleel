@@ -1,13 +1,17 @@
 import { supabase } from './supabaseClient';
 const getCourseBySlug = async (slug: string) => {
-  const initSlug = slug.trim();
+  console.log('slug', slug);
+
   const { data, error } = await supabase
     .from('courses')
     .select('*')
-    .eq('slug', initSlug)
+    .eq('slug', slug)
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    console.error('Supabase Admin error:', error);
+    throw new Error(error.message);
+  }
   return data;
 };
 export default getCourseBySlug;
