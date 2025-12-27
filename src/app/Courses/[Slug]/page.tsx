@@ -3,14 +3,14 @@ import { User, ChartNoAxesColumnDecreasing, Star } from 'lucide-react';
 import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseDetailsContent';
 import getCourseBySlug from '../../../../lib/getCourseBySlug';
 import { notFound, redirect } from 'next/navigation';
-
+export const dynamic = 'force-dynamic';
 export default async function CourseDetailsPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  console.log('slug', slug);
+  if (!slug) return notFound();
   const slugDecoded = decodeURIComponent(slug);
   const courseInfo = await getCourseBySlug(slugDecoded);
 
