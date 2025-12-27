@@ -1,9 +1,10 @@
 import { supabase } from './supabaseClient';
 const getCourseBySlug = async (slug: string) => {
+  const normalizedSlug = slug.normalize('NFC').trim();
   const { data, error } = await supabase
     .from('courses')
     .select('*')
-    .eq('slug', slug)
+    .eq('slug', normalizedSlug)
     .maybeSingle();
 
   if (error) {
