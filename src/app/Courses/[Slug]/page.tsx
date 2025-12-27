@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { User, ChartNoAxesColumnDecreasing, Star } from 'lucide-react';
 import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseDetailsContent';
 import getCourseBySlug from '../../../../lib/getCourseBySlug';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 export default async function CourseDetailsPage({
   params,
