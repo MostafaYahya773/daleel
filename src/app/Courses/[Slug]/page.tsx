@@ -12,7 +12,7 @@ export default async function CourseDetailsPage({
   const { slug } = await params;
   if (!slug || slug === 'undefined') {
     console.log('slug', slug);
-    redirect('/courses');
+    redirect('/Courses');
   }
   const slugDecoded = decodeURIComponent(slug);
   const courseInfo = await getCourseBySlug(slugDecoded);
