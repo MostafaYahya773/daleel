@@ -9,6 +9,8 @@ interface paramsServerProps {
 
 export default async function CourseDetailsPage({ params }: paramsServerProps) {
   const { slug } = await params;
+  console.log(slug);
+
   const slugDecoded = decodeURIComponent(slug);
   const courseInfo = await getCourseBySlug(slugDecoded);
 
