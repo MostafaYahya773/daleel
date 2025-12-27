@@ -1,6 +1,7 @@
 import { supabaseServer } from './supabaseServer';
 const getCourseBySlug = async (slug: string) => {
-  const { data, error } = await supabaseServer
+  const supabase = await supabaseServer();
+  const { data, error } = await supabase
     .from('courses')
     .select('*')
     .eq('slug', slug)

@@ -1,7 +1,8 @@
 import { supabaseServer } from './supabaseServer';
 
 const GetCources = async () => {
-  const { data, error } = await supabaseServer
+  const supabase = await supabaseServer();
+  const { data, error } = await supabase
     .from('courses')
     .select('*')
     .order('id', { ascending: false });
