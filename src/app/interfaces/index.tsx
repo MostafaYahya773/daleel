@@ -40,7 +40,3 @@ export interface Lessonprops {
   is_free: boolean;
   lesson_img: string;
 }
-
-export interface paramsServerProps {
-  params: Promise<{ slug: string; courseId: string }>;
-}
