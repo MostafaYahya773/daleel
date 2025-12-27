@@ -6,13 +6,13 @@ import { Courseprops } from '@/app/interfaces';
 import toast from 'react-hot-toast';
 import Select from '@/app/_components/Select/Select';
 import { SelectOptionProps } from '@/app/interfaces';
-import useGetCourseByName from '@/app/hook/useGetCourseById';
 import useEditCourse from '@/app/hook/useEditCourse';
 import AddAndEditindCourseAndLesson from '@/app/_components/Loader/AddAndEditindCourseAndLesson';
+import useGetCourseById from '@/app/hook/useGetCourseById';
 const CourseForm = React.memo(
   ({ courseID, courseName }: { courseID: string; courseName: string }) => {
     const { mutate } = useEditCourse(courseID);
-    const { data: courseDetails, isLoading } = useGetCourseByName(courseName);
+    const { data: courseDetails, isLoading } = useGetCourseById(courseID);
     const categories: SelectOptionProps[] = useMemo(
       () => [
         { label: 'مواد جامعية', value: 'مواد جامعية' },
