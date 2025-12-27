@@ -8,6 +8,8 @@ const getCourseBySlug = async (slug: string) => {
     .single();
 
   if (error) {
+    console.log(error);
+
     throw new Error(error.message);
   }
   return data;
