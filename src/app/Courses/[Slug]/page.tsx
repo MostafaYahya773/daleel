@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { User, ChartNoAxesColumnDecreasing, Star } from 'lucide-react';
 import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseDetailsContent';
 import getCourseBySlug from '../../../../lib/getCourseBySlug';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 export default async function CourseDetailsPage({
   params,
@@ -12,7 +12,7 @@ export default async function CourseDetailsPage({
   const { slug } = await params;
   if (!slug || slug === 'undefined') {
     console.log('slug', slug);
-    return notFound();
+    redirect('/courses');
   }
   const slugDecoded = decodeURIComponent(slug);
   const courseInfo = await getCourseBySlug(slugDecoded);
