@@ -13,7 +13,7 @@ export default async function CourseDetailsPage({
   if (!slug || slug === undefined) {
     return notFound();
   }
-  const slugDecoded = decodeURI(slug).normalize('NFC').trim();
+  const slugDecoded = decodeURIComponent(slug).normalize('NFC').trim();
   const courseInfo = await getCourseBySlug(slugDecoded);
   console.log('slug', slug);
   console.log('slug slug', slugDecoded);
