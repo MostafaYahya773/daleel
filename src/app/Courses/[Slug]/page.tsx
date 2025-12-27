@@ -9,14 +9,14 @@ export default async function CourseDetailsPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const param = await params;
-  const slug = param.slug;
+  const { slug } = await params;
   if (!slug || slug === 'undefined') {
     console.log('slug', slug);
     return notFound();
   }
   const slugDecoded = decodeURIComponent(slug);
   const courseInfo = await getCourseBySlug(slugDecoded);
+  console.log(courseInfo);
 
   return (
     <div className="flex flex-col gap-7 py-7">
