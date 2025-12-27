@@ -1,14 +1,11 @@
 import getLessonsByCourseId from '../../../../../../lib/getLessonsByCourseId';
-import VideosPage from './VideosPage';
+import VideosPage from './_components/VideosPage';
 
-interface Props {
-  params: {
-    slug: string;
-    courseId: string;
-  };
-}
-
-export default async function LessonPage({ params }: Props) {
+export default async function LessonPage({
+  params,
+}: {
+  params: Promise<{ courseId: string }>;
+}) {
   const { courseId } = await params;
   const data = await getLessonsByCourseId(courseId);
 

@@ -52,6 +52,8 @@ const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
       lesson_img: '',
     },
     onSubmit: (values, { resetForm, setSubmitting }) => {
+      console.log(values);
+
       addLesson(values, {
         onSuccess: () => {
           toast.success('تم اضافة الدرس بنجاح', { position: 'top-center' });

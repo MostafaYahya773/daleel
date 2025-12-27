@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
+  images: {
+    domains: ['i.postimg.cc'],
+  },
   productionBrowserSourceMaps: false,
 };
 

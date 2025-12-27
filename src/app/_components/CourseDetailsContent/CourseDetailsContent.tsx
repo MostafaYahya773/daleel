@@ -11,12 +11,14 @@ const CourseDetailsContent = ({
   price,
   courseId,
   slug,
+  image_url,
 }: {
   description: string;
   whatYouWillLearn: string;
   price: number;
   courseId: string;
   slug: string;
+  image_url: string;
 }) => {
   interface FutureProps {
     name: string;
@@ -77,7 +79,7 @@ const CourseDetailsContent = ({
       <div className="w-full bg-white shadow-lg rounded-md overflow-hidden flex flex-col ">
         <div className="img w-full h-full">
           <Image
-            src="/blogHero.jpg"
+            src={image_url || '/logo.png'}
             alt="logo"
             width={400}
             height={400}

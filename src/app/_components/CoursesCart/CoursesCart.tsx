@@ -63,7 +63,7 @@ const CoursesCart = React.memo(
                 >
                   <div className="h-[200px] bg-secondary rounded-md overflow-hidden">
                     <Image
-                      src={'/logo.png'}
+                      src={course?.image_url || '/logo.png'}
                       alt="Course"
                       width={100}
                       height={100}

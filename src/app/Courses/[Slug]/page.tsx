@@ -54,7 +54,7 @@ export default async function CourseDetailsPage({
           </div>
           <div className="w-full hidden md:block z-40">
             <Image
-              src="/courseDetailsHero.svg"
+              src={'/courseDetailsHero.svg'}
               width={500}
               height={500}
               priority
@@ -71,6 +71,7 @@ export default async function CourseDetailsPage({
           price={courseInfo.price}
           courseId={courseInfo.id}
           slug={courseInfo.slug}
+          image_url={courseInfo.image_url}
         />
       </div>
     </div>
