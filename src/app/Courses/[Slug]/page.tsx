@@ -10,6 +10,9 @@ export default async function CourseDetailsPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  console.log('SERVER PARAMS:', slug);
+  console.log('SERVER SLUG:', slug);
+  console.log('SERVER SLUG JSON:', JSON.stringify(slug));
   if (!slug) return notFound();
   const slugDecoded = decodeURIComponent(slug).normalize('NFC');
   const courseInfo = await getCourseBySlug(slugDecoded);
