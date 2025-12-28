@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import NavDropList from '../NavDropList/NavDropList';
 import { usePathname } from 'next/navigation';
+import MobileMenu from '../MobileMenu/MobileManu';
 export default function Nav() {
   const path = usePathname();
   interface NavProps {
@@ -23,9 +24,9 @@ export default function Nav() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="fixed top-0 left-0 right-0 p-2 bg-white shadow-md z-50 overflow-y-hidden">
-      <div className="grid md:grid-cols-[auto_1fr_auto] grid-cols-2 items-center max-w-[1200px] mx-auto relative z-50">
-        <div className="flex items-center gap-3">
+    <div className="fixed top-0 left-0 right-0 p-2 bg-white shadow-md z-[100] ">
+      <div className="md:grid md:grid-cols-[auto_1fr_auto]  items-center max-w-[1200px] mx-auto relative">
+        <div className="flex items-center gap-3 justify-between md:justify-start">
           <div>
             <span
               onClick={() => setIsOpen(!isOpen)}
@@ -34,17 +35,20 @@ export default function Nav() {
               <Menu className="w-6 h-6 text-therd" />
             </span>
           </div>
-          <Link href="/" className="flex items-center gap-3 ">
+          <Link
+            href="/"
+            className="flex items-center gap-3 overflow-hidden md:overflow-visible"
+          >
             <Image
               src="/logo.png"
               width={70}
               height={70}
               alt="user Image"
-              className="object-cover scale-[2] px-2 lg:px-0"
+              className="object-cover scale-[1.5] md:scale-[2] px-2 lg:px-0"
             />
           </Link>
         </div>
-        <div className="links justify-center items-center gap-5 text-[18px] text-gray-500 hidden md:flex">
+        <div className="links justify-center items-center gap-5 md:text-[16px] lg:text-[18px] text-gray-500 hidden md:flex">
           {pages.map((page) => (
             <Link
               onClick={() => setIsClicked(page.href)}
@@ -59,7 +63,7 @@ export default function Nav() {
             </Link>
           ))}
         </div>
-        <div className="user flex item-center justify-end gap-2 text-white">
+        <div className="user item-center justify-end gap-2 text-white md:flex hidden">
           {isLoggedIn ? (
             <button
               className="py-2 px-5 bg-therd rounded-md "
@@ -88,8 +92,9 @@ export default function Nav() {
             </div>
           )}
         </div>
-        <div className={`navDropDown ${isOpen ? 'block ' : 'hidden'} `}>
-          <NavDropList setIsOpen={setIsOpen} />
+        <div>
+          <NavDropList setIsOpen={setIsOpen} isOpen={isOpen} />
+          <MobileMenu setIsOpen={setIsOpen} isOpen={isOpen} />
         </div>
       </div>
     </div>
