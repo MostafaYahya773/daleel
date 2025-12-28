@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer';
 import Skeleton from 'react-loading-skeleton';
 interface Props {
   selectOptions: Lessonprops[];
-  onselect: (value: number) => void;
+  onselect: (value: number, name: string) => void;
   isLoading: boolean;
 }
 
@@ -27,7 +27,7 @@ const LessonsDropList = React.memo(
 
     const handleSelect = (id: number, name: string) => {
       setInputValue(name);
-      onselect(id);
+      onselect(id, name);
       setIsOpen(false);
     };
 

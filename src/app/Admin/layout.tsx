@@ -20,17 +20,16 @@ export default function AdminLayout({
 
   return (
     <div className="flex flex-col gap-7">
-      <div className="mt-28 grid grid-cols-3 gap-5 border-b-2 border-gray-300 pb-5">
+      <div className="lg:mt-24 mt-20 grid md:grid-cols-3 grid-cols-2 gap-5 border-b-2 border-gray-300 pb-5">
         {Options.map((opt) => {
           const isActive = pathname === opt.href;
-
           return (
             <Link
               key={opt.href}
               href={opt.href}
               className={`${
                 isActive ? 'bg-therd text-white' : 'bg-slate-300 text-gray-700'
-              } text-[18px] p-2 text-center rounded-lg hover:bg-therd hover:text-white duration-300`}
+              } md:text-[18px] p-2 text-center rounded-lg hover:bg-therd hover:text-white duration-300`}
             >
               {opt.name}
             </Link>

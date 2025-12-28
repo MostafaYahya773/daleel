@@ -31,7 +31,7 @@ export default function EditCourse() {
           }}
         />
       </div>
-      <CourseForm courseID={courseID} courseName={courseName} />{' '}
+      <CourseForm courseID={courseID} courseName={courseName} />
     </div>
   );
 }

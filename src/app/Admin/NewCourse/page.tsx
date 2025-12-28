@@ -99,7 +99,7 @@ export default function NewCourse() {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="grid grid-cols-3 gap-5 mb-5 ">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mb-5 ">
         {/* inputs */}
         {fields?.slice(0, 3)?.map((feld, index) => (
           <div key={index} className="flex flex-col gap-2">
@@ -121,7 +121,7 @@ export default function NewCourse() {
           </div>
         ))}
       </div>
-      <div className="select grid grid-cols-2 gap-5 mb-5 *:flex *:flex-col *:px-2 *:gap-2">
+      <div className="select grid md:grid-cols-2 gap-5 mb-5 *:flex *:flex-col *:px-2 *:gap-2">
         <div>
           <span>{fields[3].label}</span>
           <Select
@@ -145,7 +145,7 @@ export default function NewCourse() {
           )}
         </div>
       </div>
-      <div className="textArea grid grid-cols-3 gap-5 mb-5">
+      <div className="textArea grid lg:grid-cols-3 md:grid-cols-2 gap-5 mb-5">
         {/* text area */}
         {fields.slice(5, 8)?.map((feld, index) => (
           <div key={index} className="flex flex-col gap-2">
