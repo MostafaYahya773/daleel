@@ -44,6 +44,7 @@ export default function VideosPage({
               controls: [
                 'play-large',
                 'restart',
+                'play',
                 'progress',
                 'volume',
                 'fullscreen',
