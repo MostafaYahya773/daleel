@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+'use client';
+
+import React from 'react';
 import {
   LibraryBig,
   BookmarkCheck,
@@ -12,17 +14,15 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 interface MenuProps {
   name: string;
   href: string;
   icon: React.ReactNode;
 }
+
 const menu: MenuProps[] = [
-  {
-    name: 'الرئيسية',
-    href: '/',
-    icon: <House className="w-5 h-5" />,
-  },
+  { name: 'الرئيسية', href: '/', icon: <House className="w-5 h-5" /> },
   {
     name: 'الملف الشخصي',
     href: '/Profile',
@@ -43,74 +43,66 @@ const menu: MenuProps[] = [
     href: '/MyCertificates',
     icon: <BookmarkCheck className="w-5 h-5" />,
   },
-  {
-    name: 'المدونة',
-    href: '/Blogs',
-    icon: <BookOpen className="w-5 h-5" />,
-  },
-  {
-    name: 'الإدارة',
-    href: '/Admin',
-    icon: <ShieldUser className="w-5 h-5" />,
-  },
-  {
-    name: 'تواصل معنا',
-    href: '/Contact',
-    icon: <Mail className="w-5 h-5" />,
-  },
+  { name: 'المدونة', href: '/Blogs', icon: <BookOpen className="w-5 h-5" /> },
+  { name: 'الإدارة', href: '/Admin', icon: <ShieldUser className="w-5 h-5" /> },
+  { name: 'تواصل معنا', href: '/Contact', icon: <Mail className="w-5 h-5" /> },
   {
     name: 'تسجيل الخروج',
     href: '/Logout',
     icon: <LogOut className="w-5 h-5" />,
   },
 ];
-const MobileMenu = React.memo(
-  ({
-    setIsOpen,
-    isOpen,
-  }: {
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    isOpen: boolean;
-  }) => {
-    const path = usePathname();
-    const [isAcive, setIsAcive] = useState(path);
-    return (
+
+interface MobileMenuProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const MobileMenu = React.memo(({ isOpen, setIsOpen }: MobileMenuProps) => {
+  const pathname = usePathname();
+
+  return (
+    <div
+      className={`fixed right-0 md:hidden transition-all ${
+        isOpen
+          ? 'bg-black/30 backdrop-blur-sm w-screen h-screen'
+          : 'bg-transparent pointer-events-none'
+      }`}
+      onClick={() => setIsOpen(false)}
+    >
       <div
-        className={`fixed w-screen h-screen right-0 ${
-          isOpen ? 'backdrop-blur-sm bg-black/30' : 'backdrop-blur-0 '
-        }    block md:hidden`}
+        onClick={(e) => e.stopPropagation()}
+        className={`absolute right-0 top-0 h-screen bg-white shadow-lg drop-shadow-sm px-4 py-7 w-[60vw] sm:w-[50vw] transform transition-transform duration-300 ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
       >
-        <div
-          className={`flex flex-col gap-5 bg-white  shadow-lg p-3 h-screen duration-300 w-[60vw] sm:w-[50vw]  ${
-            isOpen ? 'translate-x-0' : 'translate-x-full'
-          } ]`}
-        >
-          {menu.map((item) => (
-            <ul
-              key={item.name}
-              className="flex flex-col gap-3 px-1 py-2 cursor-pointer"
-            >
-              <li>
+        <ul className="flex flex-col gap-7">
+          {menu.map((item) => {
+            const isActive = pathname === item.href;
+
+            return (
+              <li key={item.name}>
                 <Link
-                  className={`${
-                    isAcive && path === item.href ? 'text-therd' : ''
-                  } flex items-center gap-2`}
-                  onClick={() => {
-                    setIsOpen(false);
-                    setIsAcive(item.href);
-                  }}
                   href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`flex  items-center gap-3 transition-colors ${
+                    isActive ? 'text-therd font-semibold' : 'text-gray-700'
+                  }`}
                 >
-                  <span className="text-therd">{item.icon}</span>
-                  <span className="text-[14px]">{item.name}</span>
+                  <span
+                    className={`${isActive ? 'text-therd' : 'text-gray-500'}`}
+                  >
+                    {item.icon}
+                  </span>
+                  {item.name}
                 </Link>
               </li>
-            </ul>
-          ))}
-        </div>
+            );
+          })}
+        </ul>
       </div>
-    );
-  }
-);
+    </div>
+  );
+});
 
 export default MobileMenu;
