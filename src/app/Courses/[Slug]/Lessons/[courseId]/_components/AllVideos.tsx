@@ -19,6 +19,8 @@ const AllVideos = React.memo(({ videos, onselect }: Props) => {
             <Image
               src={video?.lesson_img}
               alt={video?.title}
+              loading="lazy"
+              fetchPriority="low"
               width={200}
               height={200}
               className="bg-cover w-full h-[200px] rounded-t-lg"
