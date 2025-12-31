@@ -1,10 +1,10 @@
 'use client';
 import { useMutation } from '@tanstack/react-query';
-import { supabaseServer } from '../../../lib/supabaseServer';
+import { createClient } from '../../../lib/supabase/client';
 import toast from 'react-hot-toast';
 const useDeleteLesson = () => {
   const deleteLesson = async (LessonId: number) => {
-    const { error } = await supabaseServer
+    const { error } = await createClient()
       .from('lessons')
       .delete()
       .eq('id', LessonId);

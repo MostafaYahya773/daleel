@@ -1,7 +1,7 @@
-import { supabase } from './supabaseClient';
+import { createClient } from './supabase/client';
 
 const getLessonsByCourseId = async (id: string) => {
-  const { data, error } = await supabase
+  const { data, error } = await createClient()
     .from('lessons')
     .select('*')
     .eq('course_id', id);

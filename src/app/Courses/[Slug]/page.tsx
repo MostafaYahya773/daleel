@@ -3,18 +3,20 @@ import { User, ChartNoAxesColumnDecreasing, Star } from 'lucide-react';
 import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseDetailsContent';
 import getCourseBySlug from '../../../../lib/getCourseBySlug';
 import { notFound } from 'next/navigation';
-// export const dynamic = 'force-dynamic';
+import getSession from '../../../../lib/GetSession';
 export default async function CourseDetailsPage({
   params,
 }: {
   params: Promise<{ Slug: string }>;
 }) {
+  const data = await getSession();
   const { Slug } = await params;
   const slugDecoded = decodeURI(Slug).normalize('NFC').trim();
   const courseInfo = await getCourseBySlug(slugDecoded);
   if (!Slug || Slug === 'undefined' || !slugDecoded) {
     return notFound();
   }
+  const tokenValue = data?.token;
 
   return (
     <div className="flex flex-col gap-7 py-7">
@@ -72,6 +74,7 @@ export default async function CourseDetailsPage({
           courseId={courseInfo.id}
           slug={courseInfo.slug}
           image_url={courseInfo.image_url}
+          token={tokenValue!}
         />
       </div>
     </div>

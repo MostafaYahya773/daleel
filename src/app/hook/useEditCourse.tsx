@@ -1,10 +1,10 @@
 'use client';
 import { useMutation } from '@tanstack/react-query';
-import { supabaseServer } from '../../../lib/supabaseServer';
+import { createClient } from '../../../lib/supabase/client';
 import { Courseprops } from '../interfaces';
 const useEditCourse = (id: string) => {
   const editCourse = async (values: Courseprops) => {
-    const { error } = await supabaseServer
+    const { error } = await createClient()
       .from('courses')
       .update(values)
       .eq('id', id);

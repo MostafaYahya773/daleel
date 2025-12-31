@@ -1,7 +1,7 @@
-import { supabase } from './supabaseClient';
+import { createClient } from './supabase/client';
 
 const getLessons = async () => {
-  const { data, error } = await supabase
+  const { data, error } = await createClient()
     .from('lessons')
     .select('*')
     .order('id', { ascending: false });

@@ -1,16 +1,14 @@
 'use client';
 import { useMutation } from '@tanstack/react-query';
 import { Lessonprops } from '../interfaces';
-import { supabase } from '../../../lib/supabaseClient';
+import { createClient } from '../../../lib/supabase/client';
 
 const useAddLesson = () => {
   const addLesson = async (lesson: Lessonprops) => {
-    const { data, error, statusText } = await supabase
+    const { data, error, statusText } = await createClient()
       .from('lessons')
       .insert(lesson);
     if (error) throw new Error(error.message);
-    console.log(statusText);
-
     return data;
   };
 

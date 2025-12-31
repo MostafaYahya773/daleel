@@ -1,10 +1,10 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
 import { Courseprops } from '../interfaces';
-import { supabaseServer } from '../../../lib/supabaseServer';
+import { createClient } from '../../../lib/supabase/client';
 const useGetCourseById = (id: string) => {
   const fetchCourseById = async (): Promise<Courseprops> => {
-    const { data, error } = await supabaseServer
+    const { data, error } = await createClient()
       .from('courses')
       .select('*')
       .eq('id', id)

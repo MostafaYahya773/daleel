@@ -40,3 +40,15 @@ export interface Lessonprops {
   is_free: boolean;
   lesson_img: string;
 }
+export interface FormLoginFields {
+  email: string;
+  password: string;
+}
+
+export interface FormSignUpFields {
+  full_name: string;
+  email: string;
+  password: string;
+  confirm_password?: string;
+  date_of_birth?: string;
+}

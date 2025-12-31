@@ -1,18 +1,18 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ChevronDown, Menu } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import NavDropList from '../NavDropList/NavDropList';
 import { usePathname } from 'next/navigation';
 import MobileMenu from '../MobileMenu/MobileManu';
-export default function Nav() {
+
+const Nav = ({ isLoggedIn, name }: { isLoggedIn: boolean; name: string }) => {
   const path = usePathname();
   interface NavProps {
     name: string;
     href: string;
   }
-  const name = 'Mostafa yahya mahmoud hassan';
   const pages: NavProps[] = [
     { name: 'الرئيسية', href: '/' },
     { name: 'الكورسات', href: '/Courses' },
@@ -21,8 +21,8 @@ export default function Nav() {
     { name: 'الإدارة', href: '/Admin' },
   ];
   const [isClicked, setIsClicked] = useState(path);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="fixed top-0 left-0 right-0 p-2 bg-white shadow-md z-[100] ">
       <div className="md:grid md:grid-cols-[auto_1fr_auto]  items-center max-w-[1200px] mx-auto relative">
@@ -64,15 +64,12 @@ export default function Nav() {
           ))}
         </div>
         <div className="user item-center justify-end gap-2 text-white md:flex hidden">
-          {isLoggedIn ? (
-            <button
-              className="py-2 px-5 bg-therd rounded-md "
-              onClick={() => {
-                setIsLoggedIn(false);
-              }}
-            >
-              تسجيل الدخول
-            </button>
+          {!isLoggedIn ? (
+            <Link href="/auth/LogIn">
+              <button className="py-2 px-5 bg-therd rounded-md">
+                تسجيل الدخول
+              </button>
+            </Link>
           ) : (
             <div
               onClick={() => setIsOpen(!isOpen)}
@@ -94,9 +91,15 @@ export default function Nav() {
         </div>
         <div>
           <NavDropList setIsOpen={setIsOpen} isOpen={isOpen} />
-          <MobileMenu setIsOpen={setIsOpen} isOpen={isOpen} />
+          <MobileMenu
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
+            isLoggedIn={isLoggedIn}
+          />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Nav;

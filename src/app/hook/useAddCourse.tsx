@@ -1,11 +1,11 @@
 // hook/useAddCourse.ts
 import { useMutation } from '@tanstack/react-query';
 import { Courseprops } from '../interfaces';
-import { supabase } from '../../../lib/supabaseClient';
+import { createClient } from '../../../lib/supabase/client';
 
 const useAddCourse = () => {
   const addCourse = async (course: Courseprops) => {
-    const { data, error } = await supabase.from('courses').insert(course);
+    const { data, error } = await createClient().from('courses').insert(course);
     if (error) throw new Error(error.message);
     return data;
   };

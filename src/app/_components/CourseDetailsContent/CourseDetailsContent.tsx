@@ -12,6 +12,7 @@ const CourseDetailsContent = ({
   courseId,
   slug,
   image_url,
+  token,
 }: {
   description: string;
   whatYouWillLearn: string;
@@ -19,6 +20,7 @@ const CourseDetailsContent = ({
   courseId: string;
   slug: string;
   image_url: string;
+  token: string;
 }) => {
   interface FutureProps {
     name: string;
@@ -124,9 +126,13 @@ const CourseDetailsContent = ({
             <Link
               className="w-full"
               href={
-                price === 0
+                !token
+                  ? '/auth/LogIn'
+                  : token && price !== 0
+                  ? `/Payment/${slug}`
+                  : token && price === 0
                   ? `/Courses/${slug}/Lessons/${courseId}`
-                  : `/Courses/${slug}`
+                  : ''
               }
             >
               <button className="bg-therd w-full py-2 md:text-[20px] text-[16px] rounded-lg text-white hover:opacity-70 duration-300">

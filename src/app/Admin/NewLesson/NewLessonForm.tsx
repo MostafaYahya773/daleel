@@ -9,7 +9,7 @@ import useAddLesson from '@/app/hook/useAddLesson';
 import useGetCourseById from '@/app/hook/useGetCourseById';
 const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
   const { data: courseDetails, isLoading } = useGetCourseById(CourseId);
-  const { mutate: addLesson } = useAddLesson();
+  const { mutate: addLesson, error } = useAddLesson();
   interface FormField {
     label: string;
     name: keyof Lessonprops;
@@ -52,8 +52,6 @@ const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
       lesson_img: '',
     },
     onSubmit: (values, { resetForm, setSubmitting }) => {
-      console.log(values);
-
       addLesson(values, {
         onSuccess: () => {
           toast.success('تم اضافة الدرس بنجاح', { position: 'top-center' });
