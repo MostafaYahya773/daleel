@@ -4,5 +4,7 @@ import Nav from './Nav';
 export default async function ServerNav() {
   const data = await getSession();
 
-  return <Nav isLoggedIn={!!data} name={data?.user.full_name} />;
+  return (
+    <Nav isLoggedIn={!!data} name={data?.user.full_name} role={data?.role} />
+  );
 }

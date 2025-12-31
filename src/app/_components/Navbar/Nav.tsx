@@ -7,7 +7,15 @@ import NavDropList from '../NavDropList/NavDropList';
 import { usePathname } from 'next/navigation';
 import MobileMenu from '../MobileMenu/MobileManu';
 
-const Nav = ({ isLoggedIn, name }: { isLoggedIn: boolean; name: string }) => {
+const Nav = ({
+  isLoggedIn,
+  name,
+  role,
+}: {
+  isLoggedIn: boolean;
+  name: string;
+  role: string;
+}) => {
   const path = usePathname();
   interface NavProps {
     name: string;
@@ -95,6 +103,7 @@ const Nav = ({ isLoggedIn, name }: { isLoggedIn: boolean; name: string }) => {
             setIsOpen={setIsOpen}
             isOpen={isOpen}
             isLoggedIn={isLoggedIn}
+            role={role}
           />
         </div>
       </div>

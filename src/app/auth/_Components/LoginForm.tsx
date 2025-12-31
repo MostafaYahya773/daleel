@@ -45,7 +45,9 @@ const LoginForm = () => {
         },
         onError: () => {
           setSubmitting(false);
-          toast.error('فشل تسجيل الدخول', { position: 'top-center' });
+          toast.error('البريد الالكتروني او كلمة المرور غير صحيح', {
+            position: 'top-center',
+          });
         },
       });
     },

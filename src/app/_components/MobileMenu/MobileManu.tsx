@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   LibraryBig,
   BookmarkCheck,
@@ -15,11 +15,11 @@ import {
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '../../../../lib/supabase/client';
-import { log } from 'console';
 
 interface MenuProps {
   name: string;
   href: string;
+  role?: string;
   icon: React.ReactNode;
   IsLogIN?: boolean;
   onClick?: () => void;
@@ -28,11 +28,11 @@ interface MobileMenuProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isLoggedIn: boolean;
+  role: string;
 }
 const MobileMenu = React.memo(
-  ({ isOpen, setIsOpen, isLoggedIn: logIn }: MobileMenuProps) => {
+  ({ isOpen, setIsOpen, isLoggedIn: logIn, role }: MobileMenuProps) => {
     const pathname = usePathname();
-    const router = useRouter();
     const menu: MenuProps[] = [
       { name: 'الرئيسية', href: '/', icon: <House className="w-5 h-5" /> },
       {
@@ -68,6 +68,7 @@ const MobileMenu = React.memo(
         href: '/Admin',
         icon: <ShieldUser className="w-5 h-5" />,
         IsLogIN: logIn,
+        role,
       },
       {
         name: 'تواصل معنا',
@@ -107,7 +108,11 @@ const MobileMenu = React.memo(
                 <li
                   onClick={item.onClick}
                   key={item.name}
-                  className={`${item.IsLogIN === false ? 'hidden' : ''}`}
+                  className={`${
+                    item.role === 'user' || item.IsLogIN === false
+                      ? 'hidden'
+                      : ''
+                  }`}
                 >
                   <Link
                     href={item.href}

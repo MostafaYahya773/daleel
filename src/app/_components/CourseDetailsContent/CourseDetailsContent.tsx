@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { BookCheck } from 'lucide-react';
 import Skeleton from 'react-loading-skeleton';
 import Link from 'next/link';
+import BayAlert from '../BuyAlert/BayAlert';
 
 const CourseDetailsContent = ({
   description,
@@ -13,6 +14,7 @@ const CourseDetailsContent = ({
   slug,
   image_url,
   token,
+  courseName,
 }: {
   description: string;
   whatYouWillLearn: string;
@@ -21,6 +23,7 @@ const CourseDetailsContent = ({
   slug: string;
   image_url: string;
   token: string;
+  courseName: string;
 }) => {
   interface FutureProps {
     name: string;
@@ -32,6 +35,7 @@ const CourseDetailsContent = ({
     { name: 'التقييم', id: 3 },
   ];
   const [selected, setSelected] = useState<number>(1);
+  const [isFree, setIsFree] = useState<boolean | null>(null);
 
   return (
     <div className="grid md:grid-cols-[2fr_1.2fr] grid-cols-1 gap-5">
@@ -124,22 +128,38 @@ const CourseDetailsContent = ({
               <span>جنية</span>
             </p>
             <Link
-              className="w-full"
               href={
                 !token
                   ? '/auth/LogIn'
-                  : token && price !== 0
-                  ? `/Payment/${slug}`
-                  : token && price === 0
+                  : price === 0
                   ? `/Courses/${slug}/Lessons/${courseId}`
-                  : ''
+                  : '#'
               }
+              className="w-full"
+              onClick={(e) => {
+                if (price !== 0) {
+                  e.preventDefault();
+                  setIsFree(false);
+                }
+              }}
             >
-              <button className="bg-therd w-full py-2 md:text-[20px] text-[16px] rounded-lg text-white hover:opacity-70 duration-300">
+              <button
+                onClick={() => {
+                  if (price === 0) {
+                    setIsFree(true);
+                  } else {
+                    setIsFree(false);
+                  }
+                }}
+                className="bg-therd w-full py-2 md:text-[20px] text-[16px] rounded-lg text-white hover:opacity-70 duration-300"
+              >
                 {price === 0 ? 'مشاهدة الدورة' : 'اشتري الان'}
               </button>
             </Link>
           </div>
+        </div>
+        <div className={`${isFree === false ? 'block' : 'hidden'}`}>
+          <BayAlert courseName={courseName} setIsFree={setIsFree} />
         </div>
       </div>
     </div>

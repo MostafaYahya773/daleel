@@ -18,7 +18,7 @@ interface FormField {
 }
 
 const SignUpForm = () => {
-  const { mutate: signUp, isPending, error: error2 } = useSignUp();
+  const { mutate: signUp, isPending, error } = useSignUp();
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const form: FormField[] = [
@@ -70,11 +70,11 @@ const SignUpForm = () => {
           toast.success('تم إنشاء الحساب بنجاح ', {
             position: 'top-center',
           });
-          router.replace('/');
+          router.replace('/auth/LogIn');
         },
-        onError: () => {
+        onError: (e) => {
           setSubmitting(false);
-          toast.error('فشل إنشاء الحساب', {
+          toast.error(e.message || 'فشل إنشاء الحساب', {
             position: 'top-center',
           });
         },

@@ -75,6 +75,7 @@ export default async function CourseDetailsPage({
           slug={courseInfo.slug}
           image_url={courseInfo.image_url}
           token={tokenValue!}
+          courseName={courseInfo.course_name}
         />
       </div>
     </div>
