@@ -20,14 +20,16 @@ const Nav = ({
   interface NavProps {
     name: string;
     href: string;
+    role?: string;
   }
   const pages: NavProps[] = [
     { name: 'الرئيسية', href: '/' },
     { name: 'الكورسات', href: '/Courses' },
     { name: 'المدونة', href: '/Blogs' },
     { name: 'تواصل معنا', href: '/Contact' },
-    { name: 'الإدارة', href: '/Admin' },
+    { name: 'الإدارة', href: '/Admin', role: role },
   ];
+
   const [isClicked, setIsClicked] = useState(path);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -64,7 +66,11 @@ const Nav = ({
               href={page.href}
             >
               <span
-                className={isClicked && path === page.href ? 'text-therd' : ''}
+                className={`${
+                  isClicked && path === page.href ? 'text-therd' : ''
+                }  ${
+                  page.href === '/Admin' && role !== 'admin' ? 'hidden' : ''
+                }`}
               >
                 {page.name}
               </span>

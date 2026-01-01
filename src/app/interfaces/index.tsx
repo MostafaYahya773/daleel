@@ -52,3 +52,16 @@ export interface FormSignUpFields {
   confirm_password?: string;
   date_of_birth?: string;
 }
+
+export interface UserProps {
+  id: string;
+  email: string;
+  full_name: string;
+  role: 'user' | 'admin';
+  avatar_url: string | null;
+  date_of_birth: string;
+  verified: boolean;
+  verified_at: string | null;
+  created_at: string;
+  updated_at: string;
+}

@@ -70,7 +70,7 @@ const SignUpForm = () => {
           toast.success('تم إنشاء الحساب بنجاح ', {
             position: 'top-center',
           });
-          router.replace('/auth/LogIn');
+          router.replace('/');
         },
         onError: (e) => {
           setSubmitting(false);

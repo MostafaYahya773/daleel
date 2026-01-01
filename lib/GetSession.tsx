@@ -1,3 +1,4 @@
+import { date } from 'yup';
 import { createClient } from './supabase/server';
 
 const getSession = async () => {
@@ -16,7 +17,6 @@ const getSession = async () => {
 
   const token = sessionData.session.access_token;
   const role = userData.user.user_metadata.role;
-
   return { token, role, user, userId };
 };
 

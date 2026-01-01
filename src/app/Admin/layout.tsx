@@ -16,6 +16,7 @@ export default function AdminLayout({
     { name: 'اضافة درس', href: '/Admin/NewLesson' },
     { name: 'تحديث درس', href: '/Admin/EditLesson' },
     { name: 'حذف درس', href: '/Admin/DeleteLesson' },
+    { name: 'تأكيد الدفع', href: '/Admin/ConfirmPayment' },
   ];
 
   return (

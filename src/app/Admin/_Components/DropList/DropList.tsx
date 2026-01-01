@@ -1,6 +1,6 @@
 'use client';
 import React, { useMemo, useState } from 'react';
-import { Courseprops } from '../../../interfaces/index';
+import { Courseprops, UserProps } from '../../../interfaces/index';
 import { ArrowDown } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 

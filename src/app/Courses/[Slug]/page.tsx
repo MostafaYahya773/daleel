@@ -2,8 +2,10 @@ import Image from 'next/image';
 import { User, ChartNoAxesColumnDecreasing, Star } from 'lucide-react';
 import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseDetailsContent';
 import getCourseBySlug from '../../../../lib/getCourseBySlug';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import getSession from '../../../../lib/GetSession';
+import getEnrollments from '../../../../lib/GetEnrollments';
+import getUsers from '../../../../lib/GetUsers';
 export default async function CourseDetailsPage({
   params,
 }: {
@@ -13,10 +15,18 @@ export default async function CourseDetailsPage({
   const { Slug } = await params;
   const slugDecoded = decodeURI(Slug).normalize('NFC').trim();
   const courseInfo = await getCourseBySlug(slugDecoded);
+  const userId = data?.userId;
+  const enrolled = await getEnrollments();
+  const tokenValue = data?.token;
+
   if (!Slug || Slug === 'undefined' || !slugDecoded) {
     return notFound();
   }
-  const tokenValue = data?.token;
+  enrolled.map((enroll) => {
+    if (enroll?.user_id === userId && enroll?.course_id === courseInfo?.id) {
+      return redirect(`/Courses/${slugDecoded}/Lessons/${courseInfo?.id}`);
+    }
+  });
 
   return (
     <div className="flex flex-col gap-7 py-7">

@@ -18,7 +18,7 @@ const BayAlert = ({
           {courseName}
         </h3>
         <p className="text-therd md:text-[18px]">لمتابعة شراء الكورس </p>
-        <Link target="_blank" href=" https://wa.me/+201159635438">
+        <Link target="_blank" href="https://t.me/Shahdtarraf44">
           <button className="p-2 bg-therd rounded-lg text-white">
             تواصل معنا
           </button>
