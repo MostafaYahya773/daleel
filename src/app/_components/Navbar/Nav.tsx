@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ChevronDown, Menu } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,10 +11,12 @@ const Nav = ({
   isLoggedIn,
   name,
   role,
+  email,
 }: {
   isLoggedIn: boolean;
   name: string;
   role: string;
+  email: string;
 }) => {
   const path = usePathname();
   interface NavProps {
@@ -110,6 +112,8 @@ const Nav = ({
             isOpen={isOpen}
             isLoggedIn={isLoggedIn}
             role={role}
+            email={email}
+            name={name}
           />
         </div>
       </div>

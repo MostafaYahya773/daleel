@@ -13,7 +13,7 @@ const CourseDetailsContent = ({
   courseId,
   slug,
   image_url,
-  token,
+  name,
   courseName,
 }: {
   description: string;
@@ -22,7 +22,7 @@ const CourseDetailsContent = ({
   courseId: string;
   slug: string;
   image_url: string;
-  token: string;
+  name: string;
   courseName: string;
 }) => {
   interface FutureProps {
@@ -129,7 +129,7 @@ const CourseDetailsContent = ({
             </p>
             <Link
               href={
-                !token
+                !name
                   ? '/auth/LogIn'
                   : price === 0
                   ? `/Courses/${slug}/Lessons/${courseId}`

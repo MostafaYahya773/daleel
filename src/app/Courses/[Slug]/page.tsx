@@ -5,28 +5,27 @@ import getCourseBySlug from '../../../../lib/getCourseBySlug';
 import { notFound, redirect } from 'next/navigation';
 import getSession from '../../../../lib/GetSession';
 import getEnrollments from '../../../../lib/GetEnrollments';
-import getUsers from '../../../../lib/GetUsers';
 export default async function CourseDetailsPage({
   params,
 }: {
   params: Promise<{ Slug: string }>;
 }) {
-  const data = await getSession();
   const { Slug } = await params;
   const slugDecoded = decodeURI(Slug).normalize('NFC').trim();
+  const data = await getSession();
   const courseInfo = await getCourseBySlug(slugDecoded);
   const userId = data?.userId;
-  const enrolled = await getEnrollments();
-  const tokenValue = data?.token;
+  const userName = data?.user.full_name;
+
+  const enrolled = await getEnrollments(userId!, courseInfo?.id);
+  // console.log(enrolled);
+
+  if (enrolled)
+    return redirect(`/Courses/${slugDecoded}/Lessons/${courseInfo?.id}`);
 
   if (!Slug || Slug === 'undefined' || !slugDecoded) {
     return notFound();
   }
-  enrolled.map((enroll) => {
-    if (enroll?.user_id === userId && enroll?.course_id === courseInfo?.id) {
-      return redirect(`/Courses/${slugDecoded}/Lessons/${courseInfo?.id}`);
-    }
-  });
 
   return (
     <div className="flex flex-col gap-7 py-7">
@@ -84,7 +83,7 @@ export default async function CourseDetailsPage({
           courseId={courseInfo.id}
           slug={courseInfo.slug}
           image_url={courseInfo.image_url}
-          token={tokenValue!}
+          name={userName!}
           courseName={courseInfo.course_name}
         />
       </div>
