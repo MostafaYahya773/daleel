@@ -11,7 +11,7 @@ export default async function ProfileLayout({
   const personalInfo = user?.user;
 
   return (
-    <div className="grid grid-cols-[25%_75%] gap-3 mt-24">
+    <div className="grid grid-cols-1 lg:grid-cols-[25%_75%] gap-3 lg:mt-24 mt-16">
       <ProfilePathes personalInfo={personalInfo} />
       <div className="show">{children}</div>
     </div>

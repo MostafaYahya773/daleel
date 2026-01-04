@@ -110,7 +110,7 @@ const MobileMenu = React.memo(
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`absolute right-0 top-0 h-screen bg-white shadow-lg drop-shadow-sm px-4 py-7 w-[60vw] sm:w-[50vw] transform transition-transform duration-300 ${
+          className={`absolute right-0 top-0 h-screen bg-white shadow-lg drop-shadow-sm px-4 py-7  w-[80vw] sm:[60vw]   transform transition-transform duration-300 ${
             isOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >

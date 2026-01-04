@@ -30,7 +30,7 @@ const ProfilePathes = React.memo(
     const pathname = usePathname();
 
     return (
-      <div className="flex flex-col gap-4 p-5 bg-gray-100 h-[85vh]">
+      <div className="flex flex-col gap-4 sm:p-5 px-0 py-5 bg-gray-100 lg:h-[85vh]">
         <div className="w-full rounded-xl flex flex-col gap-2">
           <Image
             src="/logo.png"
@@ -39,31 +39,31 @@ const ProfilePathes = React.memo(
             height={150}
             className="mx-auto rounded-full bg-gray-200"
           />
-          <h2 className="text-center font-bold md:text-[16px]">
+          <h2 className="text-center font-bold text-[16px]">
             {personalInfo?.full_name}
           </h2>
-          <p className="text-center text-gray-400 md:text-[16px]">
+          <p className="text-center text-gray-400 text-[16px]">
             {personalInfo?.email}
           </p>
         </div>
-        <div className="flex flex-col gap-2">
+        <ul className="flex flex-row lg:flex-col justify-center gap-2">
           {pathes.map((path) => (
-            <ul key={path.name} className="flex flex-col gap-2 ">
-              <li
-                className={`${
-                  pathname === path.href
-                    ? 'text-therd bg-primary '
-                    : 'text-gray-500'
-                } w-full flex items-center gap-2 p-2 rounded-xl `}
-              >
-                {path.icon}
-                <Link className="w-full" href={path.href}>
-                  {path.name}
-                </Link>
-              </li>
-            </ul>
+            <li
+              key={path.name}
+              className={`${
+                pathname === path.href
+                  ? 'text-therd bg-primary '
+                  : 'text-gray-500'
+              }  flex items-center gap-2 p-2 rounded-xl `}
+            >
+              <span>{path.icon}</span>
+
+              <Link className="w-full" href={path.href}>
+                {path.name}
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     );
   }
