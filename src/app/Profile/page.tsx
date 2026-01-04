@@ -1,5 +1,5 @@
-import React from 'react';
+import { redirect } from 'next/navigation';
 
-export default function Profile() {
-  return <div>مرحبا بكم في صفحتي</div>;
+export default function main() {
+  redirect('/Profile/PersonalInfo');
 }

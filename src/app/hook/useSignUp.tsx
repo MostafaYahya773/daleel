@@ -15,6 +15,7 @@ const useSignUp = () => {
         data: {
           full_name: values.full_name,
           date_of_birth: values.date_of_birth,
+          gender: values.gender,
           role: 'user',
         },
       },

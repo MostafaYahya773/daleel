@@ -5,7 +5,6 @@ const getSession = async () => {
   const { data: sessionData } = await supabaseServer.auth.getSession();
   if (!sessionData.session) return null;
 
-  // بدل الاعتماد على session.user مباشرة
   const { data: userData } = await supabaseServer.auth.getUser(
     sessionData.session.access_token
   );

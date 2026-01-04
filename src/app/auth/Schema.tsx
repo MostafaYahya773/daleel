@@ -41,3 +41,20 @@ export const SignUpSchema = yup.object({
     .max(new Date(), 'تاريخ الميلاد غير صالح')
     .required('تاريخ الميلاد مطلوب'),
 });
+
+export const UpdateProfile = yup.object({
+  full_name: yup
+    .string()
+    .min(3, 'الاسم يجب أن يكون 3 حروف على الأقل')
+    .required('اسم المستخدم مطلوب'),
+
+  email: yup
+    .string()
+    .email('البريد الإلكتروني غير صحيح')
+    .required('البريد الإلكتروني مطلوب'),
+
+  date_of_birth: yup
+    .date()
+    .max(new Date(), 'تاريخ الميلاد غير صالح')
+    .required('تاريخ الميلاد مطلوب'),
+});

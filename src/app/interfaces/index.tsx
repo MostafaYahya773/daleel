@@ -46,22 +46,29 @@ export interface FormLoginFields {
 }
 
 export interface FormSignUpFields {
+  id?: string;
   full_name: string;
   email: string;
-  password: string;
+  role?: 'user' | 'admin';
+  sub?: string;
+  password?: string;
+  gender: string;
   confirm_password?: string;
-  date_of_birth?: string;
+  date_of_birth: string;
 }
 
 export interface UserProps {
-  id: string;
+  id?: string;
   email: string;
   full_name: string;
-  role: 'user' | 'admin';
-  avatar_url: string | null;
+  gender: string;
+  role?: 'user' | 'admin';
+  avatar_url?: string | null;
   date_of_birth: string;
-  verified: boolean;
-  verified_at: string | null;
-  created_at: string;
-  updated_at: string;
+  phone_verified?: boolean;
+  sub?: string;
+  verified?: boolean;
+  verified_at?: string | null;
+  created_at?: string;
+  updated_at?: string;
 }

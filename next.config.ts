@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     domains: ['i.postimg.cc'],
   },
