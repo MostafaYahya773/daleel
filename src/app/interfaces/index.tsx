@@ -46,7 +46,6 @@ export interface FormLoginFields {
 }
 
 export interface FormSignUpFields {
-  id?: string;
   full_name: string;
   email: string;
   role?: 'user' | 'admin';
@@ -70,5 +69,17 @@ export interface UserProps {
   verified?: boolean;
   verified_at?: string | null;
   created_at?: string;
+  email_verified?: string | null;
   updated_at?: string;
+}
+
+export interface User {
+  date_of_birth: string; // "2001-01-02"
+  email: string;
+  email_verified: boolean;
+  full_name: string;
+  gender: 'male' | 'female';
+  phone_verified: boolean;
+  role: 'user' | 'admin';
+  sub: string; // user id
 }

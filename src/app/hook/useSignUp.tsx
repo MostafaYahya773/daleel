@@ -12,6 +12,7 @@ const useSignUp = () => {
       email: values.email,
       password: values.password,
       options: {
+        emailRedirectTo: 'http://localhost:3000/auth/callback',
         data: {
           full_name: values.full_name,
           date_of_birth: values.date_of_birth,

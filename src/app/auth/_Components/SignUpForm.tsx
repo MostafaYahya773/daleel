@@ -77,7 +77,7 @@ const SignUpForm = () => {
         onSuccess: () => {
           setSubmitting(false);
           toast.success('تم إنشاء الحساب بنجاح', { position: 'top-center' });
-          router.replace('/');
+          router.replace('/auth/ValidateAccount');
         },
         onError: (e: any) => {
           setSubmitting(false);

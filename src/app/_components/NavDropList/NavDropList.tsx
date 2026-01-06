@@ -43,6 +43,7 @@ const NavDropList = React.memo(
         icon: <LogOut className="w-5 h-5" />,
         onclick: async () => {
           await createClient().auth.signOut();
+          router.replace('/');
           router.refresh();
         },
       },

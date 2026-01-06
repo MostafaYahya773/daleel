@@ -12,11 +12,13 @@ const Nav = ({
   name,
   role,
   email,
+  email_validate,
 }: {
   isLoggedIn: boolean;
   name: string;
   role: string;
   email: string;
+  email_validate: string;
 }) => {
   const path = usePathname();
   interface NavProps {
@@ -34,9 +36,8 @@ const Nav = ({
 
   const [isClicked, setIsClicked] = useState(path);
   const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <div className="fixed top-0 left-0 right-0 p-2 bg-white shadow-md z-[100] ">
+    <div className="fixed top-0 left-0 right-0 p-2 bg-white shadow-md z-[100]">
       <div className="md:grid md:grid-cols-[auto_1fr_auto]  items-center max-w-[1200px] mx-auto relative">
         <div className="flex items-center gap-3 justify-between md:justify-start">
           <div>

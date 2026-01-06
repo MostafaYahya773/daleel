@@ -1,6 +1,6 @@
 import getSession from '../../../../lib/GetSession';
 import Nav from './Nav';
-
+import { createClient } from '../../../../lib/supabase/client';
 export default async function ServerNav() {
   const data = await getSession();
 
@@ -10,6 +10,7 @@ export default async function ServerNav() {
       name={data?.user.full_name}
       role={data?.role}
       email={data?.user?.email}
+      email_validate={data?.isConfirmed!}
     />
   );
 }
