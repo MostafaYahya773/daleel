@@ -20,7 +20,8 @@ const DropList = React.memo(({ selectOptions, onselect }: Props) => {
   const [intValue, setInitValue] = useState<string>('');
   // filterData محسّنة بدون شرط غير ضروري
   const filterData = useMemo(
-    () => selectOptions?.filter((item) => item.course_name.includes(intValue)),
+    () =>
+      selectOptions?.filter((item) => item?.course_name?.includes(intValue)),
     [intValue, selectOptions]
   );
 
