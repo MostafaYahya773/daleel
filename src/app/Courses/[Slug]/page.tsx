@@ -18,7 +18,6 @@ export default async function CourseDetailsPage({
   const userName = data?.user.full_name;
 
   const enrolled = await getEnrollments(userId!, courseInfo?.id);
-  // console.log(enrolled);
 
   if (enrolled)
     return redirect(`/Courses/${slugDecoded}/Lessons/${courseInfo?.id}`);

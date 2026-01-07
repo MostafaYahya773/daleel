@@ -14,7 +14,7 @@ const getEnrollments = async (userId: string, courseId: string) => {
 
   if (error) throw new Error(error.message);
 
-  return data !== null; // بدل ما كنت ترجع data === true
+  return data !== null;
 };
 
 export default getEnrollments;
