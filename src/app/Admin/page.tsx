@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
-export default function page() {
+import getSession from '../../../lib/GetSession';
+export default async function page() {
   redirect('/Admin/NewCourse');
 }
