@@ -9,6 +9,7 @@ const useAddLesson = () => {
       .from('lessons')
       .insert(lesson);
     if (error) throw new Error(error.message);
+
     return data;
   };
 

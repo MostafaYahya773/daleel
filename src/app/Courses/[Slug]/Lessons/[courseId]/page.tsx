@@ -14,6 +14,6 @@ export default async function LessonPage({
   const user = await getSession();
   const userId = user?.userId;
   const enrolled = await getEnrollments(userId!, courseId);
-  if (!enrolled) return redirect('/courses');
+  if (!enrolled) return redirect('/Courses');
   return <VideosPage LessonInfo={data} />;
 }

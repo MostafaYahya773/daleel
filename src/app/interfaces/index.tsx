@@ -84,3 +84,11 @@ export interface User {
   role: 'user' | 'admin';
   sub: string; // user id
 }
+
+export interface ContactUsProps {
+  name: string;
+  phone: string;
+  email: string;
+  subject: string;
+  message: string;
+}

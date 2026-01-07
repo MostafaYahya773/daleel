@@ -1,4 +1,3 @@
-import React from 'react';
 import { createClient } from './supabase/client';
 import getSession from './GetSession';
 const getMyCourses = async () => {

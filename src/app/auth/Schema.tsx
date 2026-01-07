@@ -79,3 +79,43 @@ export const UpdatePasswordSchema = yup.object({
     .oneOf([yup.ref('newPassword')], 'كلمتا المرور غير متطابقتين')
     .required('تأكيد كلمة المرور مطلوب'),
 });
+
+export const ContactSchema = yup.object({
+  name: yup
+    .string()
+    .trim()
+    .min(3, 'الاسم قصير جدًا')
+    .max(50, 'الاسم طويل جدًا')
+    .matches(/^[a-zA-Z\u0600-\u06FF\s]+$/, 'الاسم غير صالح')
+    .required('الاسم مطلوب'),
+
+  phone: yup
+    .string()
+    .required('رقم الهاتف مطلوب')
+    .matches(/^[0-9]+$/, 'مسموح بالأرقام فقط')
+    .min(8, 'الرقم قصير')
+    .max(15, 'الرقم طويل'),
+
+  email: yup
+    .string()
+    .trim()
+    .email('بريد إلكتروني غير صالح')
+    .max(100)
+    .required('الإيميل مطلوب'),
+
+  subject: yup
+    .string()
+    .trim()
+    .min(3)
+    .max(100)
+    .matches(/^[^<>$%{}]*$/, 'محتوى غير مسموح')
+    .required('العنوان مطلوب'),
+
+  message: yup
+    .string()
+    .trim()
+    .min(10, 'الرسالة قصيرة جدًا')
+    .max(500)
+    .matches(/^[^<>$%{}]*$/, 'محتوى غير مسموح')
+    .required('الرسالة مطلوبة'),
+});

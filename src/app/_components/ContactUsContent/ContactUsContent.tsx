@@ -1,4 +1,9 @@
+'use client';
+import { useFormik } from 'formik';
 import { Send, PhoneCall, Mail, Phone } from 'lucide-react';
+import { ContactUsProps } from '../../interfaces';
+import useAddContactUs from '@/app/hook/useAddContactUs';
+import { ContactSchema } from '@/app/auth/Schema';
 
 interface FormField {
   name: string;
@@ -14,6 +19,12 @@ interface Contact {
 const formFields: FormField[] = [
   { name: 'name', label: 'الاسم', type: 'text', placeholder: 'اكتب اسمك' },
   {
+    name: 'phone',
+    label: 'رقم الهاتف',
+    type: 'text',
+    placeholder: 'اكتب رقم الهاتف',
+  },
+  {
     name: 'email',
     label: 'الإيميل',
     type: 'email',
@@ -26,12 +37,13 @@ const formFields: FormField[] = [
     placeholder: 'عنوان الموضوع',
   },
   {
-    name: 'details',
+    name: 'message',
     label: 'تفاصيل الموضوع',
     type: 'textarea',
     placeholder: 'اكتب تفاصيل الموضوع هنا',
   },
 ];
+
 const ContactType: Contact[] = [
   {
     value: '00112233445',
@@ -56,37 +68,95 @@ const ContactType: Contact[] = [
 ];
 
 const ContactUsContent = () => {
+  const { mutate: readMessage } = useAddContactUs();
+  const formik = useFormik<ContactUsProps>({
+    initialValues: {
+      name: '',
+      phone: '',
+      email: '',
+      subject: '',
+      message: '',
+    },
+    onSubmit: (values, { resetForm, setSubmitting }) => {
+      readMessage(values, {
+        onSuccess: () => {
+          resetForm();
+          setSubmitting(false);
+        },
+        onError: () => {
+          setSubmitting(false);
+        },
+      });
+    },
+    validationSchema: ContactSchema,
+  });
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 py-5 px-5">
-      <form className="w-full flex flex-col gap-4 order-2 lg:order-1 bg-secondary p-2 rounded-lg shadow-lg">
-        {' '}
-        {formFields.map((field) => (
+      <form
+        onSubmit={formik.handleSubmit}
+        className="w-full flex flex-col gap-4 order-2 lg:order-1 bg-secondary p-2 rounded-lg shadow-lg"
+      >
+        {formFields.slice(0, 4).map((field) => (
           <div key={field.name} className="flex flex-col gap-2">
             <label className="text-sm font-medium text-gray-700 px-2">
               {field.label}
               <span className="text-red-500 text-[18px] ms-1">*</span>
             </label>
 
-            {field.type === 'textarea' ? (
-              <textarea
-                className="resize-none py-3 rounded-xl border border-gray-300 px-4 text-sm outline-none focus:border-therd duration-300"
-                placeholder={field.placeholder}
-              />
-            ) : (
-              <input
-                type={field.type}
-                className="rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none focus:border-therd duration-300"
-                placeholder={field.placeholder}
-              />
-            )}
+            <input
+              type={field.type}
+              className="rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none focus:border-therd duration-300"
+              placeholder={field.placeholder}
+              name={field.name}
+              value={formik.values[field.name as keyof ContactUsProps]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched[field.name as keyof ContactUsProps] &&
+              formik.errors[field.name as keyof ContactUsProps] && (
+                <span className="text-red-500 text-sm">
+                  {formik.errors[field.name as keyof ContactUsProps]}
+                </span>
+              )}
           </div>
         ))}
+
+        {formFields[4].type === 'textarea' && (
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium text-gray-700 px-2">
+              {formFields[4].label}
+              <span className="text-red-500 text-[18px] ms-1">*</span>
+            </label>
+            <textarea
+              className="rounded-xl border border-gray-300 px-4 py-3 h-[150px] text-sm outline-none focus:border-therd duration-300 resize-none"
+              placeholder={formFields[4].placeholder}
+              name={formFields[4].name}
+              value={formik.values[formFields[4].name as keyof ContactUsProps]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {}
+            {formik.touched[formFields[4].name as keyof ContactUsProps] &&
+              formik.errors[formFields[4].name as keyof ContactUsProps] && (
+                <span className="text-red-500 text-sm">
+                  {formik.errors[formFields[3].name as keyof ContactUsProps]}
+                </span>
+              )}
+          </div>
+        )}
         <button
+          disabled={formik.isSubmitting}
           type="submit"
-          className="flex items-center justify-center gap-2 rounded-xl bg-therd px-6 py-3 hover:opacity-80 duration-300 text-sm font-medium text-white"
+          className=" rounded-xl bg-therd px-6 py-3 hover:opacity-80 duration-300 text-sm font-medium text-white"
         >
-          إرسال
-          <Send size={16} />
+          {formik.isSubmitting ? (
+            <span className="loaderAnimation"></span>
+          ) : (
+            <div className="flex items-center justify-center gap-2">
+              إرسال
+              <Send size={16} />
+            </div>
+          )}
         </button>
       </form>
       <div className="grid grid-cols-1 gap-3 order-1 lg:order-2">
