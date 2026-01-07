@@ -1,6 +1,5 @@
 import getSession from '../../../../lib/GetSession';
 import Nav from './Nav';
-import { createClient } from '../../../../lib/supabase/client';
 export default async function ServerNav() {
   const data = await getSession();
 

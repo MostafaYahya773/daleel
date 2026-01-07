@@ -14,7 +14,7 @@ interface FormField {
 }
 
 const LoginForm = () => {
-  const { mutate: login } = useLogin();
+  const { mutate: login, error } = useLogin();
   const router = useRouter();
   const form: FormField[] = [
     {
