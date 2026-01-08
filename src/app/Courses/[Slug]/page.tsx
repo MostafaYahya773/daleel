@@ -84,6 +84,7 @@ export default async function CourseDetailsPage({
           image_url={courseInfo.image_url}
           name={userName!}
           courseName={courseInfo.course_name}
+          enrolled={enrolled}
         />
       </div>
     </div>

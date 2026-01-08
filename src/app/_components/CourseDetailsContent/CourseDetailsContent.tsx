@@ -15,6 +15,7 @@ const CourseDetailsContent = ({
   image_url,
   name,
   courseName,
+  enrolled,
 }: {
   description: string;
   whatYouWillLearn: string;
@@ -24,6 +25,7 @@ const CourseDetailsContent = ({
   image_url: string;
   name: string;
   courseName: string;
+  enrolled: boolean;
 }) => {
   interface FutureProps {
     name: string;
@@ -137,7 +139,7 @@ const CourseDetailsContent = ({
               }
               className="w-full"
               onClick={(e) => {
-                if (price !== 0) {
+                if (price !== 0 && enrolled === false) {
                   e.preventDefault();
                   setIsFree(false);
                 }
