@@ -92,3 +92,18 @@ export interface ContactUsProps {
   subject: string;
   message: string;
 }
+
+export interface StudentProps {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+  created_at: string;
+}
+
+export interface UserInfoProps {
+  name: string;
+  email: string;
+}

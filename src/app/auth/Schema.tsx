@@ -106,8 +106,8 @@ export const ContactSchema = yup.object({
   subject: yup
     .string()
     .trim()
-    .min(3)
-    .max(100)
+    .min(3, 'العنوان قصير جدًا')
+    .max(100, 'العنوان طويل جدًا')
     .matches(/^[^<>$%{}]*$/, 'محتوى غير مسموح')
     .required('العنوان مطلوب'),
 
@@ -115,7 +115,7 @@ export const ContactSchema = yup.object({
     .string()
     .trim()
     .min(10, 'الرسالة قصيرة جدًا')
-    .max(500)
+    .max(500, 'الرسالة طويلة جدًا')
     .matches(/^[^<>$%{}]*$/, 'محتوى غير مسموح')
     .required('الرسالة مطلوبة'),
 });

@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import useDeleteLesson from '@/app/hook/useDeleteLesson';
 import useEnroll from '@/app/hook/useEnroll';
+import useDeleteStudentsInquiries from '@/app/hook/useDeleteStudentsInquiries';
 
 const ConfirmAlert = React.memo(
   ({
@@ -14,6 +15,8 @@ const ConfirmAlert = React.memo(
     lessonName,
     userName,
     userID,
+    message,
+    studntId,
   }: {
     courseName?: string;
     setConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,12 +25,14 @@ const ConfirmAlert = React.memo(
     lessonName?: string;
     userName?: string;
     userID?: string;
+    message?: string;
+    studntId?: string;
   }) => {
     const path = usePathname();
     const { mutate: deleteCourse, isPending } = useDeleteCourse();
     const { mutate: DeleteLesson } = useDeleteLesson();
     const { mutate: ConfirmPayment } = useEnroll();
-
+    const { mutate: DeleteMessage } = useDeleteStudentsInquiries();
     return (
       <div className="fixed z-[100] shadow-md backdrop-blur-sm w-screen h-screen bg-black/50 top-0 left-0 right-0 flex justify-center items-center ">
         <div className="flex flex-col  items-center  gap-3 bg-white px-10 py-5 rounded-lg w-full mx-3 sm:mx-0 sm:w-[500px]">
@@ -42,12 +47,20 @@ const ConfirmAlert = React.memo(
                   ? 'هل انت متأكد من تاكيد الدفع'
                   : ''
               }
+              ${
+                path === '/Admin/StudentsInquiries'
+                  ? 'هل انت متأكد من حذف الرسالة الخاصة بالطالب'
+                  : ''
+              }
+              
            `}
           </h2>
           <p className="text-gray-500 text-[18px] font-medium">
             {`${path === '/Admin/DeleteCourse' ? courseName : ''} ${
               path === '/Admin/DeleteLesson' ? lessonName : ''
-            } ${path === '/Admin/ConfirmPayment' ? courseName : ''}`}
+            } ${path === '/Admin/ConfirmPayment' ? courseName : ''}
+            ${path === '/Admin/StudentsInquiries' ? message : ''}
+            `}
           </p>
           <p className="text-gray-500 text-[18px]">
             {path === '/Admin/ConfirmPayment' ? `للمستخدم` : ''}
@@ -55,6 +68,7 @@ const ConfirmAlert = React.memo(
           <span className="text-[20px] text-therd">
             {path === '/Admin/ConfirmPayment' ? userName : ''}
           </span>
+
           <div className="flex gap-2 w-full *:w-full *:p-2 *:rounded-lg *:text-white *:duration-300 mt-7">
             <button
               onClick={() => setConfirmation(false)}
@@ -71,6 +85,8 @@ const ConfirmAlert = React.memo(
                   DeleteLesson(lessonID!);
                 } else if (path === '/Admin/ConfirmPayment') {
                   ConfirmPayment({ courseID: courseID!, userID: userID! });
+                } else if (path === '/Admin/StudentsInquiries') {
+                  DeleteMessage(studntId!);
                 }
                 setConfirmation(false);
               }}
