@@ -12,13 +12,13 @@ const Nav = ({
   name,
   role,
   email,
-  email_validate,
+  avatar_url,
 }: {
   isLoggedIn: boolean;
   name: string;
   role: string;
   email: string;
-  email_validate: string;
+  avatar_url: string | null;
 }) => {
   const path = usePathname();
   interface NavProps {
@@ -97,7 +97,7 @@ const Nav = ({
               </p>
               <ChevronDown className="w-5 h-5 text-gray-500" />
               <Image
-                src="/logo.png"
+                src={avatar_url ? avatar_url : '/user.png'}
                 width={0}
                 height={0}
                 alt="user Image"

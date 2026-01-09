@@ -1,7 +1,7 @@
 import React from 'react';
 import ProfilePathes from './_Components/ProfilePathes/ProfilePathes';
 import getSession from '../../../lib/GetSession';
-import { UserProps } from '../interfaces';
+import getUserAvatar from '../../../lib/getUserAvatar';
 export default async function ProfileLayout({
   children,
 }: {
@@ -9,10 +9,11 @@ export default async function ProfileLayout({
 }) {
   const user = await getSession();
   const personalInfo = user?.user;
-
+  const userImg = await getUserAvatar({ userId: personalInfo?.sub });
+  const userInfo = { ...personalInfo, avatar_url: userImg };
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[25%_75%] gap-3 lg:mt-24 mt-16">
-      <ProfilePathes personalInfo={personalInfo} />
+      <ProfilePathes personalInfo={userInfo!} />
       <div className="show">{children}</div>
     </div>
   );

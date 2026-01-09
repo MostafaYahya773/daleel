@@ -63,7 +63,6 @@ export interface UserProps {
   full_name: string;
   gender: string;
   role?: 'user' | 'admin';
-  avatar_url?: string | null;
   date_of_birth: string;
   phone_verified?: boolean;
   sub?: string;
@@ -72,6 +71,7 @@ export interface UserProps {
   created_at?: string;
   email_verified?: string | null;
   updated_at?: string;
+  avatar_url?: string | null;
 }
 
 export interface User {

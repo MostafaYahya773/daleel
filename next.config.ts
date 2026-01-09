@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['i.postimg.cc'],
+    domains: ['boccvxdoadtkygrhdeeq.supabase.co', 'i.postimg.cc'],
   },
   productionBrowserSourceMaps: false,
 };
