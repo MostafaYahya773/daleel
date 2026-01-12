@@ -113,22 +113,7 @@ const CourseDetailsContent = ({
                 <Skeleton height={20} count={7} baseColor="#e5e7eb" />
               )}
             </div>
-            <p
-              className={`${
-                price === 0 && 'hidden'
-              } text-therd font-bold text-[30px] text-center flex justify-center items-center gap-2`}
-            >
-              {price || (
-                <Skeleton
-                  height={20}
-                  width={50}
-                  count={1}
-                  containerClassName="pt-1"
-                  baseColor="#e5e7eb"
-                />
-              )}
-              <span>جنية</span>
-            </p>
+
             <Link
               href={
                 !name
