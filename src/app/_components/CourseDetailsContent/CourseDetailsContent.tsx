@@ -139,7 +139,7 @@ const CourseDetailsContent = ({
               }
               className="w-full"
               onClick={(e) => {
-                if (price !== 0 && enrolled === false) {
+                if (price !== 0 && !enrolled) {
                   e.preventDefault();
                   setIsFree(false);
                 }

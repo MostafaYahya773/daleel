@@ -11,13 +11,13 @@ interface EnrollProps {
 
 const useEnroll = () => {
   const enrollCourse = async (values: EnrollProps) => {
-    const { error } = await createClient().from('enrollments').upsert({
+    const { data, error } = await createClient().from('enrollments').upsert({
       course_id: values.courseID,
       user_id: values.userID,
     });
 
-    if (error) throw error;
-    return true;
+    if (error) throw new Error(error.message);
+    return data;
   };
 
   return useMutation({
@@ -25,7 +25,7 @@ const useEnroll = () => {
     mutationFn: enrollCourse,
 
     onSuccess: () => {
-      toast.success('تم تسجيلك في الكورس بنجاح', {
+      toast.success('تم تسجيل الطالب في الكورس بنجاح', {
         position: 'top-center',
       });
     },

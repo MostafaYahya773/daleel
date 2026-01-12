@@ -9,7 +9,7 @@ interface studentsConfirmProps {
 const StudentConfirm = React.memo(
   ({ studnt, setIsShow }: studentsConfirmProps) => {
     return (
-      <div className="fixed w-screen h-screen backdrop-blur-sm flex justify-center items-center bg-black/50 top-0 left-0 z-[100]">
+      <div className="fixed w-screen h-screen backdrop-blur-sm flex justify-center items-center bg-black/10 top-0 left-0 z-[100]">
         <div className="bg-white md:w-[600px] mx-3 md:mx-0 h-fit rounded-lg p-3">
           <div className="grid grid-rows-[auto_1fr_auto] h-full gap-2 bg-white shadow-sm p-2 rounded-lg w-full">
             <div className="students_info flex flex-col gap-1 w-full border-b border-gray-400 pb-2">

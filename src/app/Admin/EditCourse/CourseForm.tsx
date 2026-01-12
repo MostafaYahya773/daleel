@@ -85,6 +85,8 @@ const CourseForm = React.memo(
       enableReinitialize: true,
       validationSchema: courseSchema,
       onSubmit: (values, { resetForm, setSubmitting }) => {
+        // console.log(values);
+
         mutate(values, {
           onSuccess: () => {
             toast.success('تم تحديث الكورس بنجاح', {

@@ -34,7 +34,7 @@ const ConfirmAlert = React.memo(
     const { mutate: ConfirmPayment } = useEnroll();
     const { mutate: DeleteMessage } = useDeleteStudentsInquiries();
     return (
-      <div className="fixed z-[100] shadow-md backdrop-blur-sm w-screen h-screen bg-black/50 top-0 left-0 right-0 flex justify-center items-center ">
+      <div className="fixed z-[100] shadow-md backdrop-blur-sm w-screen h-screen bg-black/10 top-0 left-0 right-0 flex justify-center items-center ">
         <div className="flex flex-col  items-center  gap-3 bg-white px-10 py-5 rounded-lg w-full mx-3 sm:mx-0 sm:w-[500px]">
           <h2 className="text-therd text-[18px] font-bold">
             {`

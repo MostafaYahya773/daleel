@@ -4,19 +4,20 @@ import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseD
 import getCourseBySlug from '../../../../lib/getCourseBySlug';
 import { notFound, redirect } from 'next/navigation';
 import getSession from '../../../../lib/GetSession';
+// import { createClient } from '../../../../lib/supabase/server';
 import getEnrollments from '../../../../lib/GetEnrollments';
 export default async function CourseDetailsPage({
   params,
 }: {
   params: Promise<{ Slug: string }>;
 }) {
+  // const supabaseServer = await createClient();
   const { Slug } = await params;
-  const slugDecoded = decodeURI(Slug).normalize('NFC').trim();
   const data = await getSession();
+  const slugDecoded = decodeURI(Slug).normalize('NFC').trim();
   const courseInfo = await getCourseBySlug(slugDecoded);
-  const userId = data?.userId;
   const userName = data?.user.full_name;
-
+  const userId = data?.userId;
   const enrolled = await getEnrollments(userId!, courseInfo?.id);
 
   if (enrolled)

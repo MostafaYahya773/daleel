@@ -1,33 +1,33 @@
-import { createClient } from './supabase/client';
+import { createClient } from './supabase/server';
 
 interface FetchAndSaveAvatarParams {
-  userId: string;
   bucketName?: string;
-  fileExt?: string; // لو مش عارف الامتداد، ممكن تبعته أو تخلي افتراضية
 }
 
-export const getUserAvatar = async ({
-  userId,
-  bucketName = 'users-avatar',
-  fileExt = 'png',
-}: FetchAndSaveAvatarParams) => {
-  const supabase = createClient();
-
-  const fileName = `${userId}.${fileExt}`;
-
-  const { data } = supabase.storage.from(bucketName).getPublicUrl(fileName);
-  if (!data?.publicUrl) throw new Error('حدث خطأ في الحصول على رابط الصورة');
-  const publicUrl = data.publicUrl;
-  const avatarUrl = `${data.publicUrl}?t=${Date.now()}`;
-
-  const { error: profileError } = await supabase
+export const getUserAvatar = async () => {
+  const bucketName = 'users-avatar';
+  const supabaseServer = await createClient();
+  const {
+    data: { user },
+  } = await supabaseServer.auth.getUser();
+  const { data: profile } = await supabaseServer
     .from('profiles')
-    .update({ avatar_url: publicUrl })
-    .eq('id', userId);
+    .select('avatar_url')
+    .eq('id', user?.id)
+    .single();
 
-  //   if (profileError) throw new Error('حدث خطأ في حفظ رابط الصورة في البروفايل');
+  const fileName = profile?.avatar_url?.length
+    ? profile.avatar_url
+    : '/logo.png';
 
-  return avatarUrl;
+  const { data } = supabaseServer.storage
+    .from(bucketName)
+    .getPublicUrl(fileName);
+
+  if (!data?.publicUrl) return '/logo.png';
+
+  // 5️⃣ cache busting
+  return `${data.publicUrl}?t=${Date.now()}`;
 };
 
 export default getUserAvatar;

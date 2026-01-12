@@ -76,7 +76,7 @@ const ProfilePathes = React.memo(
               </p>
             ) : (
               <Image
-                src={personalInfo?.avatar_url ?? '/logo.png'}
+                src={personalInfo?.avatar_url || '/logo.png'}
                 alt="personal-img"
                 priority
                 width={150}

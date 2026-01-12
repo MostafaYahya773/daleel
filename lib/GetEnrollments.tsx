@@ -1,13 +1,11 @@
-import { createClient } from './supabase/client';
+import { createClient } from './supabase/server';
 
 const getEnrollments = async (userId: string, courseId: string) => {
   if (!userId || !courseId) return false;
-
-  const supabase = createClient();
-
-  const { data, error } = await supabase
+  const subapaseServer = await createClient();
+  const { data, error } = await subapaseServer
     .from('enrollments')
-    .select('id')
+    .select('*')
     .eq('user_id', userId)
     .eq('course_id', courseId)
     .maybeSingle();

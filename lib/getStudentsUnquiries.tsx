@@ -1,7 +1,8 @@
-import { createClient } from './supabase/client';
+import { createClient } from './supabase/server';
 
 const getStudentsUnquiries = async () => {
-  const { data, error } = await createClient().from('contact').select('*');
+  const supabaseServer = await createClient();
+  const { data, error } = await supabaseServer.from('contact').select('*');
 
   if (error) {
     throw new Error('حدث خطأ اثناء جلب البيانات');

@@ -4,15 +4,19 @@ import { createClient } from '../../../lib/supabase/client';
 import { Courseprops } from '../interfaces';
 const useEditCourse = (id: string) => {
   const editCourse = async (values: Courseprops) => {
-    const { error } = await createClient()
+    const { data, error } = await createClient()
       .from('courses')
       .update(values)
       .eq('id', id);
-    return error;
+
+    if (error) throw new Error(error.message);
+    console.log(data);
+
+    return data;
   };
 
   return useMutation({
-    mutationKey: ['editCourse'],
+    mutationKey: ['editCourse', id],
     mutationFn: editCourse,
   });
 };

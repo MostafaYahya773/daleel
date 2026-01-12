@@ -10,7 +10,7 @@ const useSignUp = () => {
   const signUp = async (values: FormSignUpFields) => {
     const { data, error } = await createClient().auth.signUp({
       email: values.email,
-      password: values.password,
+      password: values.password!,
       options: {
         emailRedirectTo: 'https://daleel-two.vercel.app/auth/callback',
         data: {

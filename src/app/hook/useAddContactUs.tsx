@@ -12,7 +12,7 @@ const useAddContactUs = () => {
       subject: values.subject,
       message: values.message,
     });
-    if (error) throw new Error('حدث خطأ في إرسال الرسالة');
+    if (error) throw new Error('يجب عليك تسجيل الدخول اولا');
     return data;
   };
 
