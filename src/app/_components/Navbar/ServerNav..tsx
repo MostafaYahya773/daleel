@@ -3,8 +3,7 @@ import getUserAvatar from '../../../../lib/getUserAvatar';
 import Nav from './Nav';
 export default async function ServerNav() {
   const data = await getSession();
-  const personalInfo = data?.user;
-  const userImg = await getUserAvatar({ userId: personalInfo?.sub });
+  const userImg = await getUserAvatar();
   return (
     <Nav
       isLoggedIn={!!data}

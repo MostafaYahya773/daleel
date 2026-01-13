@@ -33,6 +33,7 @@ interface MobileMenuProps {
   role: string;
   email: string;
   name: string;
+  avatar_url: string | null;
 }
 const MobileMenu = React.memo(
   ({
@@ -42,6 +43,7 @@ const MobileMenu = React.memo(
     role,
     email,
     name,
+    avatar_url,
   }: MobileMenuProps) => {
     const pathname = usePathname();
     const router = useRouter();
@@ -119,16 +121,18 @@ const MobileMenu = React.memo(
               href="/Profile"
               className={`${
                 !name ? 'hidden' : ''
-              } flex gap-2 relative items-center bg-gray-100 py-2 rounded-md `}
+              } flex gap-2 relative items-center bg-gray-100 py-2`}
               onClick={() => setIsOpen(false)}
             >
-              <Image
-                src="/logo.png"
-                alt="logo"
-                width={50}
-                height={50}
-                className="w-15 h-15"
-              />
+              <div className="w-10 h-10 rounded-full bg-white flex justify-center items-center overflow-hidden">
+                <Image
+                  src={avatar_url || '/logo.png'}
+                  alt="logo"
+                  width={50}
+                  height={50}
+                  className="object-cover rounded-md "
+                />
+              </div>
               <div className="personal_info flex flex-col">
                 <span className="text-[12px]">{name}</span>
                 <span className="text-[12px] text-gray-500">{email}</span>

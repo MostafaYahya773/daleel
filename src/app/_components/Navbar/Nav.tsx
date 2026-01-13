@@ -115,6 +115,7 @@ const Nav = ({
             role={role}
             email={email}
             name={name}
+            avatar_url={avatar_url}
           />
         </div>
       </div>

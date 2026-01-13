@@ -88,7 +88,7 @@ export default function BlogCart() {
   return (
     <div ref={ref} className="min-h-screen">
       {inView && (
-        <div className="max-w-[1200px] mx-auto py-5">
+        <div id="blog" className="max-w-[1200px] mx-auto py-5">
           <h2 className="lg:text-[30px] md:text-[25px]  text-[20px] text-center mb-5 pb-3 border-b-2 border-therd w-fit mx-auto">
             احدث مقالات <span className="text-therd">دليل</span>
           </h2>
