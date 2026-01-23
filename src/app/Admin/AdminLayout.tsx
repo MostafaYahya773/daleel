@@ -18,6 +18,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     { name: 'تحديث درس', href: '/Admin/EditLesson' },
     { name: 'حذف درس', href: '/Admin/DeleteLesson' },
     { name: 'اضافة مقال', href: '/Admin/AddBlog' },
+    { name: 'تحديث مقال', href: '/Admin/EditBlog' },
+    { name: 'حذف مقال', href: '/Admin/DeleteBlog' },
     { name: 'استفسارات الطلاب', href: '/Admin/StudentsInquiries' },
     { name: 'تأكيد الدفع', href: '/Admin/ConfirmPayment' },
   ];

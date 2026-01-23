@@ -107,3 +107,22 @@ export interface UserInfoProps {
   name: string;
   email: string;
 }
+
+export interface BlogForms {
+  id?: string;
+  title: string;
+  content: string;
+  file: File | null;
+  image_url: File | null;
+  reading_minutes: string;
+  auher_id?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface BlogFormProps {
+  label: string;
+  name: keyof BlogForms;
+  type: string;
+  placeholder: string;
+}

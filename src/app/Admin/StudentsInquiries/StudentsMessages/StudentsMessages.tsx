@@ -1,26 +1,13 @@
 'use client';
 import React, { useState } from 'react';
-import dayjs from 'dayjs';
-import isToday from 'dayjs/plugin/isToday';
-import isYesterday from 'dayjs/plugin/isYesterday';
+
 import { StudentProps } from '../../../interfaces';
 import ConfirmAlert from '../../_Components/ConfirmAlert/ConfirmAlert';
 import { MessageCircleOff } from 'lucide-react';
 import StudentConfirm from '../../_Components/StudentConfirm/StudentConfirm';
-dayjs.extend(isToday);
-dayjs.extend(isYesterday);
+import { formatMessageDate } from '../../../../../lib/formatMessageDate';
 
 const StudentsMessages = React.memo(({ data }: { data: StudentProps[] }) => {
-  const formatMessageDate = (dateString?: string) => {
-    if (!dateString) return '';
-    const msgDate = dayjs(dateString);
-    if (!msgDate.isValid()) return dateString;
-    if (msgDate.isToday()) return 'اليوم';
-    if (msgDate.isYesterday()) return 'امس';
-    const diffDays = dayjs().startOf('day').diff(msgDate.startOf('day'), 'day');
-    if (diffDays === 2) return 'منذ يومين';
-    return `منذ ${diffDays} أيام`;
-  };
   const [confirmation, setConfirmation] = useState(false);
   const [isShow, setIsShow] = useState(false);
   if (data.length === 0)

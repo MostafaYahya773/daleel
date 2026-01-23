@@ -1,15 +1,15 @@
 'use client';
 import React, { useMemo, useState } from 'react';
-import { Courseprops, UserProps } from '../../../interfaces/index';
+import { BlogForms } from '../../../interfaces/index';
 import { ArrowDown } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 
 interface Props {
-  selectOptions: Courseprops[];
-  onselect: (value: string, name: string) => void;
+  selectOptions: BlogForms[];
+  onselect: (BlogID: string, name: string) => void;
 }
 
-const DropList = React.memo(({ selectOptions, onselect }: Props) => {
+const BlogDropList = React.memo(({ selectOptions, onselect }: Props) => {
   const { ref, inView } = useInView({
     threshold: 0.5,
     triggerOnce: true,
@@ -20,8 +20,7 @@ const DropList = React.memo(({ selectOptions, onselect }: Props) => {
   const [intValue, setInitValue] = useState<string>('');
   // filterData محسّنة بدون شرط غير ضروري
   const filterData = useMemo(
-    () =>
-      selectOptions?.filter((item) => item?.course_name?.includes(intValue)),
+    () => selectOptions?.filter((item) => item?.title?.includes(intValue)),
     [intValue, selectOptions],
   );
 
@@ -38,7 +37,7 @@ const DropList = React.memo(({ selectOptions, onselect }: Props) => {
           <div className="input">
             <input
               type="text"
-              placeholder={inputValue || 'اسم الكورس'}
+              placeholder={inputValue || 'اسم المقالة'}
               onChange={(e) => setInitValue(e.target.value)}
               onClick={() => setIsOpen(!isOpen)}
               className="w-full md:text-[16px] text-[14px] outline-none p-2 border rounded-md border-gray-400 text-gray-500 font-bold focus:border-gray-600 cursor-pointer"
@@ -52,10 +51,10 @@ const DropList = React.memo(({ selectOptions, onselect }: Props) => {
               {filterData?.map((item) => (
                 <li
                   key={item.id}
-                  onClick={() => handleSelect(item?.id!, item?.course_name!)}
+                  onClick={() => handleSelect(item?.id!, item?.title!)}
                   className="flex items-center md:text-[16px] text-[14px] cursor-pointer p-2 hover:bg-therd text-gray-500 hover:text-white rounded-md"
                 >
-                  {item.course_name}
+                  {item.title}
                 </li>
               ))}
             </ul>
@@ -66,4 +65,4 @@ const DropList = React.memo(({ selectOptions, onselect }: Props) => {
   );
 });
 
-export default DropList;
+export default BlogDropList;
