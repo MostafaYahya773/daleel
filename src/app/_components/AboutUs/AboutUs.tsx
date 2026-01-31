@@ -16,12 +16,13 @@ const AboutUs = () => {
     <div
       ref={ref}
       className="grid lg:grid-cols-2 grid-cols-1 gap-5 items-center overflow-hidden"
+      id="AboutUs"
     >
       <div
         className={`whyusimg w-full lg:order-1 order-2 duration-1000 ${
-          inView
-            ? 'md:translate-x-0 translate-y-0 opacity-100'
-            : 'md:translate-x-full translate-y-full opacity-0'
+          inView ?
+            'md:translate-x-0 translate-y-0 opacity-100'
+          : 'md:translate-x-full translate-y-full opacity-0'
         }`}
       >
         <Image
@@ -35,9 +36,9 @@ const AboutUs = () => {
 
       <div
         className={`whyusText my-10 flex flex-col gap-7 lg:order-2 order-1 duration-1000 ${
-          inView
-            ? 'md:translate-x-0 translate-y-0 opacity-100'
-            : 'md:-translate-x-full translate-y-full opacity-0'
+          inView ?
+            'md:translate-x-0 translate-y-0 opacity-100'
+          : 'md:-translate-x-full translate-y-full opacity-0'
         }`}
       >
         <Title title="تعرف على دليل" />

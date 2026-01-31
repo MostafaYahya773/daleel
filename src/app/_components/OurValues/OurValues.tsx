@@ -16,6 +16,7 @@ const OurValues = () => {
     <div
       ref={ref}
       className="grid md:grid-cols-2 grid-cols-1 gap-8 overflow-hidden"
+      id="OurValues"
     >
       <div
         className={`flex flex-col gap-6 md:mt-7  duration-1000 ${

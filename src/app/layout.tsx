@@ -6,6 +6,7 @@ import ReactQueryProvider from './_components/ReactQueryProvider/ReactQueryProvi
 import { Toaster } from 'react-hot-toast';
 import 'react-loading-skeleton/dist/skeleton.css';
 import ServerNav from './_components/Navbar/ServerNav.';
+import Footer from './_components/Footer/Footer';
 const cairoFont = Cairo({
   subsets: ['arabic'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],
@@ -36,6 +37,9 @@ export default function RootLayout({
             </nav>
             {children}
           </main>
+          <footer>
+            <Footer />
+          </footer>
           <Toaster />
         </ReactQueryProvider>
       </body>

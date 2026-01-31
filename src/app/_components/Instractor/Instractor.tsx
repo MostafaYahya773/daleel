@@ -16,6 +16,7 @@ export default function Instractor() {
     <div
       ref={ref}
       className="grid md:grid-cols-2 lg:gap-5 gap-16 overflow-hidden"
+      id="aboutInstractor"
     >
       <div
         className={`aboutInstractor flex flex-col lg:gap-7 gap-3 duration-1000 ${

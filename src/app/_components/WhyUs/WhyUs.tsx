@@ -74,15 +74,16 @@ export default function WhyUs() {
     <div
       ref={ref}
       className="bg-secondary min-h-fit py-5 mt-[70px] lg:mt-16 relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen overflow-hidden"
+      id="WhyUs"
     >
       <div className="max-w-[1200px] mx-auto flex flex-col px-5 lg:px-0 gap-5 ">
         <Title title="لماذا تختار دليل؟" />
         <div className="grid md:grid-cols-2 grid-cols-1 md:grid-rows-2 gap-5">
           <div
             className={`img1 mx-auto md:order-1 order-2 duration-1000 ${
-              inView
-                ? 'translate-y-0 opacity-100 '
-                : 'translate-y-full opacity-0'
+              inView ?
+                'translate-y-0 opacity-100 '
+              : 'translate-y-full opacity-0'
             }`}
           >
             <Image
@@ -95,9 +96,9 @@ export default function WhyUs() {
           </div>
           <div
             className={`text1 grid md:grid-rows-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-none  gap-5 md:order-2 order-1 duration-1000 ${
-              inView
-                ? 'md:translate-x-0 opacity-100 translate-y-0'
-                : 'md:-translate-x-full opacity-0 translate-y-full'
+              inView ?
+                'md:translate-x-0 opacity-100 translate-y-0'
+              : 'md:-translate-x-full opacity-0 translate-y-full'
             } `}
           >
             {features.slice(0, 4)?.map((feature: Features, index: number) => (

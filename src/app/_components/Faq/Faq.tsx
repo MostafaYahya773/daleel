@@ -43,7 +43,7 @@ const faqData: FAQItem[] = [
 
 const FAQ = () => {
   return (
-    <section className="flex flex-col gap-4 py-7">
+    <section id="Faq" className="flex flex-col gap-4 py-7">
       <Title title="الأسئلة الشائعة" />
 
       {faqData.map((item, index) => (
