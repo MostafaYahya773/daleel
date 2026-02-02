@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Lessonprops } from '@/app/interfaces';
 import toast from 'react-hot-toast';
 import { useFormik } from 'formik';
@@ -10,6 +10,8 @@ import useGetCourseById from '@/app/hook/useGetCourseById';
 const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
   const { data: courseDetails, isLoading } = useGetCourseById(CourseId);
   const { mutate: addLesson, error } = useAddLesson();
+  const [files, setFiles] = useState<File | null>(null);
+
   interface FormField {
     label: string;
     name: keyof Lessonprops;
@@ -32,7 +34,7 @@ const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
     {
       label: 'رابط الصورة',
       name: 'lesson_img',
-      type: 'text',
+      type: 'file',
       placeholder: 'من فضلك ادخل رابط الصورة',
     },
     {
@@ -50,6 +52,7 @@ const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
       youtube_url: '',
       is_free: false,
       lesson_img: '',
+      updated_at: '',
     },
     onSubmit: (values, { resetForm, setSubmitting }) => {
       addLesson(values, {
@@ -70,11 +73,17 @@ const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
   if (isLoading) {
     return <AddAndEditindCourseAndLesson />;
   }
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    if (file) {
+      setFiles(file);
+    }
+  };
   return (
-    <div className={`${!CourseId ? 'hidden' : ''}`}>
+    <div className={`${!CourseId ? 'hidden' : ''} `}>
       <form onSubmit={formik.handleSubmit}>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
-          {formFelds.slice(0, 3).map((field, index) => (
+          {formFelds.slice(0, 2).map((field, index) => (
             <div key={index} className="flex flex-col gap-2">
               <label className="font-semibold px-2">{field.label}</label>
               <input
@@ -93,6 +102,24 @@ const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
               )}
             </div>
           ))}
+          <div className="flex flex-col gap-2">
+            <span>رابط الصورة</span>
+            <div className="border border-gray-400 rounded ">
+              <label
+                htmlFor="upload_img"
+                className="text-gray-400 w-full block p-2 cursor-pointer overflow-hidden"
+              >
+                {files ? files.name : formFelds[2].placeholder}
+              </label>
+              <input
+                id="upload_img"
+                type={formFelds[2].type}
+                name="image_url"
+                onChange={(e) => handleFile(e)}
+                className="hidden h-full w-full"
+              />
+            </div>
+          </div>
         </div>
         <div className="flex flex-col gap-2 my-3">
           <label className="font-semibold px-2">{formFelds[3].label}</label>
@@ -116,11 +143,9 @@ const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
           type="submit"
           className="bg-therd text-white p-2 rounded hover:opacity-80 mb-5 w-full mx-auto"
         >
-          {formik.isSubmitting ? (
+          {formik.isSubmitting ?
             <span className="loaderAnimation"></span>
-          ) : (
-            'اضافة درس جديد'
-          )}
+          : 'اضافة درس جديد'}
         </button>
       </form>
     </div>

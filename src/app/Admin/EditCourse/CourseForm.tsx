@@ -1,5 +1,5 @@
 'use client';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useFormik } from 'formik';
 import { courseSchema } from '../Schema';
 import { Courseprops } from '@/app/interfaces';
@@ -18,7 +18,7 @@ const CourseForm = React.memo(
         { label: 'مواد جامعية', value: 'مواد جامعية' },
         { label: 'ذكاء اصطناعي', value: 'ذكاء اصطناعي' },
       ],
-      []
+      [],
     );
     const levels: SelectOptionProps[] = useMemo(
       () => [
@@ -29,8 +29,9 @@ const CourseForm = React.memo(
         { label: 'سنة رابعة', value: 'سنة رابعة' },
         { label: 'سنة خامسة', value: 'سنة خامسة' },
       ],
-      []
+      [],
     );
+    const [files, setFiles] = useState<File | null>(null);
     interface FormField {
       label: string;
       name: keyof Courseprops;
@@ -54,7 +55,7 @@ const CourseForm = React.memo(
       {
         label: 'رابط الصورة',
         name: 'image_url',
-        type: 'text',
+        type: 'file',
         placeholder: 'ضع رابط الصورة',
       },
       { label: 'الفئة', name: 'category', type: 'text' },
@@ -85,32 +86,40 @@ const CourseForm = React.memo(
       enableReinitialize: true,
       validationSchema: courseSchema,
       onSubmit: (values, { resetForm, setSubmitting }) => {
-        // console.log(values);
-
-        mutate(values, {
-          onSuccess: () => {
-            toast.success('تم تحديث الكورس بنجاح', {
-              position: 'top-center',
-            });
-            resetForm();
-            setSubmitting(false);
+        mutate(
+          { values, file: files },
+          {
+            onSuccess: () => {
+              toast.success('تم تحديث الكورس بنجاح', {
+                position: 'top-center',
+              });
+              resetForm();
+              setSubmitting(false);
+            },
+            onError: (e) => {
+              console.log(e);
+              toast.error('فشل تحديث الكورس');
+              setSubmitting(false);
+            },
           },
-          onError: () => {
-            toast.error('فشل تحديث الكورس');
-            setSubmitting(false);
-          },
-        });
+        );
       },
     });
     if (isLoading) {
       return <AddAndEditindCourseAndLesson />;
     }
+    const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0] || null;
+      if (file) {
+        setFiles(file);
+      }
+    };
     return (
       <div className={`${!courseID && !courseName ? 'hidden' : ''}`}>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 mb-5">
             {/* inputs */}
-            {fields?.slice(0, 3)?.map((feld, index) => (
+            {fields?.slice(0, 2)?.map((feld, index) => (
               <div key={index} className="flex flex-col gap-2">
                 <label className="font-semibold px-2">{feld.label}</label>
                 <input
@@ -129,6 +138,24 @@ const CourseForm = React.memo(
                 )}
               </div>
             ))}
+            <div className="flex flex-col gap-2">
+              <span>رابط الصورة</span>
+              <div className="border border-gray-400 rounded ">
+                <label
+                  htmlFor="upload_img"
+                  className="text-gray-400 w-full block p-2 cursor-pointer overflow-hidden"
+                >
+                  {files ? files.name : courseDetails?.image_url}
+                </label>
+                <input
+                  id="upload_img"
+                  type={fields[2].type}
+                  name="image_url"
+                  onChange={(e) => handleFile(e)}
+                  className="hidden h-full w-full"
+                />
+              </div>
+            </div>
           </div>
           <div className="select grid md:grid-cols-2 gap-5 mb-5 *:flex *:flex-col *:px-2 *:gap-2">
             <div>
@@ -182,16 +209,14 @@ const CourseForm = React.memo(
             className="bg-therd text-white p-2 rounded hover:opacity-80 mb-5 w-full mx-auto"
             disabled={formik.isSubmitting}
           >
-            {formik.isSubmitting ? (
+            {formik.isSubmitting ?
               <span className="loaderAnimation"></span>
-            ) : (
-              'تحديث الكورس'
-            )}
+            : 'تحديث الكورس'}
           </button>
         </form>
       </div>
     );
-  }
+  },
 );
 
 export default CourseForm;

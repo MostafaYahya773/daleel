@@ -51,31 +51,31 @@ const CoursesCart = React.memo(
       >
         {inView && (
           <>
-            {!courses ? (
+            {!courses ?
               <CartLoader />
-            ) : coursesFilter && coursesFilter.length > 0 ? (
+            : coursesFilter && coursesFilter.length > 0 ?
               coursesFilter.map((course) => (
                 <Link
                   href={`/Courses/${course?.slug}`}
                   prefetch={true}
                   key={course?.id}
-                  className="grid grid-rows-[auto_auto_1fr_auto] gap-5 bg-white border border-gray-300 rounded-lg p-3 hover:shadow-lg hover:scale-[103%] transition-all duration-300"
+                  className="grid grid-rows-[auto_auto_1fr_auto] gap-5 bg-white border border-gray-300 rounded-lg  hover:shadow-lg hover:scale-[103%] transition-all duration-300"
                 >
                   <div className="h-[200px] bg-secondary rounded-md overflow-hidden">
                     <Image
-                      src={course?.image_url || '/logo.png'}
-                      alt="Course"
+                      src={course?.image_url ?? '/logo.png'}
+                      alt="Course image"
                       width={100}
                       height={100}
                       className="w-full h-full object-cover"
                     />
                   </div>
 
-                  <h3 className="text-fourth font-bold md:text-[15px]">
+                  <h3 className="text-fourth font-bold md:text-[15px] px-3 ">
                     {course?.course_name}
                   </h3>
 
-                  <div className="text-[14px] flex flex-col gap-2">
+                  <div className="text-[14px] flex flex-col gap-2 px-3 ">
                     <p className="text-therd font-bold">المهارات المكتسبة:</p>
                     <div className="flex flex-wrap gap-2 text-therd">
                       {course?.skills.split(',').map((skill, index) => (
@@ -89,7 +89,7 @@ const CoursesCart = React.memo(
                     </div>
                   </div>
 
-                  <div className="flex gap-1 items-center justify-between">
+                  <div className="flex gap-1 items-center justify-between px-3 pb-3">
                     <div className="flex gap-1 items-center">
                       <svg
                         className="w-5 h-5 text-yellow-400"
@@ -107,19 +107,18 @@ const CoursesCart = React.memo(
                   </div>
                 </Link>
               ))
-            ) : (
-              <div className="col-span-full flex justify-center opacity-50 flex-col gap-7 items-center py-10">
+            : <div className="col-span-full flex justify-center opacity-50 flex-col gap-7 items-center py-10">
                 <SearchX className="w-16 h-16 text-therd" />
                 <p className="text-fourth text-[16px] md:text-[18px] lg:text-[20px] font-bold">
                   لا يوجد دورات مطابقة للفلترة
                 </p>
               </div>
-            )}
+            }
           </>
         )}
       </div>
     );
-  }
+  },
 );
 
 export default CoursesCart;

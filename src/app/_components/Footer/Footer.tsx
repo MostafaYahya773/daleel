@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <div className="bg-secondary py-5 overflow-hidden lg:py-7 relative left-1/2 right-1/2  ml-[-50vw] mr-[-50vw] w-screen">
+    <div className="bg-secondary py-5 overflow-hidden lg:py-7 relative left-1/2 right-1/2  ml-[-50vw] mr-[-50vw] w-screen mt-10">
       <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-10 px-3 lg:px-0">
         <div className="logo flex flex-col gap-3">
           <h2 className="text-therd font-bold text-[25px]">دليل</h2>
@@ -50,7 +50,6 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-
         <div className="flex flex-col gap-3 lg:items-center ">
           <h4 className="text-therd font-bold">الدعم والمساعدة</h4>
           <ul className="flex flex-col gap-2 text-gray-500 cursor-pointer">

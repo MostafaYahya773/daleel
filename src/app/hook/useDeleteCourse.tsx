@@ -1,5 +1,5 @@
 'use client';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createClient } from '../../../lib/supabase/client';
 import toast from 'react-hot-toast';
 const useDeleteCourse = () => {

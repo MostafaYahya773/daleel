@@ -1,5 +1,5 @@
 'use client';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useFormik } from 'formik';
 import { courseSchema } from '../Schema';
 import { Courseprops } from '@/app/interfaces';
@@ -7,14 +7,16 @@ import useAddCourse from '@/app/hook/useAddCourse';
 import toast from 'react-hot-toast';
 import Select from '@/app/_components/Select/Select';
 import { SelectOptionProps } from '@/app/interfaces';
+import useUploadCourseImage from '@/app/hook/useUploadCourseImge';
 export default function NewCourse() {
   const { mutate: addCourse } = useAddCourse();
+  const [imgFile, setImgFile] = useState<File | null>(null);
   const categories: SelectOptionProps[] = useMemo(
     () => [
       { label: 'مواد جامعية', value: 'مواد جامعية' },
       { label: 'ذكاء اصطناعي', value: 'ذكاء اصطناعي' },
     ],
-    []
+    [],
   );
   const levels: SelectOptionProps[] = useMemo(
     () => [
@@ -25,7 +27,7 @@ export default function NewCourse() {
       { label: 'سنة رابعة', value: 'سنة رابعة' },
       { label: 'سنة خامسة', value: 'سنة خامسة' },
     ],
-    []
+    [],
   );
   interface FormField {
     label: string;
@@ -46,12 +48,10 @@ export default function NewCourse() {
       type: 'text',
       placeholder: 'اكتب سعر الكورس',
     },
-
     {
       label: 'رابط الصورة',
       name: 'image_url',
-      type: 'text',
-      placeholder: 'ضع رابط الصورة',
+      type: 'file',
     },
     { label: 'الفئة', name: 'category', type: 'text' },
     { label: 'المستوى', name: 'level', type: 'text' },
@@ -80,28 +80,39 @@ export default function NewCourse() {
       price: 0,
     },
     validationSchema: courseSchema,
-    onSubmit: (values, { resetForm, setSubmitting }) => {
-      addCourse(values, {
-        onSuccess: () => {
-          toast.success('تم اضافة الكورس بنجاح', {
-            position: 'top-center',
-          });
-          resetForm();
-          setSubmitting(false);
+    onSubmit: (course, { resetForm, setSubmitting }) => {
+      addCourse(
+        { course, file: imgFile ? imgFile : null },
+        {
+          onSuccess: () => {
+            toast.success('تم اضافة الكورس بنجاح', {
+              position: 'top-center',
+            });
+            resetForm();
+            setSubmitting(false);
+          },
+          onError: (e) => {
+            console.log(e);
+
+            toast.error('اسم الكورس مستخدم من قبل');
+            setSubmitting(false);
+          },
         },
-        onError: () => {
-          toast.error('اسم الكورس مستخدم من قبل');
-          setSubmitting(false);
-        },
-      });
+      );
     },
   });
 
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    if (file) {
+      setImgFile(file);
+    }
+  };
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mb-5 ">
         {/* inputs */}
-        {fields?.slice(0, 3)?.map((feld, index) => (
+        {fields?.slice(0, 2)?.map((feld, index) => (
           <div key={index} className="flex flex-col gap-2">
             <label className="font-semibold px-2">{feld.label}</label>
             <input
@@ -120,6 +131,24 @@ export default function NewCourse() {
             )}
           </div>
         ))}
+        <div className="flex flex-col gap-2">
+          <span>رابط الصورة</span>
+          <div className="border border-gray-400 rounded ">
+            <label
+              htmlFor="upload_img"
+              className="text-gray-400 w-full block p-2 cursor-pointer"
+            >
+              اضافة صورة
+            </label>
+            <input
+              id="upload_img"
+              type={fields[2].type}
+              name="image_url"
+              onChange={(e) => handleFile(e)}
+              className="hidden h-full w-full"
+            />
+          </div>
+        </div>
       </div>
       <div className="select grid md:grid-cols-2 gap-5 mb-5 *:flex *:flex-col *:px-2 *:gap-2">
         <div>
@@ -171,11 +200,9 @@ export default function NewCourse() {
         className="bg-therd text-white p-2 rounded hover:opacity-80 mb-5 w-full mx-auto"
         disabled={formik.isSubmitting}
       >
-        {formik.isSubmitting ? (
+        {formik.isSubmitting ?
           <span className="loaderAnimation"></span>
-        ) : (
-          'اضافة كورس جديد'
-        )}
+        : 'اضافة كورس جديد'}
       </button>
     </form>
   );

@@ -24,7 +24,7 @@ const AllCourses = React.memo(({ courses }: { courses: Courseprops[] }) => {
       { label: 'مواد جامعية', value: 'مواد جامعية' },
       { label: 'ذكاء اصطناعي', value: 'ذكاء اصطناعي' },
     ],
-    []
+    [],
   );
 
   const filterBy: SelectOptionProps[] = useMemo(
@@ -33,7 +33,7 @@ const AllCourses = React.memo(({ courses }: { courses: Courseprops[] }) => {
       { label: 'الأحدث', value: 'الأحدث' },
       { label: 'الأقدم', value: 'الأقدم' },
     ],
-    []
+    [],
   );
 
   const [filterOptions, setFilterOptions] = useState<string>('كل التخصصات');
@@ -59,7 +59,7 @@ const AllCourses = React.memo(({ courses }: { courses: Courseprops[] }) => {
   }, [filterOptions]);
 
   return (
-    <div className="flex flex-col gap-7 min-h-fit py-5">
+    <div className="flex flex-col gap-7  py-5 min-h-screen">
       <div className="filters grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
         <Select
           selectOptions={selectTypes}

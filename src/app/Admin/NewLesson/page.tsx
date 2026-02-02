@@ -16,7 +16,7 @@ export default function NewLesson() {
   });
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-7 h-screen">
       <div className="flex flex-col gap-3">
         <h2 className="text-therd md:text-[18px] font-bold px-2">
           اختر اسم الكورس لاضافة الدرس له
