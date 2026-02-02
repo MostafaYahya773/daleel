@@ -18,10 +18,10 @@ const StudentsMessages = React.memo(({ data }: { data: StudentProps[] }) => {
       </div>
     );
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 h-screen">
       {data?.map((studnt) => (
         <div key={studnt?.id}>
-          <div className="grid grid-rows-[auto_1fr_auto] h-full gap-2 bg-white border border-gray-200 shadow-sm p-2 rounded-lg w-full">
+          <div className="grid grid-rows-[auto_1fr_auto]  gap-2 bg-white border border-gray-200 shadow-sm p-2 rounded-lg w-full h-[230px]">
             <div className="students_info flex flex-col gap-1 w-full border-b border-gray-400 pb-2">
               <div className="flex justify-between items-center flex-wrap">
                 <h3 className="font-bold text-[14px]">{studnt?.name}</h3>

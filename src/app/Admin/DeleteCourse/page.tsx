@@ -19,7 +19,7 @@ export default function DeleteCourse() {
   }, []);
 
   return (
-    <div className="mt-0 flex flex-col gap-7">
+    <div className="mt-0 flex flex-col gap-7 h-screen">
       <DropList
         selectOptions={courses}
         onselect={(courseid: string, CourseName: string) => {

@@ -5,7 +5,7 @@ export const courseSchema = Yup.object().shape({
     .max(100, 'اسم الكورس طويل جدًا')
     .nullable()
     .required('اسم الكورس مطلوب'),
-  image_url: Yup.string().nullable(),
+  image_url: Yup.string().required('الصورة مطلوبة').nullable(),
   category: Yup.string().required('الفئة مطلوبة').nullable(),
   level: Yup.string().required('المستوى مطلوب').nullable(),
   description: Yup.string()
@@ -44,16 +44,10 @@ export const lessonSchema = Yup.object({
     .url('رابط غير صالح')
     .matches(
       /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/,
-      'الرابط يجب أن يكون من YouTube فقط'
+      'الرابط يجب أن يكون من YouTube فقط',
     ),
 
-  lesson_img: Yup.string()
-    .required('رابط الصورة مطلوب')
-    .url('رابط الصورة غير صالح')
-    .matches(
-      /\.(jpg|jpeg|png|webp)$/i,
-      'يجب أن يكون رابط صورة صحيح (jpg, png, webp)'
-    ),
+  lesson_img: Yup.string().required('الصورة مطلوبة').nullable(),
 
   is_free: Yup.boolean().required(),
 });

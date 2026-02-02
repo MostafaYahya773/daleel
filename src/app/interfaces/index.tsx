@@ -39,7 +39,6 @@ export interface Lessonprops {
   youtube_url: string;
   is_free: boolean;
   lesson_img: string;
-  updated_at: string;
 }
 export interface FormLoginFields {
   email: string;

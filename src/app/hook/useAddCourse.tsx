@@ -34,7 +34,7 @@ const useAddCourse = () => {
     // add course
     const { data, error } = await supabase.from('courses').insert({
       ...course,
-      image_url: image.publicUrl,
+      lesson_image: image.publicUrl,
     });
     if (error) throw new Error(error.message);
     return data;

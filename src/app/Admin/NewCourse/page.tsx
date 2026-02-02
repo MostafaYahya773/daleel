@@ -7,7 +7,6 @@ import useAddCourse from '@/app/hook/useAddCourse';
 import toast from 'react-hot-toast';
 import Select from '@/app/_components/Select/Select';
 import { SelectOptionProps } from '@/app/interfaces';
-import useUploadCourseImage from '@/app/hook/useUploadCourseImge';
 export default function NewCourse() {
   const { mutate: addCourse } = useAddCourse();
   const [imgFile, setImgFile] = useState<File | null>(null);
@@ -91,9 +90,7 @@ export default function NewCourse() {
             resetForm();
             setSubmitting(false);
           },
-          onError: (e) => {
-            console.log(e);
-
+          onError: () => {
             toast.error('اسم الكورس مستخدم من قبل');
             setSubmitting(false);
           },
@@ -109,8 +106,8 @@ export default function NewCourse() {
     }
   };
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mb-5 ">
+    <form onSubmit={formik.handleSubmit} className="min-h-screen">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mb-5">
         {/* inputs */}
         {fields?.slice(0, 2)?.map((feld, index) => (
           <div key={index} className="flex flex-col gap-2">
@@ -142,8 +139,8 @@ export default function NewCourse() {
             </label>
             <input
               id="upload_img"
-              type={fields[2].type}
               name="image_url"
+              type={fields[2].type}
               onChange={(e) => handleFile(e)}
               className="hidden h-full w-full"
             />

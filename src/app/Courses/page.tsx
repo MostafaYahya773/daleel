@@ -7,7 +7,7 @@ export default async function Courses() {
   const data = await GetCources();
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-7 min-h-screen">
       <CoursesHero />
       <AllCourses courses={data} />
     </div>

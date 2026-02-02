@@ -25,7 +25,7 @@ export default function VideosPage({
 
   useEffect(() => setMounted(true), []);
   return (
-    <div className="lg:mt-14 mt-10 py-10 flex flex-col gap-3 px-2">
+    <div className="lg:mt-14 mt-10 py-10 flex flex-col gap-3 px-2 min-h-screen">
       <div className="flex flex-col gap-5 lg:h-[500px] ">
         {initialVideo && mounted && (
           <Plyr

@@ -28,7 +28,7 @@ export default async function CourseDetailsPage({
   }
 
   return (
-    <div className="flex flex-col gap-7 py-7">
+    <div className="flex flex-col gap-7 py-7 min-h-screen">
       <div className="bg-secondary py-5 overflow-hidden lg:py-0 flex justify-center items-center mt-[40px] lg:mt-16  z-[-1] relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
         <span className="absolute md:w-[600] md:h-[600] w-[500px] h-[500px] rounded-full bg-primary -top-[160px] -right-40 z-0"></span>
         <div className="grid grid-cols-1 md:grid-cols-2 text-center md:text-start px-5 gap-5 z-20 max-w-[1200px] mx-auto">
@@ -40,9 +40,9 @@ export default async function CourseDetailsPage({
               <div className="flex items-center flex-wrap justify-center gap-2">
                 <User className="w-5 h-5 text-therd" />
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">
-                  {courseInfo.students_count === 0
-                    ? 500
-                    : courseInfo?.students_count}
+                  {courseInfo.students_count === 0 ?
+                    500
+                  : courseInfo?.students_count}
                 </p>
               </div>
               <span className="text-gray-500">|</span>
@@ -56,9 +56,9 @@ export default async function CourseDetailsPage({
               <div className="flex items-center gap-2 flex-wrap justify-center">
                 <Star className="w-5 h-5 text-therd" />
                 <p className="md:text-[18px] text-[16px] text-fourth font-bold">
-                  {courseInfo.reviews_count === 0
-                    ? 0
-                    : courseInfo.reviews_count}
+                  {courseInfo.reviews_count === 0 ?
+                    0
+                  : courseInfo.reviews_count}
                 </p>
               </div>
             </div>

@@ -7,7 +7,7 @@ export default async function AddBlog() {
   } = await supabase.auth.getUser();
   const userId = user?.id;
   return (
-    <div>
+    <div className="h-screen">
       <BlogForm userId={userId!} />
     </div>
   );

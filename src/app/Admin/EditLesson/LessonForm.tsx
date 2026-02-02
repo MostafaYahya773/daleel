@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Lessonprops } from '@/app/interfaces';
 import toast from 'react-hot-toast';
 import { useFormik } from 'formik';
@@ -11,6 +11,7 @@ const LessonForm = React.memo(
   ({ lessonID }: { lessonID: number; isLoading: boolean }) => {
     const { data: courseDetails, isLoading } = useGetLessonById(lessonID);
     const { mutate: editLesson } = useEditLesson(lessonID);
+    const [imgFile, setImgFile] = useState<File | null>(null);
 
     interface FormField {
       label: string;
@@ -34,7 +35,7 @@ const LessonForm = React.memo(
       {
         label: 'رابط الصورة',
         name: 'lesson_img',
-        type: 'text',
+        type: 'file',
         placeholder: 'من فضلك ادخل رابط الصورة',
       },
       {
@@ -53,18 +54,21 @@ const LessonForm = React.memo(
         is_free: courseDetails?.[0].is_free || false,
         lesson_img: courseDetails?.[0].lesson_img || '',
       },
-      onSubmit: (values, { resetForm, setSubmitting }) => {
-        editLesson(values, {
-          onSuccess: () => {
-            toast.success('تم تحديث الدرس بنجاح', { position: 'top-center' });
-            resetForm();
-            setSubmitting(false);
+      onSubmit: (lesson, { resetForm, setSubmitting }) => {
+        editLesson(
+          { lesson, file: imgFile },
+          {
+            onSuccess: () => {
+              toast.success('تم تحديث الدرس بنجاح', { position: 'top-center' });
+              resetForm();
+              setSubmitting(false);
+            },
+            onError: () => {
+              toast.error('فشل تحديث الدرس', { position: 'top-center' });
+              setSubmitting(false);
+            },
           },
-          onError: () => {
-            toast.error('فشل تحديث الدرس', { position: 'top-center' });
-            setSubmitting(false);
-          },
-        });
+        );
       },
       validationSchema: lessonSchema,
       enableReinitialize: true,
@@ -72,11 +76,17 @@ const LessonForm = React.memo(
     if (isLoading) {
       return <AddAndEditindCourseAndLesson />;
     }
+    const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0] || null;
+      if (file) {
+        setImgFile(file);
+      }
+    };
     return (
       <div className={`${!lessonID ? 'hidden' : ''}`}>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
-            {formFelds.slice(0, 3).map((field, index) => (
+            {formFelds.slice(0, 2).map((field, index) => (
               <div key={index} className="flex flex-col gap-2">
                 <label className="font-semibold px-2">{field.label}</label>
                 <input
@@ -95,6 +105,30 @@ const LessonForm = React.memo(
                 )}
               </div>
             ))}
+            <div className="flex flex-col gap-2">
+              <span>رابط الصورة</span>
+              <div className="border border-gray-400 rounded ">
+                <label
+                  htmlFor="upload_img"
+                  className="text-gray-400 w-full block p-2 cursor-pointer overflow-hidden"
+                >
+                  {imgFile ? imgFile.name : formFelds[2].placeholder}
+                </label>
+                <input
+                  id="upload_img"
+                  type={formFelds[2].type}
+                  name="image_url"
+                  onChange={(e) => handleFile(e)}
+                  className="hidden h-full w-full"
+                />
+              </div>
+              {formik.touched[formFelds[2].name] &&
+                formik.errors[formFelds[2].name] && (
+                  <span className="text-red-500 text-sm">
+                    {formik.errors[formFelds[2].name]}
+                  </span>
+                )}
+            </div>
           </div>
           <div className="flex flex-col gap-2 my-3">
             <label className="font-semibold px-2">{formFelds[3].label}</label>
@@ -118,16 +152,14 @@ const LessonForm = React.memo(
             type="submit"
             className="bg-therd text-white p-2 rounded hover:opacity-80 mb-5 w-full mx-auto"
           >
-            {formik.isSubmitting ? (
+            {formik.isSubmitting ?
               <span className="loaderAnimation"></span>
-            ) : (
-              'تحديث الدرس'
-            )}
+            : 'تحديث الدرس'}
           </button>
         </form>
       </div>
     );
-  }
+  },
 );
 
 export default LessonForm;

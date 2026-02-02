@@ -25,7 +25,7 @@ export default function DeleteLesson() {
   const { data: lesson, isLoading } = useGetLessonsById(courseID);
 
   return (
-    <div className="mt-0 flex flex-col gap-7">
+    <div className="mt-0 flex flex-col gap-7 h-screen">
       <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
         <div className="flex flex-col gap-2">
           <h2 className="text-therd md:text-[18px] text-[14px] font-bold px-2">

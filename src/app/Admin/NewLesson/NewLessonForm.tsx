@@ -10,7 +10,7 @@ import useGetCourseById from '@/app/hook/useGetCourseById';
 const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
   const { data: courseDetails, isLoading } = useGetCourseById(CourseId);
   const { mutate: addLesson, error } = useAddLesson();
-  const [files, setFiles] = useState<File | null>(null);
+  const [imgFile, setImgFile] = useState<File | null>(null);
 
   interface FormField {
     label: string;
@@ -51,21 +51,25 @@ const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
       description: '',
       youtube_url: '',
       is_free: false,
-      lesson_img: '',
-      updated_at: '',
+      lesson_img: 'img',
     },
-    onSubmit: (values, { resetForm, setSubmitting }) => {
-      addLesson(values, {
-        onSuccess: () => {
-          toast.success('تم اضافة الدرس بنجاح', { position: 'top-center' });
-          resetForm();
-          setSubmitting(false);
+    onSubmit: (lesson, { resetForm, setSubmitting }) => {
+      addLesson(
+        { lesson, file: imgFile ? imgFile : null },
+        {
+          onSuccess: () => {
+            toast.success('تم اضافة الدرس بنجاح', { position: 'top-center' });
+            resetForm();
+            setSubmitting(false);
+          },
+          onError: (e) => {
+            console.log(e);
+
+            toast.error('فشل اضافة الدرس', { position: 'top-center' });
+            setSubmitting(false);
+          },
         },
-        onError: () => {
-          toast.error('فشل اضافة الدرس', { position: 'top-center' });
-          setSubmitting(false);
-        },
-      });
+      );
     },
     validationSchema: lessonSchema,
     enableReinitialize: true,
@@ -76,7 +80,7 @@ const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     if (file) {
-      setFiles(file);
+      setImgFile(file);
     }
   };
   return (
@@ -109,7 +113,7 @@ const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
                 htmlFor="upload_img"
                 className="text-gray-400 w-full block p-2 cursor-pointer overflow-hidden"
               >
-                {files ? files.name : formFelds[2].placeholder}
+                {imgFile ? imgFile.name : formFelds[2].placeholder}
               </label>
               <input
                 id="upload_img"
@@ -119,6 +123,12 @@ const NewLessonForm = React.memo(({ CourseId }: { CourseId: string }) => {
                 className="hidden h-full w-full"
               />
             </div>
+            {formik.touched[formFelds[2].name] &&
+              formik.errors[formFelds[2].name] && (
+                <span className="text-red-500 text-sm">
+                  {formik.errors[formFelds[2].name]}
+                </span>
+              )}
           </div>
         </div>
         <div className="flex flex-col gap-2 my-3">
