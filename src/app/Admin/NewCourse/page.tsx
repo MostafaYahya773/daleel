@@ -70,7 +70,7 @@ export default function NewCourse() {
   const formik = useFormik<Courseprops>({
     initialValues: {
       course_name: '',
-      image_url: '',
+      image_url: 'image_url',
       category: '',
       level: '',
       description: '',
@@ -90,8 +90,10 @@ export default function NewCourse() {
             resetForm();
             setSubmitting(false);
           },
-          onError: () => {
-            toast.error('اسم الكورس مستخدم من قبل');
+          onError: (e) => {
+            toast.error(e.message || 'فشل اضافة الكورس', {
+              position: 'top-center',
+            });
             setSubmitting(false);
           },
         },
@@ -105,6 +107,7 @@ export default function NewCourse() {
       setImgFile(file);
     }
   };
+
   return (
     <form onSubmit={formik.handleSubmit} className="min-h-screen">
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mb-5">
@@ -135,7 +138,7 @@ export default function NewCourse() {
               htmlFor="upload_img"
               className="text-gray-400 w-full block p-2 cursor-pointer"
             >
-              اضافة صورة
+              {imgFile ? imgFile.name : fields[2].label}
             </label>
             <input
               id="upload_img"
@@ -145,6 +148,11 @@ export default function NewCourse() {
               className="hidden h-full w-full"
             />
           </div>
+          {formik.touched.image_url && formik.errors.image_url && (
+            <span className="text-red-500 text-sm">
+              {formik.errors.image_url}
+            </span>
+          )}
         </div>
       </div>
       <div className="select grid md:grid-cols-2 gap-5 mb-5 *:flex *:flex-col *:px-2 *:gap-2">
