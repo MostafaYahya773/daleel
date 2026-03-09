@@ -39,6 +39,7 @@ export interface Lessonprops {
   youtube_url: string;
   is_free: boolean;
   lesson_img: string;
+  updated_at?: string;
 }
 export interface FormLoginFields {
   email: string;
@@ -125,3 +126,13 @@ export interface BlogFormProps {
   type: string;
   placeholder: string;
 }
+
+export type CommentsProps = {
+  id?: number;
+  lesson_id: number;
+  course_id?: string;
+  rating?: number;
+  user_id: string;
+  comment: string;
+  created_at?: string;
+};

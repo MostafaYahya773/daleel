@@ -3,7 +3,7 @@ import getEnrollments from '../../../../../../lib/GetEnrollments';
 import getLessonsByCourseId from '../../../../../../lib/getLessonsByCourseId';
 import getSession from '../../../../../../lib/GetSession';
 import VideosPage from './_components/VideosPage';
-
+import getUserAvatar from '../../../../../../lib/getUserAvatar';
 export default async function LessonPage({
   params,
 }: {
@@ -12,8 +12,16 @@ export default async function LessonPage({
   const { courseId } = await params;
   const data = await getLessonsByCourseId(courseId);
   const user = await getSession();
+  const avatar = await getUserAvatar();
   const userId = user?.userId;
   const enrolled = await getEnrollments(userId!, courseId);
   if (!enrolled) return redirect('/Courses');
-  return <VideosPage LessonInfo={data} />;
+  return (
+    <VideosPage
+      LessonInfo={data}
+      userId={userId!}
+      avatar={avatar}
+      userName={user?.user?.full_name}
+    />
+  );
 }

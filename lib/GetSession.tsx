@@ -6,7 +6,7 @@ const getSession = async () => {
   if (!sessionData.session) return null;
 
   const { data: userData } = await supabaseServer.auth.getUser(
-    sessionData.session.access_token
+    sessionData.session.access_token,
   );
 
   const isConfirmed = userData?.user?.email_confirmed_at;

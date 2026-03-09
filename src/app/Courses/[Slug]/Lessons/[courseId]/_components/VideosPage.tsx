@@ -10,12 +10,19 @@ const Plyr = dynamic(() => import('plyr-react').then((mod) => mod.Plyr), {
 
 export default function VideosPage({
   LessonInfo,
+  userId,
+  avatar,
+  userName,
 }: {
   LessonInfo: Lessonprops[];
+  userId: string;
+  avatar: string;
+  userName: string;
 }) {
   const [mounted, setMounted] = useState<boolean>(false);
   const [initialVideo, setInitialVideo] = useState<Lessonprops>({
     course_id: '',
+    id: LessonInfo?.[0]?.id,
     title: LessonInfo?.[0]?.title,
     description: LessonInfo?.[0]?.description,
     youtube_url: LessonInfo?.[0]?.youtube_url,
@@ -58,6 +65,9 @@ export default function VideosPage({
         allLessons={LessonInfo}
         initialVideo={initialVideo}
         setInitialVideo={setInitialVideo}
+        userId={userId}
+        avatar={avatar}
+        userName={userName}
       />
     </div>
   );

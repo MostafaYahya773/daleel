@@ -3,15 +3,22 @@ import React, { useState } from 'react';
 import LessonDescriptions from './lessonDescription';
 import AllVideos from './AllVideos';
 import { Lessonprops } from '@/app/interfaces';
+import Comments from './Comments';
 const RenderPage = React.memo(
   ({
     allLessons,
     setInitialVideo,
     initialVideo,
+    userId,
+    avatar,
+    userName,
   }: {
     allLessons: Lessonprops[];
     setInitialVideo: any;
     initialVideo: Lessonprops;
+    userId: string;
+    avatar: string;
+    userName: string;
   }) => {
     const Links = [
       {
@@ -31,9 +38,9 @@ const RenderPage = React.memo(
             <button
               key={link.id}
               className={`${
-                isClicked === Number(link.id)
-                  ? 'border-b border-therd text-therd'
-                  : 'text-gray-500'
+                isClicked === Number(link.id) ?
+                  'border-b border-therd text-therd'
+                : 'text-gray-500'
               } pb-2 md:text-[16px] lg:text-[18px] font-semibold`}
               onClick={() => setIsClicked(Number(link.id))}
             >
@@ -57,10 +64,18 @@ const RenderPage = React.memo(
               videos={allLessons}
             />
           </div>
-          <div className={`${isClicked === 2 ? 'block' : 'hidden'}`}></div>
+          <div className={`${isClicked === 2 ? 'block' : 'hidden'}`}>
+            <Comments
+              key={initialVideo.id}
+              lessonId={initialVideo.id!}
+              userId={userId!}
+              avatar={avatar}
+              userName={userName}
+            />
+          </div>
         </div>
       </div>
     );
-  }
+  },
 );
 export default RenderPage;
