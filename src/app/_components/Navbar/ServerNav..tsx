@@ -4,6 +4,7 @@ import Nav from './Nav';
 export default async function ServerNav() {
   const data = await getSession();
   const userImg = await getUserAvatar();
+
   return (
     <Nav
       isLoggedIn={!!data}

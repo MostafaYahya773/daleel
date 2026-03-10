@@ -70,12 +70,11 @@ const ProfilePathes = React.memo(
                 onChange={(e) => handleProfilePicture(e)}
               />
             </div>
-            {isPending ? (
+            {isPending ?
               <p className="flex justify-center items-center h-full w-full bg-black/30">
                 <span className="loaderAnimation"></span>
               </p>
-            ) : (
-              <Image
+            : <Image
                 src={personalInfo?.avatar_url || '/logo.png'}
                 alt="personal-img"
                 priority
@@ -83,7 +82,7 @@ const ProfilePathes = React.memo(
                 height={150}
                 className="w-full h-full object-contain"
               />
-            )}
+            }
           </div>
 
           <h2 className="text-center font-bold text-[16px]">
@@ -98,9 +97,9 @@ const ProfilePathes = React.memo(
             <li
               key={path.name}
               className={`${
-                pathname === path.href
-                  ? 'text-therd bg-primary '
-                  : 'text-gray-500'
+                pathname === path.href ?
+                  'text-therd bg-primary '
+                : 'text-gray-500'
               }  flex items-center gap-2 p-2 rounded-xl `}
             >
               <span>{path.icon}</span>
@@ -113,6 +112,6 @@ const ProfilePathes = React.memo(
         </ul>
       </div>
     );
-  }
+  },
 );
 export default ProfilePathes;

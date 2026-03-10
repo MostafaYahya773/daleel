@@ -4,6 +4,7 @@ import getLessonsByCourseId from '../../../../../../lib/getLessonsByCourseId';
 import getSession from '../../../../../../lib/GetSession';
 import VideosPage from './_components/VideosPage';
 import getUserAvatar from '../../../../../../lib/getUserAvatar';
+import getUsers from '../../../../../../lib/GetUsers';
 export default async function LessonPage({
   params,
 }: {

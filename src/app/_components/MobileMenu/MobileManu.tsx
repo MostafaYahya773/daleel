@@ -104,9 +104,9 @@ const MobileMenu = React.memo(
     return (
       <div
         className={`fixed right-0 md:hidden transition-all ${
-          isOpen
-            ? 'bg-black/30 backdrop-blur-sm w-screen h-screen'
-            : 'bg-transparent pointer-events-none'
+          isOpen ?
+            'bg-black/30 backdrop-blur-sm w-screen h-screen'
+          : 'bg-transparent pointer-events-none'
         }`}
         onClick={() => setIsOpen(false)}
       >
@@ -148,9 +148,9 @@ const MobileMenu = React.memo(
                     onClick={item.onClick}
                     key={item.name}
                     className={`${
-                      item.role === 'user' || item.IsLogIN === false
-                        ? 'hidden'
-                        : ''
+                      item.role === 'user' || item.IsLogIN === false ?
+                        'hidden'
+                      : ''
                     }`}
                   >
                     <Link
@@ -177,7 +177,7 @@ const MobileMenu = React.memo(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default MobileMenu;

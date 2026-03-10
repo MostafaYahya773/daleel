@@ -69,8 +69,6 @@ const RenderPage = React.memo(
               key={initialVideo.id}
               lessonId={initialVideo.id!}
               userId={userId!}
-              avatar={avatar}
-              userName={userName}
             />
           </div>
         </div>

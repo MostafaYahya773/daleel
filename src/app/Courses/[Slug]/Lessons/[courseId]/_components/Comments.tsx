@@ -10,17 +10,15 @@ import { Timer } from 'lucide-react';
 const Comments = ({
   lessonId,
   userId,
-  avatar,
-  userName,
 }: {
   lessonId: number;
   userId: string;
-  avatar: string;
-  userName: string;
 }) => {
   const { mutate: addComment } = useAddComment();
 
   const { data: Allcomments, isLoading } = useGetComment(lessonId);
+  console.log(Allcomments);
+
   const formik = useFormik<CommentsProps>({
     initialValues: {
       lesson_id: lessonId,
@@ -73,26 +71,28 @@ const Comments = ({
         {Allcomments?.map((comment: CommentsProps) => (
           <div
             key={comment?.id}
-            className="flex gap-3 p-4 rounded-md border-b border-gray-300"
+            className="flex gap-3 p-4 pb-3 border-b border-gray-200"
           >
             <Image
-              src={avatar ?? '/logo.png'}
-              alt={avatar ?? 'commentimg'}
+              src={comment?.profiles?.avatar_url ?? '/logo.png'}
+              alt={'commentimg'}
               width={40}
               height={40}
               className="w-[50px] h-[50px] rounded-full"
             />
             <div className="flex flex-col gap-3">
               <div className="flex gap-3 items-center">
-                <p className="text-therd font-bold text-[16px]">{userName}</p>
-                <div className="flex items-center gap-2">
-                  <Timer className="text-gray-500 w-4 h-4" />
-                  <span className="text-gray-500 text-[13px]">
+                <p className="text-therd font-bold text-[16px]">
+                  {comment.profiles?.full_name}
+                </p>
+                <div className="flex items-center text-gray-600 gap-2">
+                  <Timer className="w-4 " />
+                  <span className="text-[13px]">
                     {` تم النشر ${formatMessageDate(comment?.created_at)}`}
                   </span>
                 </div>
               </div>
-              <p className="text-[12px] lg:text-[15px] md:text-[14px] text-gray-600 leading-7">
+              <p className="text-[14px] leading-7 text-gray-800 ">
                 {comment?.comment}
               </p>
             </div>

@@ -81,14 +81,13 @@ const Nav = ({
           ))}
         </div>
         <div className="user item-center justify-end gap-2 text-white md:flex hidden">
-          {!isLoggedIn ? (
+          {!isLoggedIn ?
             <Link href="/auth/LogIn">
               <button className="py-2 px-5 bg-therd rounded-md">
                 تسجيل الدخول
               </button>
             </Link>
-          ) : (
-            <div
+          : <div
               onClick={() => setIsOpen(!isOpen)}
               className="flex gap-1 items-center cursor-pointer "
             >
@@ -97,14 +96,14 @@ const Nav = ({
               </p>
               <ChevronDown className="w-5 h-5 text-gray-500" />
               <Image
-                src={avatar_url || '/user.png'}
+                src={avatar_url || '/logo.png'}
                 width={0}
                 height={0}
                 alt="user Image"
                 className="rounded-full object-cover w-9 h-9"
               />
             </div>
-          )}
+          }
         </div>
         <div>
           <NavDropList setIsOpen={setIsOpen} isOpen={isOpen} />

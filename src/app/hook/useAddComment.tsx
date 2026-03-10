@@ -6,11 +6,17 @@ import toast from 'react-hot-toast';
 
 const useAddComment = () => {
   const queryClient = useQueryClient();
+  const supabase = createClient();
 
-  const addComment = async (values: CommentsProps) => {
-    const { data, error } = await createClient().from('reviews').insert({
+  const addComment = async (values: { lesson_id: number; comment: string }) => {
+    const { data: sessionData } = await supabase.auth.getSession();
+
+    const user = sessionData?.session?.user;
+    if (!user) throw new Error('يجب تسجيل الدخول لإضافة تعليق');
+
+    const { data, error } = await supabase.from('reviews').insert({
       lesson_id: values.lesson_id,
-      user_id: values.user_id,
+      user_id: user.id,
       comment: values.comment,
     });
 
@@ -30,9 +36,7 @@ const useAddComment = () => {
     },
 
     onError: (e: any) => {
-      toast.error(e.message || 'فشل التعليق', {
-        position: 'top-center',
-      });
+      toast.error(e.message || 'فشل التعليق', { position: 'top-center' });
     },
   });
 };

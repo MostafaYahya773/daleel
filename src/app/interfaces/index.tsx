@@ -127,12 +127,16 @@ export interface BlogFormProps {
   placeholder: string;
 }
 
-export type CommentsProps = {
+export interface CommentsProps {
   id?: number;
   lesson_id: number;
   course_id?: string;
   rating?: number;
-  user_id: string;
+  user_id?: string;
   comment: string;
   created_at?: string;
-};
+  profiles?: {
+    full_name: string | null;
+    avatar_url: string | null;
+  } | null;
+}

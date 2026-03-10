@@ -24,7 +24,7 @@ const useAddCourse = () => {
     // upload New Image
     const { error: uploadError } = await supabase.storage
       .from(bucketName)
-      .upload(fileName, file as File);
+      .upload(fileName, file as File as File, { upsert: true });
 
     if (uploadError) throw uploadError;
     // get New Image

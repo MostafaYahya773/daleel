@@ -1,28 +1,23 @@
 import { createClient } from './supabase/server';
 
 export const getUserAvatar = async () => {
-  const bucketName = 'users-avatar';
-  const supabaseServer = await createClient();
+  const supabase = await createClient();
+
   const {
     data: { user },
-  } = await supabaseServer.auth.getUser();
-  const { data: profile } = await supabaseServer
+  } = await supabase.auth.getUser();
+
+  const { data: profile } = await supabase
     .from('profiles')
     .select('avatar_url')
     .eq('id', user?.id)
     .single();
 
-  const fileName =
-    profile?.avatar_url?.length ? profile.avatar_url : '/logo.png';
+  // لو مفيش صورة
+  if (!profile?.avatar_url) return '/logo.png';
 
-  const { data } = supabaseServer.storage
-    .from(bucketName)
-    .getPublicUrl(fileName);
-
-  if (!data?.publicUrl) return '/logo.png';
-
-  // 5️⃣ cache busting
-  return `${data.publicUrl}?t=${Date.now()}`;
+  // لو الرابط كامل
+  if (profile?.avatar_url?.startsWith('http')) return profile?.avatar_url;
 };
 
 export default getUserAvatar;

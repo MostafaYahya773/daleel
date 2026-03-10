@@ -7,19 +7,28 @@ const useGetComment = (lessonId: number) => {
   const getComments = async (): Promise<CommentsProps[]> => {
     const { data, error } = await createClient()
       .from('reviews')
-      .select('*')
+      .select(
+        `id,
+        lesson_id,
+        comment,
+        created_at,
+        profiles (
+        full_name,
+        avatar_url
+        )`,
+      )
       .eq('lesson_id', lessonId)
       .order('created_at', { ascending: false });
 
     if (error) throw new Error(error.message);
 
-    return data || [];
+    return (data as unknown as CommentsProps[]) || [];
   };
 
   return useQuery({
     queryKey: ['getComments', lessonId],
     queryFn: getComments,
-    enabled: !!lessonId, // ما ينفذش لو lessonId undefined أو 0
+    enabled: !!lessonId,
   });
 };
 

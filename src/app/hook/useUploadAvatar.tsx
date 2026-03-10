@@ -1,3 +1,4 @@
+'use client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createClient } from '../../../lib/supabase/client';
 import toast from 'react-hot-toast';
@@ -27,20 +28,25 @@ const useUploadAvatar = () => {
     const { error: uploadError } = await supabase.storage
       .from(bucketName)
       .upload(fileName, file, { upsert: true });
-
+    // نجلب الصورة
     if (uploadError) throw uploadError;
+    const { data: imgurl } = supabase.storage
+      .from(bucketName)
+      .getPublicUrl(fileName);
+
+    if (!imgurl?.publicUrl) return '/logo.png';
 
     // 3️⃣ نخزّن اسم الملف في البروفايل
     const { error: profileError } = await supabase
       .from('profiles')
       .update({
-        avatar_url: fileName,
+        avatar_url: imgurl.publicUrl,
       })
       .eq('id', userId);
 
     if (profileError) throw profileError;
 
-    return fileName;
+    return `${imgurl.publicUrl}?t=${Date.now()}`;
   };
 
   return useMutation({
