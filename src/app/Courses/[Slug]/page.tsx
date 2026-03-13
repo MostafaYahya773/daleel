@@ -4,29 +4,25 @@ import CourseDetailsContent from '@/app/_components/CourseDetailsContent/CourseD
 import getCourseBySlug from '../../../../lib/getCourseBySlug';
 import { notFound, redirect } from 'next/navigation';
 import getSession from '../../../../lib/GetSession';
-// import { createClient } from '../../../../lib/supabase/server';
 import getEnrollments from '../../../../lib/GetEnrollments';
 export default async function CourseDetailsPage({
   params,
 }: {
   params: Promise<{ Slug: string }>;
 }) {
-  // const supabaseServer = await createClient();
   const { Slug } = await params;
-  const data = await getSession();
-  const slugDecoded = decodeURI(Slug).normalize('NFC').trim();
-  const courseInfo = await getCourseBySlug(slugDecoded);
-  const userName = data?.user.full_name;
-  const userId = data?.userId;
-  const enrolled = await getEnrollments(userId!, courseInfo?.id);
-
-  if (enrolled)
-    return redirect(`/Courses/${slugDecoded}/Lessons/${courseInfo?.id}`);
-
-  if (!Slug || Slug === 'undefined' || !slugDecoded) {
+  if (!Slug || Slug === 'undefined') {
     return notFound();
   }
-
+  const slugDecoded = decodeURI(Slug).normalize('NFC').trim();
+  const [data, courseInfo] = await Promise.all([
+    getSession(),
+    getCourseBySlug(slugDecoded),
+  ]);
+  const enrolled = await getEnrollments(data?.userId!, courseInfo?.id);
+  if (enrolled) {
+    redirect(`/Courses/${slugDecoded}/Lessons/${courseInfo?.id}`);
+  }
   return (
     <div className="flex flex-col gap-7 py-7 min-h-screen">
       <div className="bg-secondary py-5 overflow-hidden lg:py-0 flex justify-center items-center mt-[40px] lg:mt-16  z-[-1] relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen">
@@ -83,7 +79,7 @@ export default async function CourseDetailsPage({
           courseId={courseInfo.id}
           slug={courseInfo.slug}
           image_url={courseInfo.image_url}
-          name={userName!}
+          name={data?.user.full_name || ''}
           courseName={courseInfo.course_name}
           enrolled={enrolled}
         />

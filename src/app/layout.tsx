@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body
-        className={`${cairoFont.className} max-w-[1200px] px-2 mx-auto overflow-x-hidden `}
+        className={`${cairoFont.className} max-w-[1200px] px-2 mx-auto overflow-x-hidden`}
       >
         <ReactQueryProvider>
           <main>

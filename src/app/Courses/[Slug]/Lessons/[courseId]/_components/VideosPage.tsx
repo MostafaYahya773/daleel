@@ -4,6 +4,7 @@ import { Lessonprops } from '@/app/interfaces/index';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import RenderPage from './RenderPage';
+import Image from 'next/image';
 const Plyr = dynamic(() => import('plyr-react').then((mod) => mod.Plyr), {
   ssr: false,
 });
@@ -34,7 +35,7 @@ export default function VideosPage({
   return (
     <div className="lg:mt-14 mt-10 py-10 flex flex-col gap-3 px-2 min-h-screen">
       <div className="flex flex-col gap-5 lg:h-[500px] ">
-        {initialVideo && mounted && (
+        {initialVideo && mounted ?
           <Plyr
             source={{
               type: 'video',
@@ -59,7 +60,13 @@ export default function VideosPage({
               ],
             }}
           />
-        )}
+        : <Image
+            src="/LoadingAnimation.svg"
+            width={200}
+            height={200}
+            alt="loading w-full h-full fixed top-0 z-20 left-0 right-0 bg-black/40 drop-shadow-lg flex items-center justify-center"
+          />
+        }
       </div>
       <RenderPage
         allLessons={LessonInfo}

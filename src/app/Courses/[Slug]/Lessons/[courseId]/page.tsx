@@ -12,15 +12,12 @@ export default async function LessonPage({
 }) {
   const { courseId } = await params;
   const data = await getLessonsByCourseId(courseId);
-  const user = await getSession();
-  const avatar = await getUserAvatar();
-  const userId = user?.userId;
-  const enrolled = await getEnrollments(userId!, courseId);
-  if (!enrolled) return redirect('/Courses');
+  const [user, avatar] = await Promise.all([getSession(), getUserAvatar()]);
+
   return (
     <VideosPage
       LessonInfo={data}
-      userId={userId!}
+      userId={user?.userId!}
       avatar={avatar}
       userName={user?.user?.full_name}
     />
