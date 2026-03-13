@@ -5,7 +5,10 @@ import useAddComment from '@/app/hook/useAddComment';
 import useGetComment from '@/app/hook/useGetComment';
 import Image from 'next/image';
 import { formatMessageDate } from '../../../../../../../lib/formatMessageDate';
-import { Timer } from 'lucide-react';
+import { Trash, Pen, Timer } from 'lucide-react';
+import { Ellipsis } from 'lucide-react';
+import { useState } from 'react';
+import useDeleteComment from '@/app/hook/useDeleteComments';
 
 const Comments = ({
   lessonId,
@@ -16,6 +19,8 @@ const Comments = ({
 }) => {
   const { mutate: addComment } = useAddComment();
   const { data: Allcomments, isLoading } = useGetComment(lessonId);
+  const { mutate: deleteComment } = useDeleteComment(lessonId);
+  const [isEdit, setIsEdit] = useState<number | null>(null);
   const formik = useFormik<CommentsProps>({
     initialValues: {
       lesson_id: lessonId,
@@ -34,6 +39,18 @@ const Comments = ({
       });
     },
   });
+
+  // function delete comment
+
+  const handleToggleEdit = (id: number) => {
+    // لو القائمة مفتوحة بالفعل لنفس التعليق، اقفلها
+    if (isEdit === id) {
+      setIsEdit(null);
+    } else {
+      setIsEdit(id);
+    }
+  };
+
   if (isLoading) return;
 
   return (
@@ -87,6 +104,29 @@ const Comments = ({
                   <span className="text-[13px]">
                     {` تم النشر ${formatMessageDate(comment?.created_at)}`}
                   </span>
+                </div>
+                <div className="flex items-center relative">
+                  <Ellipsis
+                    onClick={() => handleToggleEdit(comment.id!)}
+                    className="w-5 h-5 text-gray-600 cursor-pointer"
+                  />
+                  <div
+                    className={`${isEdit === comment.id ? 'flex' : 'hidden'} edits flex-col  absolute top-6 right-0 bg-white drop-shadow-lg border border-gray-300 rounded-lg`}
+                  >
+                    <button className="flex w-16 hover:bg-gray-100 items-center justify-center border-b border-gray-300 py-2 text-blue-600 gap-1 text-[12px] cursor-pointer">
+                      <Pen className="w-3 h-3" />
+                      <span className="">تعديل</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        (deleteComment(comment?.id!), setIsEdit(null));
+                      }}
+                      className="flex w-16 hover:bg-gray-100 items-center justify-center py-2 text-red-600 gap-1 text-[12px] cursor-pointer"
+                    >
+                      <Trash className="w-3 h-3" />
+                      <span>حذف</span>
+                    </button>
+                  </div>
                 </div>
               </div>
               <p className="text-[14px] leading-7 text-gray-800 ">
