@@ -44,7 +44,6 @@ export default function VideosPage({
                 {
                   src: initialVideo.youtube_url,
                   provider: 'youtube',
-                  type: 'video/mp4',
                 },
               ],
             }}
@@ -60,13 +59,7 @@ export default function VideosPage({
               ],
             }}
           />
-        : <Image
-            src="/LoadingAnimation.svg"
-            width={200}
-            height={200}
-            alt="loading w-full h-full fixed top-0 z-20 left-0 right-0 bg-black/40 drop-shadow-lg flex items-center justify-center"
-          />
-        }
+        : null}
       </div>
       <RenderPage
         allLessons={LessonInfo}

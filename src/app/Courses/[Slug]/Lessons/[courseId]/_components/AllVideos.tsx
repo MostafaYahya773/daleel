@@ -21,9 +21,9 @@ const AllVideos = React.memo(({ videos, onselect }: Props) => {
               alt={video?.title}
               loading="lazy"
               fetchPriority="low"
-              width={200}
+              width={500}
               height={200}
-              className="bg-cover w-full h-[200px] rounded-t-lg"
+              className="bg-cover w-full rounded-t-lg"
             />
             <div className="flex flex-col gap-3 p-2">
               <p className="text-fourth text-[14px] md:text-16 lg:text-[18px]">

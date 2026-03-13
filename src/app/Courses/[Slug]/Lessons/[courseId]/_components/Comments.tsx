@@ -15,10 +15,7 @@ const Comments = ({
   userId: string;
 }) => {
   const { mutate: addComment } = useAddComment();
-
   const { data: Allcomments, isLoading } = useGetComment(lessonId);
-  console.log(Allcomments);
-
   const formik = useFormik<CommentsProps>({
     initialValues: {
       lesson_id: lessonId,
