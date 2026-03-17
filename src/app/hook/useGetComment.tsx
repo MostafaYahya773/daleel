@@ -10,6 +10,7 @@ const useGetComment = (lessonId: number) => {
       .select(
         `id,
         lesson_id,
+        user_id,
         comment,
         created_at,
         profiles (

@@ -5,11 +5,18 @@ import toast from 'react-hot-toast';
 const useDeleteComment = (lessonId: number) => {
   const queryClient = useQueryClient();
   const supabase = createClient();
-  const deleteComment = async (id: number) => {
+  const deleteComment = async ({
+    commentId,
+    userId,
+  }: {
+    commentId: number;
+    userId: string;
+  }) => {
     const { data, error } = await supabase
       .from('reviews')
       .delete()
-      .eq('id', id);
+      .eq('id', commentId)
+      .eq('user_id', userId);
     if (error) throw error;
 
     return data;
