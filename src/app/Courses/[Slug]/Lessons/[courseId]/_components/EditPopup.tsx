@@ -72,7 +72,9 @@ const EditPopup = ({
           disabled={formik.isSubmitting}
           className="bg-therd text-white py-2 rounded-md disabled:opacity-50"
         >
-          {formik.isSubmitting ? 'جارٍ التعديل...' : 'تعديل'}
+          {formik.isSubmitting ?
+            <span className="loaderAnimation"></span>
+          : 'تعديل'}
         </button>
       </form>
     </div>

@@ -7,16 +7,7 @@ import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { formatMessageDate } from '../../../../lib/formatMessageDate';
 import { BookAlert } from 'lucide-react';
-interface Article {
-  author_id: string;
-  content: string;
-  id: string;
-  image_url: string;
-  reading_minutes: number;
-  title: string;
-  created_at: string;
-  updated_at: string;
-}
+import { Article } from '@/app//interfaces/index';
 
 const BlogCart = React.memo(({ articles }: { articles: Article[] }) => {
   const isPriority = (index: number) => index < 3;
@@ -36,10 +27,7 @@ const BlogCart = React.memo(({ articles }: { articles: Article[] }) => {
             احدث مقالات <span className="text-therd">دليل</span>
           </h2>
 
-          <Link
-            href="/blog/id"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {articles.length === 0 ?
               <div className="flex flex-col justify-center items-center gap-5 w-full col-span-3 h-[50vh] md:h-[70vh]">
                 <BookAlert className="w-32 h-32 text-gray-200" />
@@ -48,8 +36,10 @@ const BlogCart = React.memo(({ articles }: { articles: Article[] }) => {
                 </p>
               </div>
             : articles.map((article, index) => (
-                <div
+                <Link
+                  href={`/Blogs/${article.slug}`}
                   key={article.id}
+                  target="_blank"
                   className="group bg-white rounded-2xl border-2 shadow-md border-gray-200 overflow-hidden duration-300 hover:scale-[103%]"
                 >
                   <div className="relative h-64 w-full overflow-hidden">
@@ -88,10 +78,10 @@ const BlogCart = React.memo(({ articles }: { articles: Article[] }) => {
                       {article.content}
                     </p>
                   </div>
-                </div>
+                </Link>
               ))
             }
-          </Link>
+          </div>
         </div>
       )}
     </div>

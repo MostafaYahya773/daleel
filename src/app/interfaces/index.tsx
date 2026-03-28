@@ -140,3 +140,14 @@ export interface CommentsProps {
     avatar_url: string | null;
   } | null;
 }
+export interface Article {
+  author_id: string;
+  content: string;
+  id: string;
+  slug: string;
+  image_url: string;
+  reading_minutes: number;
+  title: string;
+  created_at: string;
+  updated_at: string;
+}

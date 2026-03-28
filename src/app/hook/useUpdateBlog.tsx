@@ -2,24 +2,38 @@
 import { useMutation } from '@tanstack/react-query';
 import { BlogForms } from '../interfaces';
 import { createClient } from '../../../lib/supabase/client';
+import slugify from 'slugify';
+
 const useUpdateBlog = (userId: string) => {
   const supabase = createClient();
   const bucketName = 'blog_imges';
   const updateBlog = async (value: BlogForms) => {
     const file = value.file;
     const fileExt = file?.name.split('.').pop();
-    const fileName = `${userId}/${Date.now()}.${fileExt}`;
-    const { data: response, error: uploadError } = await supabase.storage
+    const fileName =
+      slugify(value.title, {
+        replacement: '_', // استبدال الفراغات بـ _
+        lower: false, // تحافظ على الحروف الكبيرة لو عايز
+        strict: true, // يشيل أي رموز غير مسموح بها
+      }) +
+      '.' +
+      fileExt;
+    const { error: uploadError } = await supabase.storage
       .from(bucketName)
-      .upload(fileName, file as File, { upsert: false });
+      .upload(fileName, file as File, { upsert: true });
 
     if (uploadError) throw uploadError;
+
+    const { data: response } = supabase.storage
+      .from(bucketName)
+      .getPublicUrl(fileName);
+
     const { data, error } = await createClient()
       .from('blog')
       .update({
         title: value.title,
         content: value.content,
-        image_url: response.path,
+        image_url: response.publicUrl,
         author_id: userId,
         reading_minutes: value.reading_minutes,
       })
