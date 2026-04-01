@@ -23,11 +23,7 @@ const BlogCart = React.memo(({ articles }: { articles: Article[] }) => {
           id="blog"
           className="max-w-[1200px] mx-auto py-5 flex flex-col gap-10"
         >
-          <h2 className="lg:text-[30px] md:text-[25px] text-[20px] text-center mb-5 pb-3 border-b-2 border-therd w-fit mx-auto">
-            احدث مقالات <span className="text-therd">دليل</span>
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {articles.length === 0 ?
               <div className="flex flex-col justify-center items-center gap-5 w-full col-span-3 h-[50vh] md:h-[70vh]">
                 <BookAlert className="w-32 h-32 text-gray-200" />
@@ -39,8 +35,8 @@ const BlogCart = React.memo(({ articles }: { articles: Article[] }) => {
                 <Link
                   href={`/Blogs/${article.slug}`}
                   key={article.id}
-                  target="_blank"
-                  className="group bg-white rounded-2xl border-2 shadow-md border-gray-200 overflow-hidden duration-300 hover:scale-[103%]"
+                  // target="_blank"
+                  className="group bg-white rounded-2xl border-2 shadow-md border-gray-200 overflow-hidden duration-300 md:hover:scale-[103%]"
                 >
                   <div className="relative h-64 w-full overflow-hidden">
                     <Image
@@ -54,7 +50,7 @@ const BlogCart = React.memo(({ articles }: { articles: Article[] }) => {
                   </div>
 
                   <div className="p-5">
-                    <h3 className="md:text-[15px] font-bold text-fourth mb-4 group-hover:text-therd transition-colors">
+                    <h3 className="text-[15px] lg:text-[18px] font-bold text-fourth mb-4 group-hover:text-therd transition-colors">
                       {article.title}
                     </h3>
 
@@ -74,7 +70,7 @@ const BlogCart = React.memo(({ articles }: { articles: Article[] }) => {
                       </div>
                     </div>
 
-                    <p className="text-gray-600 text-base leading-relaxed line-clamp-2 mb-6">
+                    <p className="text-gray-600 text-base text-[12px] leading-relaxed line-clamp-2 mb-6">
                       {article.content}
                     </p>
                   </div>

@@ -2,6 +2,7 @@ import getBlogBySlug from '../../../../lib/getBlogBySlug';
 import Image from 'next/image';
 import getSession from '../../../../lib/GetSession';
 import getUserAvatar from '../../../../lib/getUserAvatar';
+import BlogRecommend from '@/app/_components/BlogRecommend/BlogRecommend';
 const supjectDetails = async ({
   params,
 }: {
@@ -21,8 +22,8 @@ const supjectDetails = async ({
         <Image
           src={blog.image_url ?? '/logo.png'}
           alt={blog?.title}
-          width={200}
-          height={200}
+          width={700}
+          height={700}
           loading="lazy"
           className="w-full xl:h-[700px]"
         />
@@ -56,6 +57,7 @@ const supjectDetails = async ({
           {blog?.content}
         </p>
       </div>
+      <BlogRecommend />
     </div>
   );
 };
