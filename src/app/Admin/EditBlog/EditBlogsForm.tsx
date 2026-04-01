@@ -63,7 +63,9 @@ const EditBlogsForm = React.memo(
     });
     const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0] || null;
-      if (file) {
+      if (formik.values.image_url)
+        formik.setFieldValue('image_url', formik.values.image_url);
+      else if (file) {
         formik.setFieldValue('file', file);
       }
     };
@@ -133,7 +135,7 @@ const EditBlogsForm = React.memo(
                   value={formik.values.content}
                   onChange={formik.handleChange}
                   placeholder={FormInputs[3].placeholder}
-                  className="border border-gray-400 p-3 rounded outline-none focus:border-therd duration-100 h-[250px] resize-none"
+                  className="border border-gray-400 p-3 rounded outline-none whitespace-pre-wrap break-words focus:border-therd duration-100 h-[250px] resize-none"
                 />
               </div>
 

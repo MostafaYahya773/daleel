@@ -52,7 +52,7 @@ const supjectDetails = async ({
         <h2 className="text-therd lg:text-[24px] md:text-[20px] text-[18px] font-bold">
           {blog?.title}
         </h2>
-        <p className="text-gray-500 lg:text-[18px] md:text-[16px] text-[14px]">
+        <p className="text-gray-500 lg:text-[18px] md:text-[16px] text-[14px] whitespace-pre-wrap break-words">
           {blog?.content}
         </p>
       </div>
